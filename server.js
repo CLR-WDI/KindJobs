@@ -1,12 +1,10 @@
-var express = require('express');
-var app = express();
+var express = require('./config/express');
 var mongoose = require('./config/mongoose');
 
 // run database before express application object
 
 var db = mongoose();
-
-app.use(express.static(__dirname + '/dist'));
+var app = express();
 
 app.set('port',(process.env.PORT||1337));
 

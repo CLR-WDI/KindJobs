@@ -1,4 +1,4 @@
-var KindJobs = require('mongoose').model('KindJobs');
+var KindJobs = require('mongoose').model('KindJob');
 
 module.exports = {
 
