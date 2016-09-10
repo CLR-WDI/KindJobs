@@ -7,7 +7,7 @@ let IndexRoute = ReactRouter.IndexRoute;
 let HashHistory = ReactRouter.hashHistory;
 
 import Layout from "../components/Layout";
-import Home from "../components/Home"
+import Home from "../containers/HomeContainer"
 import DummyContainer from '../containers/DummyContainer';
 
 

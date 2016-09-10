@@ -1,14 +1,13 @@
 import React from 'react'
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 
-import{fetchTodos, addTodo, deleteTodo} from "../actions/todoActions"
+// import{fetchTodos, addTodo, deleteTodo} from "../actions/todoActions"
 
-@connect((store) => {
-  return{
-    todos: store.todos.todos
-  }
-})
-
+// @connect((store) => {
+//   return{
+//     todos: store.todos.todos
+//   }
+// })
 
 export default class DummyContainer extends React.Component {
   render() {
