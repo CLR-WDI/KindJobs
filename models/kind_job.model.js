@@ -1,9 +1,56 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema
 
 var KindJobSchema = new Schema({
-  job: String,
-
+  image: String,
+  title: {
+    type: String,
+    trim: true,
+    required: [true, 'Job title is required'],
+    validate: [
+      function (title) {
+        return title.length <=60;
+      },
+      'Title is too long'
+    ]
+  },
+  description: {
+    type: String,
+    required: [true, 'Description is required'],
+  },
+  salary: Number,
+  min_yrs_exp: Number,
+  min_qualification: String,
+  scope_id:{
+    required: [true, 'Scope is required'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Scope'
+  },
+  employment_term_id: {
+    required: [true, 'Employment term is required'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'EmploymentTerm'
+  },
+  sector_id:{
+    required: [true, 'Sector is required'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Sector'
+  },
+  location_id:{
+    required: [true, 'Location is required'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Location'
+  },
+  sgo_id:{
+    required: [true,'SGO is required'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'SGO'
+  },
+  deadline: Date
 });
 
-mongoose.model('KindJob', KindJobSchema);
+KindJobSchema.set('timestamps',{});
+
+var KindJob = mongoose.model('KindJob', KindJobSchema);
+
+module.export = KindJob;
