@@ -10,9 +10,6 @@ export default function reducer(state = {
         ...state,
         selection: action.payload};
     }
-
-
-
   }
   return state;
 }

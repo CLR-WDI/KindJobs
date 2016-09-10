@@ -1,5 +1,5 @@
 export default function reducer(state = {
-  todos:[],
+  todos:{},
   fetching: false,
   fetched: false,
   error: null

@@ -1,10 +1,10 @@
 import React from "react";
+// import {Link} from "react-router"
 
-
-export default class Footer extends React.Component {
-  render() {
-    return (
-      <footer>footer</footer>
-    );
-  }
+const Footer = () => {
+  return(
+    <footer>This is the footer bar </footer>
+  )
 }
+
+export default Footer
