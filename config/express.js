@@ -3,6 +3,7 @@
   var morgan = require('morgan');
   var compress = require('compression');
   var bodyParser = require('body-parser');
+  var path = require('path');
 	// Parse incoming request bodies in a middleware before your handlers, availabe under the req.body property.
   var methodOverride = require('method-override');
 	// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
@@ -32,7 +33,10 @@ module.exports = function() {
 
 	app.use(methodOverride());
 
+  app.use(express.static(path.resolve(__dirname, '../dist')));
+
   require('./routes')(app);
+
 
   return app;
 };
