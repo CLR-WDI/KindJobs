@@ -1,14 +1,17 @@
 import React from "react";
 
-const InputText = (props) => {
-  return(
-    <div>
-      <label> {props.label}
-        <input type="text" ref={props.ref} onChange={props.onChange} value={props.value}></input>
-      </label>
-      <br/>
-    </div>
-  )
+class InputText extends React.Component{
+  render() {
+    return(
+      <div>
+        <label> {this.props.label}
+          <input type="text" ref={this.props.ref} onChange={this.props.onChange} value={this.props.value}></input>
+        </label>
+        <br/>
+      </div>
+    )
+  }
 }
+
 
 export default InputText

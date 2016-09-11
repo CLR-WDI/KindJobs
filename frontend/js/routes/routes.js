@@ -13,6 +13,7 @@ import ApplyContainer from '../containers/ApplyContainer';
 import SearchResultsContainer from '../containers/SearchResultsContainer';
 import DummyContainer from '../containers/DummyContainer';
 
+import JobForm from '../components/JobForm';
 
 
 let routes = (
@@ -21,6 +22,7 @@ let routes = (
       <IndexRoute component={Home} />
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
+      <Route path='jobform' component={JobForm} />
       <Route path='results' component={SearchResultsContainer} />
       <Route path='dummy' header='This is Dummy' component={DummyContainer} />
     </Route>

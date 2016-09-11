@@ -55,7 +55,7 @@ export default class ApplyContainer extends React.Component {
     let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
 
     return(
-      <form onSubmit = {this._submitApplication}>
+      <form>
         <button onClick={this.props.history.goBack.bind(this)}>Back</button>
         <h1>Application Form</h1>
         <h4>{job.title} - {job.sector} sector, {job.location}</h4>
@@ -76,7 +76,8 @@ export default class ApplyContainer extends React.Component {
           <button type="button">Customized CV</button>
 
         <br/>
-        <button type="submit">Apply</button>
+        <button type="button" >Save</button>
+        <button type="button" onClick= {this._submitApplication} >Apply</button>
       </form>
     )
   }
