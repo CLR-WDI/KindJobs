@@ -10,6 +10,7 @@ import {formatDate} from "../helpers/helpers"
   return newStore;
 })
 export default class JobContainer extends React.Component {
+
   render() {
     let jobs = [ ...this.props.kindjobs];
     let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
@@ -37,9 +38,7 @@ export default class JobContainer extends React.Component {
           <p>Minimum job experience: {job.min_yrs_exp}</p>
           <p>{formatDate(job.postdate)}</p>
           <p>{formatDate(job.deadline)}</p>
-            <Link to={'/'}>
-              <button type="button" class="btn btn-default">Back</button>
-            </Link>
+            <button onClick={this.props.history.goBack.bind(this)}>Back</button>
             <Link to={'/apply/'+job.id}>
               <button type="button" class="btn btn-primary">Apply now</button>
             </Link>
