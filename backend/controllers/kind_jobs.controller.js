@@ -14,7 +14,20 @@ module.exports = {
                 };
                 res.status(200).json(kindjob)
               });
-    } else{
+    }else if (req.query.keyword) {
+      console.log("searching");
+      KindJobs.find()
+              .sort({createdAt: -1})
+              .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
+              .exec(function (err,kindjob) {
+                if (err) {
+                  res.status(400).send(err);
+                };
+                res.status(200).json(kindjob)
+              });
+    }
+    else{
+      console.log("normal view");
       KindJobs.find()
               .sort({createdAt: -1})
               .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
