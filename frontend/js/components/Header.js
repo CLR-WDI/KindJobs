@@ -1,22 +1,24 @@
 import React from "react";
-import {Link} from "react-router"
+import {Link} from "react-router";
+import {Navbar, Nav} from "react-bootstrap";
 
 const Header = (props) => {
   return(
-    <header>
-      <p>This is the header Bar</p>
-      <nav>
-        <ul>
-          <Link to='dummy'>
-            <li>Dummy</li>
-          </Link>
-          <Link to='/'>
-            <li>Home</li>
-          </Link>
-        </ul>
-      </nav>
-    </header>
+    <Navbar staticTop fluid>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link to='/'>Kind Jobs</Link>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight>
+          <li><Link to='dummy'>Dummy</Link></li>
+          <li><Link to='/'>Home</Link></li>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 
-export default Header 
+export default Header

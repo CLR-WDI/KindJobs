@@ -13,9 +13,13 @@ export default class Home extends React.Component {
   render() {
     return(
       <div>
-        <h1>This is home trolliie</h1>
-        <SearchBar />
-        <JobList jobListName="Recent Jobs" />
+        <div class="jumbotron text-center">
+          <h1>Come find your kind of job!</h1>
+          <SearchBar />
+        </div>
+        <div class="container-fluid">
+          <JobList jobListName="Recent Jobs" />
+        </div>
       </div>
     )
   }

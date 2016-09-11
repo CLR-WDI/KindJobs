@@ -23,10 +23,8 @@ export default class JobList extends React.Component {
     return (
       <div>
         <h2>{this.props.jobListName}</h2>
-        <div>
-          <div>
-            {jobList}
-          </div>
+        <div class="row">
+          {jobList}
         </div>
       </div>
     );
