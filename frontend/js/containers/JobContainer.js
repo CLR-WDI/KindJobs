@@ -38,7 +38,7 @@ export default class JobContainer extends React.Component {
           <p>Minimum job experience: {job.min_yrs_exp}</p>
           <p>{formatDate(job.postdate)}</p>
           <p>{formatDate(job.deadline)}</p>
-            <button onClick={this.props.history.goBack.bind(this)}>Back</button>
+            <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
             <Link to={'/apply/'+job.id}>
               <button type="button" class="btn btn-primary">Apply now</button>
             </Link>
