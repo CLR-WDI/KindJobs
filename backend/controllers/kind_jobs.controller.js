@@ -3,45 +3,30 @@ var KindJobs = require('mongoose').model('KindJob');
 module.exports = {
 
   index: function(req, res, next) {
+
+    currentdate = Date.now()
+    var search_term1;
+    var search_term2;
+    var sort_criteria;
+
     if (req.query.no_expired === "true") {
-      currentdate = Date.now();
-      KindJobs.find({deadline:{"$gte":currentdate}})
-              .sort({createdAt: -1})
-              .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
-              .exec(function (err,kindjob) {
-                if (err) {
-                  res.status(400).send(err);
-                };
-                res.status(200).json(kindjob)
-              });
+      search_term1 = {deadline:{"$gte":currentdate}};
+      sort_criteria = {createdAt: -1};
     }else if (req.query.keyword) {
-      console.log("searching");
-      KindJobs.find(
-                {$text: { $search: req.query.keyword}},
-                {score: {$meta: "textScore"}}
-              )
-              .sort({score:{$meta:"textScore"}})
-              .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
-              .exec(function (err,kindjob) {
-                if (err) {
-                  res.status(400).send(err);
-                };
-                res.status(200).json(kindjob)
-              });
-    }
-    else{
-      console.log("normal view");
-      KindJobs.find()
-              .sort({createdAt: -1})
-              .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
-              .exec(function (err,kindjob) {
-                if (err) {
-                  res.status(400).send(err);
-                };
-                res.status(200).json(kindjob)
-              });
+      search_term1 = {$text: { $search: req.query.keyword}};
+      search_term2 = {score: {$meta: "textScore"}};
+      sort_criteria = {score:{$meta:"textScore"}};
     }
 
+    KindJobs.find(search_term1,search_term2)
+            .sort(sort_criteria)
+            .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
+            .exec(function (err,kindjob) {
+              if (err) {
+                res.status(400).send(err);
+              };
+              res.status(200).json(kindjob)
+            });
   },
 
   create: function(req, res, next) {
