@@ -17,7 +17,9 @@ export default class Home extends React.Component {
           <h1>Come find your kind of job!</h1>
           <SearchBar />
         </div>
-        <JobList jobListName="Recent Jobs" />
+        <div class="container-fluid">
+          <JobList jobListName="Recent Jobs" />
+        </div>
       </div>
     )
   }

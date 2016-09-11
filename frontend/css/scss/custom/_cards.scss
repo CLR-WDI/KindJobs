@@ -1,0 +1,15 @@
+.jobCard {
+  padding: $card-margin-base;
+
+  .inner {
+    border-radius: $border-radius-base;
+    border: 1px solid $card-border-color;
+    text-align: center;
+    padding: $card-margin-base ($card-margin-base * 2);
+
+    img {
+      max-width: 100px;
+      width: 100%;
+    }
+  }
+}

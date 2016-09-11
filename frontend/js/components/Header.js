@@ -7,7 +7,7 @@ const Header = (props) => {
     <Navbar staticTop fluid>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#">React-Bootstrap</a>
+          <Link to='/'>Kind Jobs</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
