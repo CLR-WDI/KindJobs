@@ -3,14 +3,12 @@ var KindJobs = require('mongoose').model('KindJob');
 module.exports = {
 
   index: function(req, res, next) {
-
-    currentdate = Date.now()
     var search_term1;
     var search_term2;
     var sort_criteria;
 
     if (req.query.no_expired === "true") {
-      search_term1 = {deadline:{"$gte":currentdate}};
+      search_term1 = {deadline:{"$gte":Date.now()}};
       sort_criteria = {createdAt: -1};
     }else if (req.query.keyword) {
       search_term1 = {$text: { $search: req.query.keyword}};
