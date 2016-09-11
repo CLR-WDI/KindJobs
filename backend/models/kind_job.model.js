@@ -51,6 +51,17 @@ var KindJobSchema = new Schema({
 
 KindJobSchema.set('timestamps',{});
 
+KindJobSchema.index({
+  "title":"text",
+  "description":"text"
+},
+{
+  "weights": {
+    title: 2,
+    description: 1
+  }
+})
+
 var KindJob = mongoose.model('KindJob', KindJobSchema);
 
 module.export = KindJob;

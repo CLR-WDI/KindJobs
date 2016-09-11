@@ -16,8 +16,11 @@ module.exports = {
               });
     }else if (req.query.keyword) {
       console.log("searching");
-      KindJobs.find()
-              .sort({createdAt: -1})
+      KindJobs.find(
+                {$text: { $search: req.query.keyword}},
+                {score: {$meta: "textScore"}}
+              )
+              .sort({score:{$meta:"textScore"}})
               .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
               .exec(function (err,kindjob) {
                 if (err) {
