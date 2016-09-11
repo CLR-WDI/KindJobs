@@ -11,6 +11,7 @@ import Home from "../containers/HomeContainer"
 import JobContainer from '../containers/JobContainer';
 import ApplyContainer from '../containers/ApplyContainer';
 import SearchResultsContainer from '../containers/SearchResultsContainer';
+import AdvancedSearchContainer from '../containers/AdvancedSearchContainer';
 import DummyContainer from '../containers/DummyContainer';
 
 
@@ -22,6 +23,7 @@ let routes = (
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
       <Route path='results' component={SearchResultsContainer} />
+      <Route path='advsearch' component={AdvancedSearchContainer } />
       <Route path='dummy' header='This is Dummy' component={DummyContainer} />
     </Route>
   </Router>

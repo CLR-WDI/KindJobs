@@ -88,6 +88,18 @@ let fakeStore = {
     }
   ],
 
+  searchFilters: [{
+    sector: {
+      
+    },
+    scope: {
+
+    },
+    tenure: {
+
+    },
+  }],
+
 };
 
 export default fakeStore;

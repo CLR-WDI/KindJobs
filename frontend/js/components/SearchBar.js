@@ -1,6 +1,6 @@
 import React from "react";
-import {connect} from "react-redux"
-import {onSubmitSearch, onTypeSearch} from "../actions/kindjobActions"
+import {connect} from "react-redux";
+import {onSubmitSearch, onTypeSearch} from "../actions/kindjobActions";
 
 @connect((store) => {
   return{
