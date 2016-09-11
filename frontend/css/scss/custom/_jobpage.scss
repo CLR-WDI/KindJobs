@@ -1,0 +1,27 @@
+.label {
+  margin-right: 5px;
+}
+
+.apply-button {
+  margin-top: 20px;
+
+  .btn {
+    float: right;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+
+    .btn {
+      float: none;
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.divider-horizontal {
+  width: 100%;
+  border-bottom: 1px solid lighten($gray-base, 75%);
+  margin: 1rem 0;
+}

@@ -14,21 +14,36 @@ export default class JobContainer extends React.Component {
     let jobs = [ ...this.props.kindjobs];
     let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
     return(
-      <div>
-        <img src={job.image} />
-        <h1>{job.title}</h1>
-        <h4>{job.location}</h4>
-        <h4>{job.sector}</h4>
-        <h4>{job.scope}</h4>
-        <p>$ {job.salary}</p>
-        <p>{job.description}</p>
-        <p>{job.min_qualification}</p>
-        <p>{job.min_yrs_exp}</p>
-        <p>{formatDate(job.postdate)}</p>
-        <p>{formatDate(job.deadline)}</p>
-          <Link to={'/apply/'+job.id}>
-            <button type="button">Apply</button>
-          </Link>
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          <img src={job.image} />
+          <div class="row">
+            <div class="job-header col-sm-8">
+              <h1>{job.title}</h1>
+              <h4>{job.location}</h4>
+            </div>
+            <Link className='apply-button col-sm-4' to={'/apply/'+job.id}>
+              <button type="button" class="btn btn-primary">Apply now</button>
+            </Link>
+          </div>
+          <h4>
+            <span class="label label-default">{job.sector}</span>
+            <span class="label label-default">{job.scope}</span>
+          </h4>
+          <h5>Salary: $ {job.salary}</h5>
+          <div class="divider-horizontal"></div>
+          <p>{job.description}</p>
+          <p>Minimum qualification: {job.min_qualification}</p>
+          <p>Minimum job experience: {job.min_yrs_exp}</p>
+          <p>{formatDate(job.postdate)}</p>
+          <p>{formatDate(job.deadline)}</p>
+            <Link to={'/'}>
+              <button type="button" class="btn btn-default">Back</button>
+            </Link>
+            <Link to={'/apply/'+job.id}>
+              <button type="button" class="btn btn-primary">Apply now</button>
+            </Link>
+        </div>
       </div>
     )
   }
