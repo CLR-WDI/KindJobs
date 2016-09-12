@@ -32,10 +32,11 @@ export default class JobForm extends React.Component {
     e.preventDefault();
     var r = confirm("Delete this job?");
     if(r==true){
-      if(this.state.type === "EDIT"){
-        jobSave.id = this.props.routeParams.id;
-        // delete job from database
-        console.log("Job deleted");
+      console.log(this.props);
+      console.log(this.props.routeParams.id);
+      if(this.props.routeParams.id){
+        this.props.dispatch( deleteKindJob(this.props.routeParams.id) );
+        this.props.history.goBack();
       }
       else{
         this.props.history.goBack();
