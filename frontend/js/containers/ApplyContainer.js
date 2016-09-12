@@ -2,74 +2,63 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import {connect} from "react-redux"
 import {Link} from "react-router"
-import fakeStore from "../fakeStore"
-import {formatDate} from "../helpers/helpers"
 import InputText from "../components/InputText"
+import {fetchKindJob} from "../actions/kindjobActions"
+import {fetchApplications, deleteApplication, editApplication, createApplication} from "../actions/applicationActions"
+// for redirect to home
+import {hashHistory} from "react-router"
 
 @connect((store) => {
-  var newStore = fakeStore;
-  // newStore.jobListName = "Recent Jobs";
-  return newStore;
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
 })
 export default class ApplyContainer extends React.Component {
+  componentWillMount() {
+    this.props.dispatch( fetchKindJob() );
+  }
   constructor(){
     super();
-    this.state = {
-      form: {
-        kindjobs_id: "",
-        name: "",
-        email: "",
-        tel: "",
-        expectedPay: 0,
-        yrs_exp: 0,
-        qualification: "",
-        message: "",
-      }
-    };
     this._submitApplication = this._submitApplication.bind(this);
-    this._updateApplication = this._updateApplication.bind(this);
   }
 
   _submitApplication(e){
     e.preventDefault();
-    console.log(this.state.form);
+    let form = {
+      kindjobs_id: this.props.routeParams.id,
+      name: ReactDOM.findDOMNode(this.refs.name.refs.inp).value,
+      email: ReactDOM.findDOMNode(this.refs.email.refs.inp).value,
+      tel_no: ReactDOM.findDOMNode(this.refs.tel_no.refs.inp).value,
+      expected_salary: ReactDOM.findDOMNode(this.refs.expected_salary.refs.inp).value,
+      yrs_rel_exp: ReactDOM.findDOMNode(this.refs.yrs_rel_exp.refs.inp).value,
+      highest_qualification: ReactDOM.findDOMNode(this.refs.highest_qualification.refs.inp).value,
+      message_to_recruiters: ReactDOM.findDOMNode(this.refs.message_to_recruiters).value,
+    }
+    this.props.dispatch( createApplication(form) );
+    alert( "Application submitted" );
+    hashHistory.go( -2 );
   }
 
-  _updateApplication(e){
-    e.preventDefault();
-    this.setState({
-      form: {
-        kindjobs_id: this.props.routeParams.id,
-        name: ReactDOM.findDOMNode(this.refs.name).value,
-        email: ReactDOM.findDOMNode(this.refs.email).value,
-        tel: ReactDOM.findDOMNode(this.refs.tel).value,
-        expectedPay: ReactDOM.findDOMNode(this.refs.expectedPay).value,
-        yrs_exp: ReactDOM.findDOMNode(this.refs.yrs_exp).value,
-        qualification: ReactDOM.findDOMNode(this.refs.qualification).value,
-        message: ReactDOM.findDOMNode(this.refs.message).value,
-      }
-    });
-  }
   render() {
     let jobs = [ ...this.props.kindjobs];
-    let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
+    let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
 
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
           <form onSubmit = {this._submitApplication}>
             <h1>Application Form</h1>
-            <h4>{job.title} - {job.sector} sector, {job.location}</h4>
+            <h4>{job.title} - {job.sector_id.sector_name} sector, {job.location_id.location_name}</h4>
             <div class="inner">
-              <InputText label="Name*" type="text" ref="name" onChange={this._updateApplication} value={this.state.form.name} />
-              <InputText label="Email*" type="text" ref="email" onChange={this._updateApplication} value={this.state.form.email} />
-              <InputText label="Tel*" type="text" ref="tel" onChange={this._updateApplication} value={this.state.form.tel} />
-              <InputText label="Expected Pay ($/mth)*" type="text" ref="expectedPay" onChange={this._updateApplication} value={this.state.form.expectedPay} />
-              <InputText label="Relevant Experience(Yrs)*" type="text" ref="yrs_exp" onChange={this._updateApplication} value={this.state.form.yrs_exp} />
-              <InputText label="Highest Relevant Qualification*" type="text" ref="qualification" onChange={this._updateApplication} value={this.state.form.qualification} />
+              <InputText _label="Name*" _type="text" ref="name"  _default="" />
+              <InputText _label="Email*" _type="text" ref="email"  _default="" />
+              <InputText _label="Tel*" _type="number" ref="tel_no"  _default={0} />
+              <InputText _label="Expected Pay ($/mth)*" _type="number" ref="expected_salary"  _default={0} />
+              <InputText _label="Relevant Experience(Yrs)*" _type="number" ref="yrs_rel_exp"  _default={0} />
+              <InputText _label="Highest Relevant Qualification*" _type="text" ref="highest_qualification"  _default="" />
               <div class="form-group">
                 <label>Message to recruiters:</label>
-                <textarea class="form-control" type="text" ref="message" onChange={this._updateApplication} placeholder="optional" value={this.state.form.message}></textarea>
+                <textarea class="form-control" type="text" ref="message_to_recruiters" onChange={this._updateApplication} placeholder="optional"></textarea>
               </div>
               <p>
                 <label>Attach your CV*</label>
@@ -80,7 +69,7 @@ export default class ApplyContainer extends React.Component {
               </div>
               <div class="form-action-btn">
                 <p>* required</p>
-                <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
+                <button class="btn btn-default" type="button" onClick={function(e){e.preventDefault; hashHistory.go( -1 ); }}>Back</button>
                 <button class="btn btn-primary" type="submit">Apply</button>
               </div>
             </div>
@@ -90,3 +79,5 @@ export default class ApplyContainer extends React.Component {
     )
   }
 }
+
+//<button class="btn btn-primary" type="submit">Save</button>

@@ -1,5 +1,5 @@
 var express = require('./config/express');
-var mongoose = require('./config/mongoose');
+var mongoose = require('./backend/config/mongoose');
 
 // run database before express application object
 

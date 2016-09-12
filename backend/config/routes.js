@@ -1,12 +1,12 @@
 module.exports = function(app) {
 
-	var kindJobsController = require('../backend/controllers/kind_jobs.controller');
-	var scopesController = require('../backend/controllers/scopes.controller');
-	var employmentTermsController = require('../backend/controllers/employment_terms.controller');
-	var sectorsController = require('../backend/controllers/sectors.controller');
-	var locationsController = require('../backend/controllers/locations.controller');
-	var sgosController = require('../backend/controllers/sgos.controller');
-	var applicationController = require('../backend/controllers/applications.controller');
+	var kindJobsController = require('../controllers/kind_jobs.controller');
+	var scopesController = require('../controllers/scopes.controller');
+	var employmentTermsController = require('../controllers/employment_terms.controller');
+	var sectorsController = require('../controllers/sectors.controller');
+	var locationsController = require('../controllers/locations.controller');
+	var sgosController = require('../controllers/sgos.controller');
+	var applicationController = require('../controllers/applications.controller');
 
 	app.route('/api/kindjobs')
 		.get(kindJobsController.index)

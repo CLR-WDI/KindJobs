@@ -1,5 +1,5 @@
 export default function reducer(state = {
-    kindjobs: [],
+    applications: [],
     fetching: false,
     fetched: false,
     error: null
@@ -7,45 +7,45 @@ export default function reducer(state = {
   action)
   {
     switch (action.type) {
-      case "FETCH_KINDJOBS":{
+      case "FETCH_APPLICATIONS":{
         return {...state, fetching: true};
       }
-      case "FETCH_KINDJOBS_FULFILLED":{
+      case "FETCH_APPLICATIONS_FULFILLED":{
         return {
           ...state,
           fetching: false,
           fetched: true,
-          kindjobs: action.payload
+          applications: action.payload
         };
       }
-      case "FETCH_KINDJOBS_REJECTED":{
+      case "FETCH_APPLICATIONS_REJECTED":{
         return{
           ...state,
           fetching: false,
           error: action.payload
         };
       }
-      case "FETCH_STORED_KINDJOB":{
+      case "FETCH_STORED_APPLICATION":{
         return{
           ...state
         };
       }
 
-      case "DELETE_KINDJOB":{
+      case "DELETE_APPLICATION":{
         return {
           ...state,
-          kindjobs: state.kindjobs.filter(kindjob => kindjob._id !== action.payload),
+          applications: state.applications.filter(application => application._id !== action.payload),
           fetching: true};
       }
-      case "DELETE_KINDJOB_FULFILLED":{
+      case "DELETE_APPLICATION_FULFILLED":{
         return {
           ...state,
           fetching: false,
           fetched: true,
-          kindjobs: action.payload
+          applications: action.payload
         };
       }
-      case "DELETE_KINDJOB_REJECTED":{
+      case "DELETE_APPLICATION_REJECTED":{
         return{
           ...state,
           fetching: false,
@@ -53,21 +53,21 @@ export default function reducer(state = {
         };
       }
 
-      // case "EDIT_KINDJOB":{
+      // case "EDIT_APPLICATION":{
       //   return {
       //     ...state,
-      //     kindjobs: state.kindjobs.filter(kindjob => kindjob._id !== action.payload),
+      //     applications: state.applications.filter(application => application._id !== action.payload),
       //     fetching: true};
       // }
-      case "EDIT_KINDJOB_FULFILLED":{
+      case "EDIT_APPLICATION_FULFILLED":{
         return {
           ...state,
           fetching: false,
           fetched: true,
-          kindjobs: action.payload
+          applications: action.payload
         };
       }
-      case "EDIT_KINDJOB_REJECTED":{
+      case "EDIT_APPLICATION_REJECTED":{
         return{
           ...state,
           fetching: false,
@@ -75,21 +75,21 @@ export default function reducer(state = {
         };
       }
 
-      // case "CREATE_KINDJOB":{
+      // case "CREATE_APPLICATION":{
       //   return {
       //     ...state,
-      //     kindjobs: state.kindjobs.filter(kindjob => kindjob._id !== action.payload),
+      //     applications: state.applications.filter(application => application._id !== action.payload),
       //     fetching: true};
       // }
-      case "CREATE_KINDJOB_FULFILLED":{
+      case "CREATE_APPLICATION_FULFILLED":{
         return {
           ...state,
           fetching: false,
           fetched: true,
-          kindjobs: action.payload
+          applications: action.payload
         };
       }
-      case "CREATE_KINDJOB_REJECTED":{
+      case "CREATE_APPLICATION_REJECTED":{
         return{
           ...state,
           fetching: false,
