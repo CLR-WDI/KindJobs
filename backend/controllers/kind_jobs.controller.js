@@ -35,7 +35,15 @@ module.exports = {
       if (err) {
         return res.status(400).send(err);
       }
-      res.status(200).json(kindJob);
+      KindJobs.find()
+            .sort({createdAt: -1})
+            .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
+            .exec(function (err,kindjob) {
+              if (err) {
+                res.status(400).send(err);
+              };
+              res.status(200).json(kindjob)
+            });
     });
 
   },
@@ -45,7 +53,15 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(kindjob);
+        KindJobs.find()
+              .sort({createdAt: -1})
+              .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
+              .exec(function (err,kindjob) {
+                if (err) {
+                  res.status(400).send(err);
+                };
+                res.status(200).json(kindjob)
+              });
 	    }
 	  });
 	},
@@ -53,7 +69,7 @@ module.exports = {
 	destroy: function(req, res, next) {
 		KindJobs.remove({
 			_id: req.params.id
-		}, function(err, kindjob){
+		}, function(err){
 			if (err) return next(err);
       KindJobs.find()
             .sort({createdAt: -1})
