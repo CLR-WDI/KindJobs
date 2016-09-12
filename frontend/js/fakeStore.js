@@ -89,15 +89,42 @@ let fakeStore = {
   ],
 
   searchFilters: [{
-    sector: {
-      
-    },
-    scope: {
-
-    },
-    tenure: {
-
-    },
+    sector: [{
+      id: 1,
+      sector_name: "Elderly"
+    },{
+      id: 2,
+      sector_name: "Children & Youth"
+    },{
+      id: 3,
+      sector_name: "Social Enterprises"
+    },{
+      id: 4,
+      sector_name: "Disabled"
+    },{
+      id: 5,
+      sector_name: "Family Services"
+    }],
+    scope: [{
+      id: 1,
+      scope_name: "Social Worker"
+    },{
+      id: 2,
+      scope_name: "Counsellor"
+    },{
+      id: 3,
+      scope_name: "Social Worker"
+    },{
+      id: 4,
+      scope_name: "Social Worker"
+    },{
+      id: 5,
+      scope_name: "Social Worker"
+    }],
+    term: [{
+      id: 1,
+      employment_term: "FullTime",
+    }],
   }],
 
 };

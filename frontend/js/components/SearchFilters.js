@@ -8,6 +8,7 @@ import fakeStore from "../fakeStore"
 })
 export default class SearchFilters extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div>
         <button></button>

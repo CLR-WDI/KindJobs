@@ -17,6 +17,7 @@ export default class Home extends React.Component {
         <div class="jumbotron text-center">
           <h2>Advanced Search</h2>
           <SearchBar />
+          <SearchFilters />
         </div>
         <div class="container-fluid">
           <JobList jobListName="Search Results" />

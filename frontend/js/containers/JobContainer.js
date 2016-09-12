@@ -28,7 +28,7 @@ export default class JobContainer extends React.Component {
             </Link>
           </div>
           <h4>
-            <span class="label label-default">{job.sector}</span>
+            <span class="label label-info">{job.sector}</span>
             <span class="label label-default">{job.scope}</span>
           </h4>
           <h5>Salary: $ {job.salary}</h5>
