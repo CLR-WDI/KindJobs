@@ -14,7 +14,7 @@ import ApplyContainer from '../containers/ApplyContainer';
 import SearchResultsContainer from '../containers/SearchResultsContainer';
 import DummyContainer from '../containers/DummyContainer';
 
-import JobForm from '../components/JobForm';
+import JobFormContainer from '../containers/JobFormContainer';
 
 
 let routes = (
@@ -24,8 +24,8 @@ let routes = (
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
       <Route path='admin/kindjobs' component={AdminJobsContainer} />
-      <Route path='jobform' component={JobForm} />
-      <Route path='jobform/:id' component={JobForm} />
+      <Route path='jobform' component={JobFormContainer} />
+      <Route path='jobform/:id' component={JobFormContainer} />
       <Route path='results' component={SearchResultsContainer} />
       <Route path='dummy' header='This is Dummy' component={DummyContainer} />
     </Route>
