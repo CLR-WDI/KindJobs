@@ -10,59 +10,23 @@ import {dateToYYYY_MM_YY} from "../helpers/helpers"
 import InputText from "../components/InputText"
 // for back button
 import {hashHistory} from "react-router"
+// actions for redux
+import {fetchKindJobs, deleteKindJob, editKindJob, createKindJob} from "../actions/kindjobActions"
 
 @connect((store) => {
-  var newStore = fakeStore;
-  // newStore.jobListName = "Recent Jobs";
-  return newStore;
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
 })
 export default class JobForm extends React.Component {
   constructor(){
     super();
-    this.state = {
-      job: {
-        id: "",
-        term: "",
-        image: "",
-        sector: "",
-        title: "",
-        location: "",
-        scope: "",
-        salary: 0,
-        description: "",
-        min_qualification: "",
-        min_yrs_exp: 0,
-        postdate: "",
-        deadline: "",
-        sgo: ""
-      },
-      type: "CREATE"
-    };
     this._submitJob = this._submitJob.bind(this);
-    this._updateInput = this._updateInput.bind(this);
     this._deleteJob = this._deleteJob.bind(this);
   }
 
   componentWillMount(){
-    if(this.props.routeParams.id){
-      let jobId = this.props.routeParams.id
-      const jobData = Object.assign({}, this.props.kindjobs.filter( job => job.id === jobId)[0]);
-      jobData.postdate = dateToYYYY_MM_YY(jobData.postdate);
-      jobData.deadline = dateToYYYY_MM_YY(jobData.deadline);
-      this.setState({
-        job: jobData,
-        type: "EDIT",
-      });
-    }else{
-      const jobData = this.state.job;
-      let cur = new Date(),
-          after90days = new Date( cur.setDate(cur.getDate() + 90) );
-      jobData.postdate = dateToYYYY_MM_YY( new Date() );
-      jobData.deadline = dateToYYYY_MM_YY( after90days );
-      this.setState({
-        job: jobData
-      });
-    }
+    this.props.dispatch( fetchKindJobs() );
   }
   _deleteJob(e){
     e.preventDefault();
@@ -81,61 +45,96 @@ export default class JobForm extends React.Component {
 
   _submitJob(e){
     e.preventDefault();
-    // remember to convert postdate deadline into Dates see below
-    // also numbers to numbers
-    let jobSave = Object.assign({}, this.state.job);
-    jobSave.postdate = Date(jobSave.postdate);
-    jobSave.deadline = Date(jobSave.deadline);
-    jobSave.min_yrs_exp = Number(jobSave.min_yrs_exp);
-    jobSave.salary = Number(jobSave.salary);
+    let jobSave = {
+          employment_term_id: ReactDOM.findDOMNode(this.refs.employment_term_id.refs.inp).value,
+          image: ReactDOM.findDOMNode(this.refs.image.refs.inp).value,
+          sector_id: ReactDOM.findDOMNode(this.refs.sector_id.refs.inp).value,
+          title: ReactDOM.findDOMNode(this.refs.title.refs.inp).value,
+          location_id: ReactDOM.findDOMNode(this.refs.location_id.refs.inp).value,
+          scope_id: ReactDOM.findDOMNode(this.refs.scope_id.refs.inp).value,
+          sgo_id: ReactDOM.findDOMNode(this.refs.sgo_id.refs.inp).value,
+          salary: ReactDOM.findDOMNode(this.refs.salary.refs.inp).value,
+          min_qualification: ReactDOM.findDOMNode(this.refs.min_qualification.refs.inp).value,
+          min_yrs_exp: ReactDOM.findDOMNode(this.refs.min_yrs_exp.refs.inp).value,
+          description: ReactDOM.findDOMNode(this.refs.description).value,
+          deadline: ReactDOM.findDOMNode(this.refs.deadline).value,
+        };
 
-    if(this.state.type === "EDIT"){
-      jobSave.id = this.props.routeParams.id;
+    if(this.props.routeParams.id){
+      let id = this.props.routeParams.id;
+      this.props.dispatch( editKindJob(id, jobSave) );
       console.log(jobSave);
+      hashHistory.go(-1);
     }
     else{
+      this.props.dispatch( createKindJob(jobSave) );
       console.log(jobSave);
+      hashHistory.go(-1);
     }
   }
 
-  _updateInput(e){
-    e.preventDefault();
-    this.setState({
-      job: {
-        term: ReactDOM.findDOMNode(this.refs.term.refs.inp).value,
-        image: ReactDOM.findDOMNode(this.refs.image.refs.inp).value,
-        sector: ReactDOM.findDOMNode(this.refs.sector.refs.inp).value,
-        title: ReactDOM.findDOMNode(this.refs.title.refs.inp).value,
-        location: ReactDOM.findDOMNode(this.refs.location.refs.inp).value,
-        scope: ReactDOM.findDOMNode(this.refs.scope.refs.inp).value,
-        salary: ReactDOM.findDOMNode(this.refs.salary.refs.inp).value,
-        description: ReactDOM.findDOMNode(this.refs.description.refs.inp).value,
-        min_qualification: ReactDOM.findDOMNode(this.refs.min_qualification.refs.inp).value,
-        min_yrs_exp: ReactDOM.findDOMNode(this.refs.min_yrs_exp.refs.inp).value,
-        sgo: ReactDOM.findDOMNode(this.refs.sgo.refs.inp).value,
-        postdate: ReactDOM.findDOMNode(this.refs.postdate).value,
-        deadline: ReactDOM.findDOMNode(this.refs.deadline).value,
-      }
-    });
-  }
   render() {
-    let fields = Object.keys(this.state.job);
-    const fieldsFiltered = fields.filter( field => field !== "postdate" && field !== "deadline" && field !== "id");
-    let inputFields = fieldsFiltered.map( (field, key) => {
-      return <InputText key={key} ref={field} _label={field} _type="text" _updateInput={this._updateInput} _value={this.state.job[field]} />
-    })
-
+    if(this.props.routeParams.id){
+      var jobs = [ ...this.props.kindjobs];
+      var job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
+      console.log(job)
+      var type = "EDIT"
+    }
+    else {
+      let cur = new Date(),
+          after90days = dateToYYYY_MM_YY( new Date( cur.setDate(cur.getDate() + 90) ) );
+      console.log(after90days);
+      var type = "POST"
+      var job = {
+        deadline: after90days,
+        description: "",
+        employment_term_id: "",
+        image: "",
+        location_id: "",
+        min_qualification: "",
+        min_yrs_exp: 0,
+        salary: 0,
+        scope_id: "",
+        sector_id: "",
+        sgo_id: "",
+        title: "",
+      }
+    }
+    console.log(job);
     return(
       <form onSubmit = {this._submitJob}>
         <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
-        <h1>KindJob Form - {this.state.type}</h1>
-        {inputFields}
+        <h1>KindJob Form - {type}</h1>
+        <InputText ref="title" _label="title" _type="text"
+        _default={job.title} />
+        <InputText ref="sector_id" _label="sector_id" _type="text"
+        _default={job.sector_id._id}/>
+        <InputText ref="scope_id" _label="scope_id" _type="text"
+        _default={job.scope_id._id}/>
+        <InputText ref="location_id" _label="location_id" _type="text"
+        _default={job.location_id._id}/>
+        <InputText ref="sgo_id" _label="sgo_id" _type="text"
+        _default={job.sgo_id._id}/>
+        <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
+        _default={job.employment_term_id._id}/>
+        <InputText ref="image" _label="image" _type="text"
+        _default={job.image}/>
 
-        <label> Post date:
-          <input type="Date" ref="postdate" onChange={this._updateInput} value={this.state.job.postdate}></input>
+        <InputText ref="min_qualification" _label="min_qualification" _type="text"
+        _default={job.min_qualification}/>
+        <InputText ref="min_yrs_exp" _label="min_yrs_exp" _type="number"
+        _default={job.min_yrs_exp}/>
+        <InputText ref="salary" _label="salary" _type="number"
+        _default={job.salary}/>
+
+        <label> Description:
+          <textarea ref="description"
+          defaultValue={job.description}></textarea>
         </label>
+        <br/>
         <label> Deadline:
-          <input type="Date" ref="deadline" onChange={this._updateInput} value={this.state.job.deadline}></input>
+          <input type="Date" ref="deadline" onChange={this._updateInput}
+          defaultValue={job.deadline}></input>
         </label>
         <br/>
         <button onClick={this._deleteJob}>Delete</button>
@@ -144,3 +143,10 @@ export default class JobForm extends React.Component {
     )
   }
 }
+
+
+//sector_name
+// scope_name
+// location_name
+// SGO_name
+// employment_term

@@ -38,8 +38,33 @@ export function deleteKindJob(id) {
         .then((response)=>{
           dispatch({type:"DELETE_KINDJOB_FULFILLED", payload: response.data})
         })
-        // .catch((err)=>{
-        //   dispatch({type:"DELETE_KINDJOB_REJECTED", payload: err})
-        // })
+        .catch((err)=>{
+          dispatch({type:"DELETE_KINDJOB_REJECTED", payload: err})
+        })
+  }
+}
+
+
+export function editKindJob(id, kindjob) {
+  return function (dispatch) {
+    axios.put('./api/kindjobs/' + id, kindjob)
+        .then((response)=>{
+          dispatch({type:"EDIT_KINDJOB_FULFILLED", payload: response.data})
+        })
+        .catch((err)=>{
+          dispatch({type:"EDIT_KINDJOB_REJECTED", payload: err})
+        })
+  }
+}
+
+export function createKindJob(kindjob) {
+  return function (dispatch) {
+    axios.post('./api/kindjobs', kindjob)
+        .then((response)=>{
+          dispatch({type:"CREATE_KINDJOB_FULFILLED", payload: response.data})
+        })
+        .catch((err)=>{
+          dispatch({type:"CREATE_KINDJOB_REJECTED", payload: err})
+        })
   }
 }
