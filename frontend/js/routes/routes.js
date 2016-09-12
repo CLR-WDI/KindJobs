@@ -20,7 +20,7 @@ import JobFormContainer from '../containers/JobFormContainer';
 let routes = (
   <Router history={HashHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Home} />
+      <IndexRoute name="home" component={Home} />
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
       <Route path='admin/kindjobs' component={AdminJobsContainer} />

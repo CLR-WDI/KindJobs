@@ -2,6 +2,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var ApplicationSchema = new Schema({
+  kindjobs_id:{
+    type: String,
+    required:[true, "Kind Jobs ID is required"]
+  },
   name: {
     type: String,
     trim: true,
@@ -42,7 +46,8 @@ var ApplicationSchema = new Schema({
   },
   link_to_cv: {
     type: String,
-    required: [true,'CV is required']}
+    // required: [true,'CV is required']
+  }
 });
 
 ApplicationSchema.set('timestamps',{});

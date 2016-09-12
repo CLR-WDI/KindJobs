@@ -31,9 +31,6 @@ export default class JobContainer extends React.Component {
               <h1>{job.title}</h1>
               <h4>{job.location}</h4>
             </div>
-            <Link className='apply-button col-sm-4' to={'/apply/'+job.id}>
-              <button type="button" class="btn btn-primary">Apply now</button>
-            </Link>
           </div>
           <h4>
             <span class="label label-default">{job.sector}</span>
