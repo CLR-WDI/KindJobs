@@ -61,12 +61,12 @@ export default class ApplyContainer extends React.Component {
             <h1>Application Form</h1>
             <h4>{job.title} - {job.sector} sector, {job.location}</h4>
             <div class="inner">
-              <InputText label="Name*" _type="text" ref="name" _updateInput={this._updateApplication} _value={this.state.form.name} />
-              <InputText label="Email*" _type="text" ref="email" _updateInput={this._updateApplication} _value={this.state.form.email} />
-              <InputText label="Tel*" _type="text" ref="tel" _updateInput={this._updateApplication} _value={this.state.form.tel} />
-              <InputText label="Expected Pay ($/mth)*" _type="text" ref="expectedPay" _updateInput={this._updateApplication} _value={this.state.form.expectedPay} />
-              <InputText label="Relevant Experience(Yrs)*" _type="text" ref="yrs_exp" _updateInput={this._updateApplication} _value={this.state.form.yrs_exp} />
-              <InputText label="Highest Relevant Qualification*" _type="text" ref="qualification" _updateInput={this._updateApplication} _value={this.state.form.qualification} />
+              <InputText _label="Name*" _type="text" ref="name" _updateInput={this._updateApplication} _value={this.state.form.name} />
+              <InputText _label="Email*" _type="text" ref="email" _updateInput={this._updateApplication} _value={this.state.form.email} />
+              <InputText _label="Tel*" _type="text" ref="tel" _updateInput={this._updateApplication} _value={this.state.form.tel} />
+              <InputText _label="Expected Pay ($/mth)*" _type="text" ref="expectedPay" _updateInput={this._updateApplication} _value={this.state.form.expectedPay} />
+              <InputText _label="Relevant Experience(Yrs)*" _type="text" ref="yrs_exp" _updateInput={this._updateApplication} _value={this.state.form.yrs_exp} />
+              <InputText _label="Highest Relevant Qualification*" _type="text" ref="qualification" _updateInput={this._updateApplication} _value={this.state.form.qualification} />
               <div class="form-group">
                 <label>Message to recruiters:</label>
                 <textarea class="form-control" type="text" ref="message" onChange={this._updateApplication} placeholder="optional" value={this.state.form.message}></textarea>
@@ -81,7 +81,7 @@ export default class ApplyContainer extends React.Component {
               <div class="form-action-btn">
                 <p>* required</p>
                 <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
-                <button class="btn btn-primary" type="submit">Apply</button>
+                <button class="btn btn-primary" type="submit">Save</button>
                 <button class="btn btn-primary" type="submit">Apply</button>
               </div>
             </div>

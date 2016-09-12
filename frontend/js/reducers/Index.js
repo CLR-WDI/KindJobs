@@ -1,9 +1,9 @@
 import {combineReducers} from "redux"
 
 import kindjobs from "./kindjobsReducer"
-import search from "./searchReducer"
+// import search from "./searchReducer"
 
 export default combineReducers({
-  // kindjobs,
+  kindjobs,
   // search
 })

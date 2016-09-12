@@ -13,7 +13,7 @@ const Header = (props) => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <li><Link to='dummy'>Dummy</Link></li>
+          <li><Link to='admin/kindjobs'>Admin</Link></li>
           <li><Link to='/'>Home</Link></li>
         </Nav>
       </Navbar.Collapse>
