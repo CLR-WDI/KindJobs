@@ -14,8 +14,10 @@ export default class JobContainer extends React.Component {
   render() {
     let jobs = [ ...this.props.kindjobs];
     let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
+    console.log(this.context.history);
     return(
       <div class="container-fluid">
+      <Link to={'admin/kindjobs'}><button>Index</button></Link>
         <div class="col-md-8 col-md-offset-2">
           <img src={job.image} />
           <div class="row">
@@ -47,3 +49,4 @@ export default class JobContainer extends React.Component {
     )
   }
 }
+//        <button onClick={this.props.history.goBack.bind(this)}>Back</button>
