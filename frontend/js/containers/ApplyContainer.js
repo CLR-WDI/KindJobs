@@ -40,12 +40,12 @@ export default class ApplyContainer extends React.Component {
     this.setState({
       form: {
         kindjobs_id: this.props.routeParams.id,
-        name: ReactDOM.findDOMNode(this.refs.name).value,
-        email: ReactDOM.findDOMNode(this.refs.email).value,
-        tel: ReactDOM.findDOMNode(this.refs.tel).value,
-        expectedPay: ReactDOM.findDOMNode(this.refs.expectedPay).value,
-        yrs_exp: ReactDOM.findDOMNode(this.refs.yrs_exp).value,
-        qualification: ReactDOM.findDOMNode(this.refs.qualification).value,
+        name: ReactDOM.findDOMNode(this.refs.name.refs.inp).value,
+        email: ReactDOM.findDOMNode(this.refs.email.refs.inp).value,
+        tel: ReactDOM.findDOMNode(this.refs.tel.refs.inp).value,
+        expectedPay: ReactDOM.findDOMNode(this.refs.expectedPay.refs.inp).value,
+        yrs_exp: ReactDOM.findDOMNode(this.refs.yrs_exp.refs.inp).value,
+        qualification: ReactDOM.findDOMNode(this.refs.qualification.refs.inp).value,
         message: ReactDOM.findDOMNode(this.refs.message).value,
       }
     });
@@ -60,12 +60,12 @@ export default class ApplyContainer extends React.Component {
         <h1>Application Form</h1>
         <h4>{job.title} - {job.sector} sector, {job.location}</h4>
 
-        <InputText label="Name" type="text" ref="name" onChange={this._updateApplication} value={this.state.form.name} />
-        <InputText label="Email" type="text" ref="email" onChange={this._updateApplication} value={this.state.form.email} />
-        <InputText label="Tel" type="text" ref="tel" onChange={this._updateApplication} value={this.state.form.tel} />
-        <InputText label="Expected Pay ($/mth)" type="text" ref="expectedPay" onChange={this._updateApplication} value={this.state.form.expectedPay} />
-        <InputText label="Relevant Experience(Yrs)" type="text" ref="yrs_exp" onChange={this._updateApplication} value={this.state.form.yrs_exp} />
-        <InputText label="Highest Relevant Qualification" type="text" ref="qualification" onChange={this._updateApplication} value={this.state.form.qualification} />
+        <InputText label="Name" _type="text" ref="name" _updateInput={this._updateApplication} _value={this.state.form.name} />
+        <InputText label="Email" _type="text" ref="email" _updateInput={this._updateApplication} _value={this.state.form.email} />
+        <InputText label="Tel" _type="text" ref="tel" _updateInput={this._updateApplication} _value={this.state.form.tel} />
+        <InputText label="Expected Pay ($/mth)" _type="text" ref="expectedPay" _updateInput={this._updateApplication} _value={this.state.form.expectedPay} />
+        <InputText label="Relevant Experience(Yrs)" _type="text" ref="yrs_exp" _updateInput={this._updateApplication} _value={this.state.form.yrs_exp} />
+        <InputText label="Highest Relevant Qualification" _type="text" ref="qualification" _updateInput={this._updateApplication} _value={this.state.form.qualification} />
 
         <label> Message to recruiters
           <textarea type="text" ref="message" onChange={this._updateApplication} placeholder="optional" value={this.state.form.message}></textarea>

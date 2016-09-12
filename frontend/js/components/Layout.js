@@ -10,8 +10,13 @@ import Header from "./Header";
 //   }
 // })
 
-export default class Layout extends React.Component {
-
+class Layout extends React.Component {
+  getChildContext() {
+    return {
+      history: this.props.history,
+      route: this.props.route
+    };
+  }
   render() {
     return (
       <div>
@@ -22,3 +27,10 @@ export default class Layout extends React.Component {
     );
   }
 }
+
+Layout.childContextTypes = {
+  history: React.PropTypes.object.isRequired,
+  route: React.PropTypes.object.isRequired
+};
+
+export default Layout;
