@@ -35,7 +35,7 @@ module.exports = function() {
 
   app.use(express.static(path.resolve(__dirname, '../dist')));
 
-  require('./routes')(app);
+  require('../backend/config/routes')(app);
 
 
   return app;
