@@ -5,13 +5,20 @@ import {Link} from "react-router"
 import fakeStore from "../fakeStore"
 import {formatDate} from "../helpers/helpers"
 import InputText from "../components/InputText"
+import {fetchKindJob} from "../actions/kindjobActions"
 
 @connect((store) => {
-  var newStore = fakeStore;
-  // newStore.jobListName = "Recent Jobs";
-  return newStore;
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
+  // var newStore = fakeStore;
+  // // newStore.jobListName = "Recent Jobs";
+  // return newStore;
 })
 export default class ApplyContainer extends React.Component {
+  componentWillMount() {
+    this.props.dispatch( fetchKindJob() );
+  }
   constructor(){
     super();
     this.state = {
@@ -51,15 +58,16 @@ export default class ApplyContainer extends React.Component {
     });
   }
   render() {
+    console.log(this.props)
     let jobs = [ ...this.props.kindjobs];
-    let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
+    let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
 
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
           <form onSubmit = {this._submitApplication}>
             <h1>Application Form</h1>
-            <h4>{job.title} - {job.sector} sector, {job.location}</h4>
+            <h4>{job.title} - {job.sector_id.sector_name} sector, {job.location}</h4>
             <div class="inner">
               <InputText _label="Name*" _type="text" ref="name" _updateInput={this._updateApplication} _value={this.state.form.name} />
               <InputText _label="Email*" _type="text" ref="email" _updateInput={this._updateApplication} _value={this.state.form.email} />

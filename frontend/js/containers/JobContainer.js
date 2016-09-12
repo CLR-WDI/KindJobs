@@ -3,18 +3,24 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import fakeStore from "../fakeStore"
 import {formatDate} from "../helpers/helpers"
+import {fetchKindJob} from "../actions/kindjobActions"
 
 @connect((store) => {
-  var newStore = fakeStore;
-  // newStore.jobListName = "Recent Jobs";
-  return newStore;
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
+  // var newStore = fakeStore;
+  // return newStore;
 })
 export default class JobContainer extends React.Component {
+  componentWillMount() {
+    this.props.dispatch( fetchKindJob() );
+  }
 
   render() {
     let jobs = [ ...this.props.kindjobs];
-    let job = jobs.filter( job => job.id === this.props.routeParams.id)[0];
-    console.log(this.context.history);
+    let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
+    console.log(job);
     return(
       <div class="container-fluid">
       <Link to={'admin/kindjobs'}><button>Index</button></Link>
@@ -38,10 +44,10 @@ export default class JobContainer extends React.Component {
           <p>{job.description}</p>
           <p>Minimum qualification: {job.min_qualification}</p>
           <p>Minimum job experience: {job.min_yrs_exp}</p>
-          <p>{formatDate(job.postdate)}</p>
+          <p>{formatDate(job.createdAt)}</p>
           <p>{formatDate(job.deadline)}</p>
             <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
-            <Link to={'/apply/'+job.id}>
+            <Link to={'/apply/'+job._id}>
               <button type="button" class="btn btn-primary">Apply now</button>
             </Link>
         </div>

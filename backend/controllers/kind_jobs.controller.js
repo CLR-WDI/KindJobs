@@ -55,7 +55,15 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.stauts(200).json([{message: 'Job successfully deleted'}])
+      KindJobs.find()
+            .sort({createdAt: -1})
+            .populate(['scope_id', 'employment_term_id', 'sector_id', 'location_id', 'sgo_id'])
+            .exec(function (err,kindjob) {
+              if (err) {
+                res.status(400).send(err);
+              };
+              res.status(200).json(kindjob)
+            });
 		})
   }
 

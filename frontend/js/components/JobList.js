@@ -17,12 +17,12 @@ export default class JobList extends React.Component {
   render() {
     let jobList = this.props.kindjobs.map( (job) => {
       return <JobCard
-      key={job._id}
-      id={job._id}
-      term = {job.term}
-      image = {job.image}
-      sector = {job.sector}
-      title = {job.title}
+        key   = {job._id}
+        id    = {job._id}
+        term  = {job.term}
+        image = {job.image}
+        sector= {job.sector}
+        title = {job.title}
       />
     })
     return (

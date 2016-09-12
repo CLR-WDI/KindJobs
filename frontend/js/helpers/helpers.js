@@ -12,4 +12,8 @@ let dateToYYYY_MM_YY = function(date){
   return date.getFullYear()+"-"+(month)+"-"+(day) ;
 };
 
-export {formatDate, dateToYYYY_MM_YY}
+let dateToYYYY_MM_YY_Mongoose = function(date){
+  return date.substr(0,10);
+};
+
+export {formatDate, dateToYYYY_MM_YY, dateToYYYY_MM_YY_Mongoose}

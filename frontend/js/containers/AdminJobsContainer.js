@@ -3,57 +3,44 @@ import {connect} from 'react-redux'
 import {Link} from "react-router";
 import fakeStore from "../fakeStore"
 // for dates
-import {dateToYYYY_MM_YY} from "../helpers/helpers"
+import {dateToYYYY_MM_YY_Mongoose} from "../helpers/helpers"
+import {fetchKindJobs, deleteKindJob} from "../actions/kindjobActions"
+
 
 @connect((store) => {
-  var newStore = fakeStore;
-  // newStore.jobListName = "Recent Jobs";
-  return newStore;
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
 })
 export default class AdminJobsContainer extends React.Component {
   constructor(){
     super();
-    this.state = {
-      kindjobs: [],
-    };
     this._deleteJob = this._deleteJob.bind(this);
   }
   componentWillMount(){
-    this.setState({
-      kindjobs: this.props.kindjobs
-    });
+    this.props.dispatch( fetchKindJobs() );
   }
   _deleteJob( e, id ){
     e.preventDefault();
     var r = confirm("Delete this job?");
     if(r==true){
-      const kindjobsList = this.state.kindjobs.filter( job => job.id !== id );
-      this.setState({ kindjobs: kindjobsList });
-      // delete job from database
-      console.log("Job deleted");
+      this.props.dispatch( deleteKindJob(id) );
     }
   }
   render() {
-    let jobList = this.state.kindjobs.map( (job) => {
-      console.log(job)
-      // console.log(typeof job.postdate)
-      // if(typeof job.postdate === "object"){ job.postdate = dateToYYYY_MM_YY(job.postdate) } else{job.postdate = ""}
-      // if(typeof job.deadline === "object"){ job.deadline = dateToYYYY_MM_YY(job.deadline) } else{job.deadline = ""}
-      job.postdate = dateToYYYY_MM_YY(job.postdate)
-      job.deadline = dateToYYYY_MM_YY(job.deadline)
-
+    let jobList = this.props.kindjobs.map( (job) => {
+      job.createdAt = dateToYYYY_MM_YY_Mongoose(job.createdAt)
+      job.deadline = dateToYYYY_MM_YY_Mongoose(job.deadline)
       return (
-        <tr key={job.id}>
-          <td>{job.postdate}</td>
+        <tr key={job._id}>
+          <td>{job.createdAt}</td>
           <td>{job.deadline}</td>
-          <td>{job.sgo}</td>
-          <td><Link to={'kindjobs/'+job.id}><div>{job.title}</div></Link></td>
-          <td><Link to={'jobform/'+job.id}><div>Edit</div></Link></td>
-          <td><button onClick={function(e){this._deleteJob( e, job.id )}}>Delete</button></td>
+          <td>{job.sgo_id.SGO_name}</td>
+          <td><Link to={'kindjobs/'+job._id}><div>{job.title}</div></Link></td>
+          <td><Link to={'jobform/'+job._id}><div>Edit</div></Link></td>
+          <td><button onClick={function(e){this._deleteJob( e, job._id )}.bind(this)}>Delete</button></td>
         </tr>
       )
-      //dateToYYYY_MM_YY
-      //dateToYYYY_MM_YY
     })
 
     return(

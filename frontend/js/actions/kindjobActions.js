@@ -25,3 +25,21 @@ export function fetchKindJobs(query) {
         })
   }
 }
+
+export function fetchKindJob() {
+  return {
+    type:"FETCH_STORED_KINDJOB"
+  }
+}
+
+export function deleteKindJob(id) {
+  return function (dispatch) {
+    axios.delete('./api/kindjobs/' + id)
+        .then((response)=>{
+          dispatch({type:"DELETE_KINDJOB_FULFILLED", payload: response.data})
+        })
+        // .catch((err)=>{
+        //   dispatch({type:"DELETE_KINDJOB_REJECTED", payload: err})
+        // })
+  }
+}
