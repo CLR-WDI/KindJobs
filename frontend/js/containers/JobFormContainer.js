@@ -7,14 +7,18 @@ import fakeStore from "../fakeStore"
 // for dates
 import {dateToYYYY_MM_YY} from "../helpers/helpers"
 // components
-import InputText from "../components/InputText"
+import InputText from "../components/InputText" //input field
+import Dropdown from "../components/Dropdown" //dropdown selectors
 // for back button
 import {hashHistory} from "react-router"
 // actions for redux
-import {fetchKindJobs, deleteKindJob, editKindJob, createKindJob} from "../actions/kindjobActions"
+import {fetchKindJobs, deleteKindJob, editKindJob, createKindJob} from "../actions/kindjobActions" //actions for kindjobs
+
+import {fetchSGOs, deleteSGO, editSGO, createSGO} from "../actions/sgoActions" //actions for SGOs
 
 @connect((store) => {
   return {
+    sgos: store.sgos.sgos,
     kindjobs: store.kindjobs.kindjobs
   }
 })
@@ -26,14 +30,15 @@ export default class JobForm extends React.Component {
   }
 
   componentWillMount(){
+    this.props.dispatch( fetchSGOs() );
     this.props.dispatch( fetchKindJobs() );
   }
   _deleteJob(e){
     e.preventDefault();
     var r = confirm("Delete this job?");
     if(r==true){
-      console.log(this.props);
-      console.log(this.props.routeParams.id);
+      // console.log(this.props);
+      // console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
         this.props.dispatch( deleteKindJob(this.props.routeParams.id) );
         this.props.history.goBack();
@@ -64,12 +69,12 @@ export default class JobForm extends React.Component {
     if(this.props.routeParams.id){
       let id = this.props.routeParams.id;
       this.props.dispatch( editKindJob(id, jobSave) );
-      console.log(jobSave);
+      // console.log(jobSave);
       hashHistory.go(-1);
     }
     else{
       this.props.dispatch( createKindJob(jobSave) );
-      console.log(jobSave);
+      // console.log(jobSave);
       hashHistory.go(-1);
     }
   }
@@ -78,13 +83,12 @@ export default class JobForm extends React.Component {
     if(this.props.routeParams.id){
       var jobs = [ ...this.props.kindjobs];
       var job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
-      console.log(job)
+      // console.log(job)
       var type = "EDIT"
     }
     else {
       let cur = new Date(),
           after90days = dateToYYYY_MM_YY( new Date( cur.setDate(cur.getDate() + 90) ) );
-      console.log(after90days);
       var type = "POST"
       var job = {
         deadline: after90days,
@@ -101,7 +105,7 @@ export default class JobForm extends React.Component {
         title: "",
       }
     }
-    console.log(job);
+    console.log("the store now in the props for this are now ", this.props.sgos);
     return(
       <form onSubmit = {this._submitJob}>
         <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
@@ -114,7 +118,7 @@ export default class JobForm extends React.Component {
         _default={job.scope_id._id}/>
         <InputText ref="location_id" _label="location_id" _type="text"
         _default={job.location_id._id}/>
-        <InputText ref="sgo_id" _label="sgo_id" _type="text"
+        <Dropdown ref="sgo_id" _label="SGO" _type="text" _sgo_list = {this.props.sgos}
         _default={job.sgo_id._id}/>
         <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
         _default={job.employment_term_id._id}/>
