@@ -122,7 +122,7 @@ export default class JobForm extends React.Component {
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
           <form onSubmit = {this._submitJob}>
-            <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
+            <button class="btn btn-default" onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
             <h1>KindJob Form - {type}</h1>
             <InputText ref="title" _label="title" _type="text"
             _default={job.title} />

@@ -16,6 +16,7 @@ const Header = (props) => {
           <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
             <li><Link to='admin/kindjobs'>Job Postings</Link></li>
             <li><Link to='admin/applications'>Applications</Link></li>
+            <li><Link to='admin/options'>Options</Link></li>
           </NavDropdown>
           <li><Link to='/'>Home</Link></li>
         </Nav>
