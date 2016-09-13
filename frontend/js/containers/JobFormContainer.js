@@ -20,8 +20,11 @@ import {fetchSectors, deleteSector, editSector, createSector} from "../actions/s
 
 import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scopeActions" //actions for Scopes
 
+import {fetchLocations, deleteLocation, editLocation, createLocation} from "../actions/locationActions" //actions for Locations
+
 @connect((store) => {
   return {
+    locations: store.locations.locations,
     scopes: store.scopes.scopes,
     sectors: store.sectors.sectors,
     sgos: store.sgos.sgos,
@@ -36,6 +39,7 @@ export default class JobForm extends React.Component {
   }
 
   componentWillMount(){
+    this.props.dispatch( fetchLocations() );
     this.props.dispatch( fetchSectors() );
     this.props.dispatch( fetchScopes() );
     this.props.dispatch( fetchSGOs() );
@@ -61,7 +65,6 @@ export default class JobForm extends React.Component {
     e.preventDefault();
     let jobSave = {
           employment_term_id: ReactDOM.findDOMNode(this.refs.employment_term_id.refs.inp).value,
-          image: ReactDOM.findDOMNode(this.refs.image.refs.inp).value,
           sector_id: ReactDOM.findDOMNode(this.refs.sector_id.refs.inp).value,
           title: ReactDOM.findDOMNode(this.refs.title.refs.inp).value,
           location_id: ReactDOM.findDOMNode(this.refs.location_id.refs.inp).value,
@@ -77,17 +80,17 @@ export default class JobForm extends React.Component {
         console.log("the values from the jobsave.sector_id are: " + jobSave.sector_id);
         console.log("the values from the jobsave.sgo_id are: " + jobSave.sgo_id);
 
-    // if(this.props.routeParams.id){
-    //   let id = this.props.routeParams.id;
-    //   this.props.dispatch( editKindJob(id, jobSave) );
-    //   // console.log(jobSave);
-    //   hashHistory.go(-1);
-    // }
-    // else{
-    //   this.props.dispatch( createKindJob(jobSave) );
-    //   // console.log(jobSave);
-    //   hashHistory.go(-1);
-    // }
+    if(this.props.routeParams.id){
+      let id = this.props.routeParams.id;
+      this.props.dispatch( editKindJob(id, jobSave) );
+      // console.log(jobSave);
+      hashHistory.go(-1);
+    }
+    else{
+      this.props.dispatch( createKindJob(jobSave) );
+      // console.log(jobSave);
+      hashHistory.go(-1);
+    }
   }
 
   render() {
@@ -105,7 +108,6 @@ export default class JobForm extends React.Component {
         deadline: after90days,
         description: "",
         employment_term_id: "",
-        image: "",
         location_id: "",
         min_qualification: "",
         min_yrs_exp: 0,
@@ -116,10 +118,6 @@ export default class JobForm extends React.Component {
         title: "",
       }
     }
-    console.log("whole prop is ", this.props);
-    console.log("props.sgos ", this.props.sgos);
-    console.log("props.sectors ", this.props.sectors);
-    console.log("props.scopes ", this.props.scopes);
     return(
       <form onSubmit = {this._submitJob}>
         <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
@@ -130,14 +128,12 @@ export default class JobForm extends React.Component {
         _default={job.sector_id._id}/>
         <Dropdown ref="scope_id" _label="Scope" _type="text" _list = {this.props.scopes}
         _default={job.scope_id._id}/>
-        <InputText ref="location_id" _label="location_id" _type="text"
+        <Dropdown ref="location_id" _label="Location" _type="text" _list = {this.props.locations}
         _default={job.location_id._id}/>
         <Dropdown ref="sgo_id" _label="SGO" _type="text" _list = {this.props.sgos}
         _default={job.sgo_id._id}/>
         <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
         _default={job.employment_term_id._id}/>
-        <InputText ref="image" _label="image" _type="text"
-        _default={job.image}/>
 
         <InputText ref="min_qualification" _label="min_qualification" _type="text"
         _default={job.min_qualification}/>

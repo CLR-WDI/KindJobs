@@ -12,7 +12,8 @@ var SectorSchema = new mongoose.Schema({
       },
       'Sector name is too long'
     ]
-  }
+  },
+  image: String
 });
 
 mongoose.model('Sector', SectorSchema);
