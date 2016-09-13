@@ -18,8 +18,11 @@ import {fetchSGOs, deleteSGO, editSGO, createSGO} from "../actions/sgoActions" /
 
 import {fetchSectors, deleteSector, editSector, createSector} from "../actions/sectorActions" //actions for Sectors
 
+import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scopeActions" //actions for Scopes
+
 @connect((store) => {
   return {
+    scopes: store.scopes.scopes,
     sectors: store.sectors.sectors,
     sgos: store.sgos.sgos,
     kindjobs: store.kindjobs.kindjobs
@@ -34,6 +37,7 @@ export default class JobForm extends React.Component {
 
   componentWillMount(){
     this.props.dispatch( fetchSectors() );
+    this.props.dispatch( fetchScopes() );
     this.props.dispatch( fetchSGOs() );
     this.props.dispatch( fetchKindJobs() );
   }
@@ -115,6 +119,7 @@ export default class JobForm extends React.Component {
     console.log("whole prop is ", this.props);
     console.log("props.sgos ", this.props.sgos);
     console.log("props.sectors ", this.props.sectors);
+    console.log("props.scopes ", this.props.scopes);
     return(
       <form onSubmit = {this._submitJob}>
         <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
@@ -123,7 +128,7 @@ export default class JobForm extends React.Component {
         _default={job.title} />
         <Dropdown ref="sector_id" _label="Sector" _type="text" _list = {this.props.sectors}
         _default={job.sector_id._id}/>
-        <InputText ref="scope_id" _label="scope_id" _type="text"
+        <Dropdown ref="scope_id" _label="Scope" _type="text" _list = {this.props.scopes}
         _default={job.scope_id._id}/>
         <InputText ref="location_id" _label="location_id" _type="text"
         _default={job.location_id._id}/>
