@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var EmploymentTermSchema = new mongoose.Schema({
-  employment_term:{
+  name:{
     type: String,
     trim: true,
     required: [true, 'Employment term name is required'],

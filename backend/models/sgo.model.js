@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var SGOSchema = new mongoose.Schema({
-  SGO_name:{
+  name:{
     type: String,
     trim: true,
     required: [true, 'SGO name is required'],
