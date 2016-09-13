@@ -103,44 +103,48 @@ export default class JobForm extends React.Component {
     }
     console.log(job);
     return(
-      <form onSubmit = {this._submitJob}>
-        <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
-        <h1>KindJob Form - {type}</h1>
-        <InputText ref="title" _label="title" _type="text"
-        _default={job.title} />
-        <InputText ref="sector_id" _label="sector_id" _type="text"
-        _default={job.sector_id._id}/>
-        <InputText ref="scope_id" _label="scope_id" _type="text"
-        _default={job.scope_id._id}/>
-        <InputText ref="location_id" _label="location_id" _type="text"
-        _default={job.location_id._id}/>
-        <InputText ref="sgo_id" _label="sgo_id" _type="text"
-        _default={job.sgo_id._id}/>
-        <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
-        _default={job.employment_term_id._id}/>
-        <InputText ref="image" _label="image" _type="text"
-        _default={job.image}/>
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          <form onSubmit = {this._submitJob}>
+            <button class="btn btn-default" onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
+            <h1>KindJob Form - {type}</h1>
+            <InputText ref="title" _label="title" _type="text"
+            _default={job.title} />
+            <InputText ref="sector_id" _label="sector_id" _type="text"
+            _default={job.sector_id._id}/>
+            <InputText ref="scope_id" _label="scope_id" _type="text"
+            _default={job.scope_id._id}/>
+            <InputText ref="location_id" _label="location_id" _type="text"
+            _default={job.location_id._id}/>
+            <InputText ref="sgo_id" _label="sgo_id" _type="text"
+            _default={job.sgo_id._id}/>
+            <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
+            _default={job.employment_term_id._id}/>
+            <InputText ref="image" _label="image" _type="text"
+            _default={job.image}/>
 
-        <InputText ref="min_qualification" _label="min_qualification" _type="text"
-        _default={job.min_qualification}/>
-        <InputText ref="min_yrs_exp" _label="min_yrs_exp" _type="number"
-        _default={job.min_yrs_exp}/>
-        <InputText ref="salary" _label="salary" _type="number"
-        _default={job.salary}/>
+            <InputText ref="min_qualification" _label="min_qualification" _type="text"
+            _default={job.min_qualification}/>
+            <InputText ref="min_yrs_exp" _label="min_yrs_exp" _type="number"
+            _default={job.min_yrs_exp}/>
+            <InputText ref="salary" _label="salary" _type="number"
+            _default={job.salary}/>
 
-        <label> Description:
-          <textarea ref="description"
-          defaultValue={job.description}></textarea>
-        </label>
-        <br/>
-        <label> Deadline:
-          <input type="Date" ref="deadline" onChange={this._updateInput}
-          defaultValue={job.deadline}></input>
-        </label>
-        <br/>
-        <button onClick={this._deleteJob}>Delete</button>
-        <button type="submit">Post</button>
-      </form>
+            <label> Description:
+              <textarea class="form-control" ref="description"
+              defaultValue={job.description}></textarea>
+            </label>
+            <br/>
+            <label> Deadline:
+              <input type="Date" ref="deadline" class="form-control" onChange={this._updateInput}
+              defaultValue={job.deadline}></input>
+            </label>
+            <br/>
+            <button class="btn btn-warning" onClick={this._deleteJob}>Delete</button>
+            <button class="btn btn-primary" type="submit">Post</button>
+          </form>
+        </div>
+      </div>
     )
   }
 }
