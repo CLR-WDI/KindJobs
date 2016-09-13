@@ -33,7 +33,8 @@ export default class AdminApplicationsContainer extends React.Component {
       application.createdAt = dateToYYYY_MM_YY_Mongoose(application.createdAt)
       return (
         <tr key={application._id}>
-          <td>{application.kindjobs_id}</td>
+          <td>{application.kindjobs_id.sgo_id.SGO_name}</td>
+          <td>{application.kindjobs_id.title}</td>
           <td>{application.createdAt}</td>
           <td>{application.highest_qualification}</td>
           <td>{application.expected_salary}</td>
@@ -50,9 +51,10 @@ export default class AdminApplicationsContainer extends React.Component {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th className="col-md-2">Job</th>
-              <th className="col-md-2">Date Posted</th>
-              <th className="col-md-2">Qualification</th>
+              <th className="col-md-2">SGO name</th>
+              <th className="col-md-2">Job title</th>
+              <th className="col-md-1">Date Posted</th>
+              <th className="col-md-1">Qualification</th>
               <th className="col-md-1">Salary</th>
               <th className="col-md-1">Yrs Exp</th>
               <th className="col-md-3">Name</th>

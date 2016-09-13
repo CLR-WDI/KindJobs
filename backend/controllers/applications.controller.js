@@ -1,18 +1,29 @@
 var Applications = require('mongoose').model('Application');
 
-module.exports = {
-
-  index: function(req, res, next) {
-    Applications.find()
-            .sort({createdAt: -1})
-            .populate(['kindjobs_id'])
-            .exec(function (err, application) {
+var getAllAppsFn = function(req, res, next) {
+          Applications.find()
+          .sort({createdAt: -1})
+          .populate('kindjobs_id')
+          .exec(function (err, docs) {
+            if (err) {
+              res.status(400).send(err);
+            };
+            Applications.populate(docs, {
+              path: 'kindjobs_id.sgo_id',
+              model: 'SGO'
+            }, function(err, application){
               if (err) {
                 res.status(400).send(err);
               };
-              res.status(200).json(application)
-            });
-  },
+              res.status(200).json(application);
+            })
+          });
+}
+
+
+module.exports = {
+
+  index: getAllAppsFn,
 
   create: function(req, res, next) {
     var Application = new Applications(req.body);
@@ -42,16 +53,7 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, application){
 			if (err) return next(err);
-      Applications.find()
-              .sort({createdAt: -1})
-              .populate(['kindjobs_id'])
-              .exec(function (err, application) {
-                if (err) {
-                  res.status(400).send(err);
-                };
-                res.status(200).json(application)
-              });
+      getAllAppsFn(req, res, next);
 		})
   }
-
 }
