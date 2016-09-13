@@ -7,6 +7,8 @@ import sectors from "./sectorsReducer"
 import kindjobs from "./kindjobsReducer"
 import applications from "./applicationsReducer"
 import sgos from "./sgosReducer"
+import filters from "./filtersReducer"
+
 
 export default combineReducers({
   employmentTerms,
@@ -16,4 +18,5 @@ export default combineReducers({
   sgos,
   kindjobs,
   applications,
+  filters
 })

@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from 'react-dom';
 // for store
 import {connect} from "react-redux"
-import fakeStore from "../fakeStore"
 // for dates
 import {dateToYYYY_MM_YY} from "../helpers/helpers"
 // components
