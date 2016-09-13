@@ -22,8 +22,11 @@ import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scope
 
 import {fetchLocations, deleteLocation, editLocation, createLocation} from "../actions/locationActions" //actions for Locations
 
+import {fetchEmploymentTerms, deleteEmploymentTerm, editEmploymentTerm, createEmploymentTerm} from "../actions/employmentTermActions" //actions for EmploymentTerms
+
 @connect((store) => {
   return {
+    employmentTerms: store.employmentTerms.employment_terms,
     locations: store.locations.locations,
     scopes: store.scopes.scopes,
     sectors: store.sectors.sectors,
@@ -39,6 +42,7 @@ export default class JobForm extends React.Component {
   }
 
   componentWillMount(){
+    this.props.dispatch( fetchEmploymentTerms() );
     this.props.dispatch( fetchLocations() );
     this.props.dispatch( fetchSectors() );
     this.props.dispatch( fetchScopes() );
@@ -76,9 +80,6 @@ export default class JobForm extends React.Component {
           description: ReactDOM.findDOMNode(this.refs.description).value,
           deadline: ReactDOM.findDOMNode(this.refs.deadline).value,
         };
-
-        console.log("the values from the jobsave.sector_id are: " + jobSave.sector_id);
-        console.log("the values from the jobsave.sgo_id are: " + jobSave.sgo_id);
 
     if(this.props.routeParams.id){
       let id = this.props.routeParams.id;
@@ -132,7 +133,7 @@ export default class JobForm extends React.Component {
         _default={job.location_id._id}/>
         <Dropdown ref="sgo_id" _label="SGO" _type="text" _list = {this.props.sgos}
         _default={job.sgo_id._id}/>
-        <InputText ref="employment_term_id" _label="employment_term_id" _type="text"
+        <Dropdown ref="employment_term_id" _label="Employment_Term" _type="text" _list = {this.props.employmentTerms}
         _default={job.employment_term_id._id}/>
 
         <InputText ref="min_qualification" _label="min_qualification" _type="text"
