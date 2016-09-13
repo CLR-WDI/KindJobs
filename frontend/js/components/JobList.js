@@ -37,6 +37,7 @@ export default class JobList extends React.Component {
     if(!this.props.filters.employment_term.internship.state){
       filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Internship" )
     }
+
     console.log(filteredList);
 
     let jobList = filteredList.map( (job) => {
