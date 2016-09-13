@@ -13,7 +13,13 @@ const Header = (props) => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <li><Link to='admin/kindjobs'>Admin</Link></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+              <li><Link to='admin/applications'>Applications</Link></li>
+            </ul>
+          </li>
           <li><Link to='/'>Home</Link></li>
         </Nav>
       </Navbar.Collapse>
