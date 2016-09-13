@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router";
-import {Navbar, Nav} from "react-bootstrap";
+import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
 
 const Header = (props) => {
   return(
@@ -13,13 +13,10 @@ const Header = (props) => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-              <li><Link to='admin/applications'>Applications</Link></li>
-            </ul>
-          </li>
+          <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
+            <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+            <li><Link to='admin/applications'>Applications</Link></li>
+          </NavDropdown>
           <li><Link to='/'>Home</Link></li>
         </Nav>
       </Navbar.Collapse>

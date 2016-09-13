@@ -46,22 +46,24 @@ export default class AdminJobsContainer extends React.Component {
     return(
       <div>
         <h1>Admin Jobs View</h1>
-        <Link to='jobform'><button>Create new JobForm</button></Link>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th className="col-md-2">Date Posted</th>
-              <th className="col-md-2">Deadline</th>
-              <th className="col-md-2">SGO</th>
-              <th className="col-md-4">Job Title</th>
-              <th className="col-md-1">Edit</th>
-              <th className="col-md-1">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jobList}
-          </tbody>
-        </table>
+        <Link to='jobform'><button class="btn btn-primary">Create new JobForm</button></Link>
+        <div class="table-responsive">
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th className="col-md-2">Date Posted</th>
+                <th className="col-md-2">Deadline</th>
+                <th className="col-md-2">SGO</th>
+                <th className="col-md-4">Job Title</th>
+                <th className="col-md-1">Edit</th>
+                <th className="col-md-1">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {jobList}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
