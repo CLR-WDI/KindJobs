@@ -23,19 +23,19 @@ export default class JobList extends React.Component {
     let filteredList = [...this.props.kindjobs];
     console.log(filteredList);
     if(!this.props.filters.employment_term.fulltime.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Full Time" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Full Time" )
     }
     if(!this.props.filters.employment_term.parttime.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Part Time" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Part Time" )
     }
     if(!this.props.filters.employment_term.contract.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Contract" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Contract" )
     }
     if(!this.props.filters.employment_term.project.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Project" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Project" )
     }
     if(!this.props.filters.employment_term.internship.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.employment_term !== "Internship" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Internship" )
     }
 
     console.log(filteredList);
@@ -44,10 +44,10 @@ export default class JobList extends React.Component {
       return <JobCard
         key   = {job._id}
         id    = {job._id}
-        term  = {job.employment_term_id.employment_term}
+        term  = {job.employment_term_id.name}
         image = {job.image}
         description = {job.description}
-        sector= {job.sector_id.sector_name}
+        sector= {job.sector_id.name}
         title = {job.title}
       />
     })

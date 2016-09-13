@@ -29,13 +29,13 @@ export default class JobContainer extends React.Component {
           <div class="row">
             <div class="job-header col-sm-8">
               <h1>{job.title}</h1>
-              <h4>{job.location_id.location_name}</h4>
-              <h4>{job.employment_term_id.employment_term}</h4>
+              <h4>{job.location_id.name}</h4>
+              <h4>{job.employment_term_id.name}</h4>
             </div>
           </div>
           <h4>
-            <span class="label label-info">{job.sector_id.sector_name}</span>
-            <span class="label label-default" >{job.scope_id.scope_name}</span>
+            <span class="label label-info">{job.sector_id.name}</span>
+            <span class="label label-default" >{job.scope_id.name}</span>
           </h4>
           <h5>Salary: $ {job.salary}</h5>
           <div class="divider-horizontal"></div>
