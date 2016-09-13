@@ -12,7 +12,8 @@ var SGOSchema = new mongoose.Schema({
       },
       'SGO name is too long'
     ]
-  }
+  },
+  SGO_icon: String
 });
 
 mongoose.model('SGO', SGOSchema);
