@@ -41,7 +41,7 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, application){
 			if (err) return next(err);
-			res.stauts(200).json([{message: 'Application successfully deleted'}])
+			res.status(200).json([{message: 'Application successfully deleted'}])
 		})
   }
 
