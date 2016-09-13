@@ -7,14 +7,12 @@ let fakeStore = {
       title: "Senior Social Worker",
       location: "Singapore",
       scope: "Social Worker",
+      salary: 5500,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iam contemni non poteris. Duo Reges: constructio interrete. Nec vero sum nescius esse utilitatem in historia, non modo voluptatem. Istam voluptatem perpetuam quis potest praestare sapienti? Minime vero, inquit ille, consentit.",
       min_qualification: "Diploma",
-      sgo: "kindJobs",
-      salary: 5500,
       min_yrs_exp: 20,
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     },{
       id: "2",
       term: "PartTime",
@@ -30,7 +28,6 @@ let fakeStore = {
       min_yrs_exp: 10,
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     },{
       id: "3",
       term: "Internship",
@@ -45,7 +42,6 @@ let fakeStore = {
       min_yrs_exp: 1,
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     },{
       id: "4",
       term: "Contract",
@@ -60,7 +56,6 @@ let fakeStore = {
       min_yrs_exp: 4,
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     },{
       id: "5",
       term: "FullTime",
@@ -75,7 +70,6 @@ let fakeStore = {
       min_yrs_exp: 10,
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     },{
       id: "6",
       term: "Contract",
@@ -91,9 +85,53 @@ let fakeStore = {
       requirements: "Nosti, credo, illud: Nemo pius est, qui pietatem",
       postdate: new Date("2016/09/16"),
       deadline: new Date(new Date("2016/09/16").getFullYear(), new Date("2016/09/16").getMonth(), new Date("2016/09/16").getDate()+7),
-      sgo: "kindJobs",
     }
   ],
+
+  searchFilters: [{
+    sector: [{
+      id: 1,
+      sector_name: "Elderly"
+    },{
+      id: 2,
+      sector_name: "Children & Youth"
+    },{
+      id: 3,
+      sector_name: "Social Enterprises"
+    },{
+      id: 4,
+      sector_name: "Disabled"
+    },{
+      id: 5,
+      sector_name: "Family Services"
+    }],
+    scope: [{
+      id: 1,
+      scope_name: "Social Worker"
+    },{
+      id: 2,
+      scope_name: "Counsellor"
+    },{
+      id: 3,
+      scope_name: "Corporate Functions"
+    },{
+      id: 4,
+      scope_name: "Physical Therapist"
+    }],
+    term: [{
+      id: 1,
+      employment_term: "FullTime",
+    },{
+      id: 2,
+      employment_term: "PartTime",
+    },{
+      id: 3,
+      employment_term: "Internship",
+    },{
+      id: 4,
+      employment_term: "Contract",
+    }],
+  }],
 
 };
 
