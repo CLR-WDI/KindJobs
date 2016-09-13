@@ -6,8 +6,14 @@ let HashHistory = ReactRouter.hashHistory;
 
 // for refs
 import ReactDOM from 'react-dom';
+import {connect} from "react-redux"
+import {fetchKindJobs} from "../actions/kindjobActions";
 
-
+@connect((store) => {
+  return {
+    kindjobs: store.kindjobs.kindjobs
+  }
+})
 export default class SearchBar extends React.Component {
   constructor(){
     super();
@@ -16,15 +22,13 @@ export default class SearchBar extends React.Component {
 
   _sendSearch(e) {
     e.preventDefault();
+    this.props.dispatch( fetchKindJobs( 'keyword=' + ReactDOM.findDOMNode(this.refs.search).value ) );
     HashHistory.push({
       pathname: 'results',
       query: {
         search: ReactDOM.findDOMNode(this.refs.search).value
       }
     })
-    if(this.props._jobListName === "Results") {
-      this.props.dispatch( fetchKindJobs( 'keyword=' + ReactDOM.findDOMNode(this.refs.search).value ) );
-    }
   }
 
   render() {
