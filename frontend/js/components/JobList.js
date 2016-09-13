@@ -23,10 +23,10 @@ export default class JobList extends React.Component {
     let filteredList = [...this.props.kindjobs];
     console.log(filteredList);
     if(!this.props.filters.employment_term.fulltime.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Full Time" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Full-time" )
     }
     if(!this.props.filters.employment_term.parttime.state){
-      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Part Time" )
+      filteredList = filteredList.filter( job => job.employment_term_id.name !== "Part-time" )
     }
     if(!this.props.filters.employment_term.contract.state){
       filteredList = filteredList.filter( job => job.employment_term_id.name !== "Contract" )

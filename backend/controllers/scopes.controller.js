@@ -3,9 +3,9 @@ var Scopes = require('mongoose').model('Scope');
 module.exports = {
 
   index: function(req, res, next) {
-    Scopes.find({}, function(err, kindjobs) {
+    Scopes.find({}, function(err, scopes) {
       if (err) return next(err);
-			res.status(200).json(kindjobs);
+			res.status(200).json(scopes);
     });
   },
 
@@ -15,7 +15,10 @@ module.exports = {
 
     scope.save(function(err) {
       if (err) return next(err);
-      res.status(200).json(scope);
+      Scopes.find({}, function(err, scopes) {
+        if (err) return next(err);
+  			res.status(200).json(scopes);
+      });
     });
 
   },
@@ -25,7 +28,10 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(scope);
+        Scopes.find({}, function(err, scopes) {
+          if (err) return next(err);
+    			res.status(200).json(scopes);
+        });
 	    }
 	  });
 	},
@@ -35,7 +41,10 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.status(200).json([{message: 'Job successfully deleted'}])
+      Scopes.find({}, function(err, scopes) {
+        if (err) return next(err);
+  			res.status(200).json(scopes);
+      });
 		})
   }
 
