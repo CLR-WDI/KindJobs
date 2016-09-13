@@ -33,7 +33,7 @@ export default class AdminApplicationsContainer extends React.Component {
       application.createdAt = dateToYYYY_MM_YY_Mongoose(application.createdAt)
       return (
         <tr key={application._id}>
-          <td>{application.kindjobs_id.sgo_id.SGO_name}</td>
+          <td>{application.kindjobs_id.sgo_id.name}</td>
           <td>{application.kindjobs_id.title}</td>
           <td>{application.createdAt}</td>
           <td>{application.highest_qualification}</td>

@@ -2,7 +2,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var KindJobSchema = new Schema({
-  image: String,
   title: {
     type: String,
     trim: true,

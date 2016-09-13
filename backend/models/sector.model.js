@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var SectorSchema = new mongoose.Schema({
-  sector_name:{
+  name:{
     type: String,
     trim: true,
     required: [true, 'Sector name is required'],
@@ -12,7 +12,8 @@ var SectorSchema = new mongoose.Schema({
       },
       'Sector name is too long'
     ]
-  }
+  },
+  image: String
 });
 
 mongoose.model('Sector', SectorSchema);

@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var ScopeSchema = new mongoose.Schema({
-  scope_name:{
+  name:{
     type: String,
     trim: true,
     required: [true, 'Scope name is required'],

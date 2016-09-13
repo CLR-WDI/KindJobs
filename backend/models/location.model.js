@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var LocationSchema = new mongoose.Schema({
-  location_name:{
+  name:{
     type: String,
     trim: true,
     required: [true, 'Location name is required'],

@@ -35,7 +35,7 @@ export default class AdminJobsContainer extends React.Component {
         <tr key={job._id}>
           <td>{job.createdAt}</td>
           <td>{job.deadline}</td>
-          <td>{job.sgo_id.SGO_name}</td>
+          <td>{job.sgo_id.name}</td>
           <td><Link to={'kindjobs/'+job._id}><div>{job.title}</div></Link></td>
           <td><Link to={'jobform/'+job._id}><div>Edit</div></Link></td>
           <td><button onClick={function(e){this._deleteJob( e, job._id )}.bind(this)}>Delete</button></td>
