@@ -20,5 +20,5 @@ export default combineReducers({
   kindjobs,
   applications,
   filters,
-  terms,
+  terms
 })
