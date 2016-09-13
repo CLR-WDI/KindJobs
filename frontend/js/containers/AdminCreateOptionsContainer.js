@@ -69,7 +69,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
           <h1>Create Options for Kind Jobs</h1>
-          <form onSubmit={this._submitSector}>
+          <form ref="sectorForm" onSubmit={this._submitSector}>
             <div class="row">
               <div class="col-md-6">
                 <InputText _label="Sector" ref="sectorName" _type="text"/>
@@ -80,13 +80,13 @@ export default class AdminCreateOptionsContainer extends React.Component {
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
           </form>
-          <form onSubmit={this._submitScope}>
+          <form ref="scopeForm" onSubmit={this._submitScope}>
             <InputGroup _label="Scope" ref="scopeName" _type="text" _btnText="Submit"/>
           </form>
-          <form onSubmit={this._submitLocation}>
+          <form ref="locationForm" onSubmit={this._submitLocation}>
             <InputGroup _label="Location" ref="locationName" _type="text" _btnText="Submit"/>
           </form>
-          <form onSubmit={this._submitTerm}>
+          <form ref="termForm" onSubmit={this._submitTerm}>
             <InputGroup _label="Employment Term" ref="termName" _type="text" _btnText="Submit"/>
           </form>
         </div>
