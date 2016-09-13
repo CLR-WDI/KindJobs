@@ -119,42 +119,45 @@ export default class JobForm extends React.Component {
       }
     }
     return(
-      <form onSubmit = {this._submitJob}>
-        <button onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
-        <h1>KindJob Form - {type}</h1>
-        <InputText ref="title" _label="title" _type="text"
-        _default={job.title} />
-        <Dropdown ref="sector_id" _label="Sector" _type="text" _list = {this.props.sectors}
-        _default={job.sector_id._id}/>
-        <Dropdown ref="scope_id" _label="Scope" _type="text" _list = {this.props.scopes}
-        _default={job.scope_id._id}/>
-        <Dropdown ref="location_id" _label="Location" _type="text" _list = {this.props.locations}
-        _default={job.location_id._id}/>
-        <Dropdown ref="sgo_id" _label="SGO" _type="text" _list = {this.props.sgos}
-        _default={job.sgo_id._id}/>
-        <Dropdown ref="employment_term_id" _label="Employment_Term" _type="text" _list = {this.props.employmentTerms}
-        _default={job.employment_term_id._id}/>
-
-        <InputText ref="min_qualification" _label="min_qualification" _type="text"
-        _default={job.min_qualification}/>
-        <InputText ref="min_yrs_exp" _label="min_yrs_exp" _type="number"
-        _default={job.min_yrs_exp}/>
-        <InputText ref="salary" _label="salary" _type="number"
-        _default={job.salary}/>
-
-        <label> Description:
-          <textarea ref="description"
-          defaultValue={job.description}></textarea>
-        </label>
-        <br/>
-        <label> Deadline:
-          <input type="Date" ref="deadline" onChange={this._updateInput}
-          defaultValue={job.deadline}></input>
-        </label>
-        <br/>
-        <button onClick={this._deleteJob}>Delete</button>
-        <button type="submit">Post</button>
-      </form>
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          <form onSubmit = {this._submitJob}>
+            <button class="btn btn-default" onClick={function(e){ e.preventDefault(); hashHistory.go(-1); }}>Back</button>
+            <h1>KindJob Form - {type}</h1>
+            <InputText ref="title" _label="title" _type="text"
+            _default={job.title} />
+            <Dropdown ref="sector_id" _label="Sector" _type="text" _list = {this.props.sectors}
+            _default={job.sector_id._id}/>
+            <Dropdown ref="scope_id" _label="Scope" _type="text" _list = {this.props.scopes}
+            _default={job.scope_id._id}/>
+            <Dropdown ref="location_id" _label="Location" _type="text" _list = {this.props.locations}
+            _default={job.location_id._id}/>
+            <Dropdown ref="sgo_id" _label="SGO" _type="text" _list = {this.props.sgos}
+            _default={job.sgo_id._id}/>
+            <Dropdown ref="employment_term_id" _label="Employment_Term" _type="text" _list = {this.props.employmentTerms}
+            _default={job.employment_term_id._id}/>
+            <InputText ref="min_qualification" _label="min_qualification" _type="text"
+            _default={job.min_qualification}/>
+            <InputText ref="min_yrs_exp" _label="min_yrs_exp" _type="number"
+            _default={job.min_yrs_exp}/>
+            <InputText ref="salary" _label="salary" _type="number"
+            _default={job.salary}/>
+            
+            <label> Description:
+              <textarea class="form-control" ref="description"
+              defaultValue={job.description}></textarea>
+            </label>
+            <br/>
+            <label> Deadline:
+              <input type="Date" ref="deadline" class="form-control" onChange={this._updateInput}
+              defaultValue={job.deadline}></input>
+            </label>
+            <br/>
+            <button class="btn btn-warning" onClick={this._deleteJob}>Delete</button>
+            <button class="btn btn-primary" type="submit">Post</button>
+          </form>
+        </div>
+      </div>
     )
   }
 }

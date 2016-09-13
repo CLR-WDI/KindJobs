@@ -7,7 +7,8 @@ let IndexRoute = ReactRouter.IndexRoute;
 let HashHistory = ReactRouter.hashHistory;
 
 import Layout from "../components/Layout";
-import Home from "../containers/HomeContainer"
+import Home from "../containers/HomeContainer";
+import AdminCreateOptionsContainer from '../containers/AdminCreateOptionsContainer';
 import AdminJobsContainer from '../containers/AdminJobsContainer';
 import JobContainer from '../containers/JobContainer';
 import ApplyContainer from '../containers/ApplyContainer';
@@ -25,6 +26,7 @@ let routes = (
       <IndexRoute name="home" component={Home} />
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
+      <Route path='admin/options' component={AdminCreateOptionsContainer} />
       <Route path='admin/kindjobs' component={AdminJobsContainer} />
       <Route path='jobform' component={JobFormContainer} />
       <Route path='jobform/:id' component={JobFormContainer} />

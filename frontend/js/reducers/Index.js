@@ -6,6 +6,7 @@ import scopes from "./scopesReducer"
 import sectors from "./sectorsReducer"
 import kindjobs from "./kindjobsReducer"
 import applications from "./applicationsReducer"
+import terms from "./termsReducer"
 import sgos from "./sgosReducer"
 import filters from "./filtersReducer"
 
@@ -18,5 +19,6 @@ export default combineReducers({
   sgos,
   kindjobs,
   applications,
-  filters
+  filters,
+  terms,
 })
