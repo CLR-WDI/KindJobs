@@ -39,7 +39,7 @@ export default class ApplicationContainer extends React.Component {
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
-          <p>Kindjob: {application.kindjobs_id}</p>
+          <p>Kindjob: {application.kindjobs_id.kindjob_name}</p>
           <p>{formatDate(application.createdAt)}</p>
           <p>Name: {application.name}</p>
           <p>Email: {application.email}</p>
@@ -51,7 +51,7 @@ export default class ApplicationContainer extends React.Component {
           <br/>
 
           <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
-          <button class="btn btn-primary" onClick={this._deleteJob}>Delete</button>
+          <button class="btn btn-primary" onClick={this._deleteApplication}>Delete</button>
 
         </div>
       </div>
