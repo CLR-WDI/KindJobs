@@ -20,7 +20,7 @@ export default class Home extends React.Component {
           <Link to={'/advsearch'}>Advanced Search</Link>
         </div>
         <div class="container-fluid">
-          <JobList jobListName="Recent Jobs" />
+          <JobList _jobListName="Recent Jobs" />
         </div>
       </div>
     )

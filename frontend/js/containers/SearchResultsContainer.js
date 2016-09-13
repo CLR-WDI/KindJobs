@@ -1,21 +1,21 @@
 import React from "react";
-import {connect} from 'react-redux';
 import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
-// import{fetchTodos, addTodo, deleteTodo} from "../actions/todoActions"
+import {Link} from "react-router";
 
-@connect((store) => {
-  // return{
-  //   // todos: store.todos.todos
-  // }
-})
 export default class SearchResults extends React.Component {
   render() {
+    console.log(this.props.location.query.search);
     return(
       <div>
-        <h1>Search Results</h1>
-        <SearchBar />
-        <JobList />
+        <div class="jumbotron text-center">
+          <h1>Come find your kind of job!</h1>
+          <SearchBar _jobListName="Results"/>
+          <Link to={'/advsearch'}>Advanced Search</Link>
+        </div>
+        <div class="container-fluid">
+          <JobList _jobListName="Results" _searchterms={this.props.location.query.search}/>
+        </div>
       </div>
     )
   }

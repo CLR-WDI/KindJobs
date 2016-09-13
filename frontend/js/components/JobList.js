@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
 import JobCard from "./JobCard"
-import fakeStore from "../fakeStore"
 import {fetchKindJobs} from "../actions/kindjobActions"
 
 @connect((store) => {
@@ -11,7 +10,10 @@ import {fetchKindJobs} from "../actions/kindjobActions"
 })
 export default class JobList extends React.Component {
   componentWillMount() {
+    if (this.props._jobListName === "Recent Jobs"){
     this.props.dispatch( fetchKindJobs() );
+    }
+
   }
 
   render() {
@@ -27,7 +29,7 @@ export default class JobList extends React.Component {
     })
     return (
       <div>
-        <h2>{this.props.jobListName}</h2>
+        <h2>{this.props._jobListName}</h2>
         <div class="row">
           {jobList}
         </div>
