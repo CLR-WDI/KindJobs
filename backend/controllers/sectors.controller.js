@@ -35,7 +35,7 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.stauts(200).json([{message: 'Job successfully deleted'}])
+			res.status(200).json([{message: 'Job successfully deleted'}])
 		})
   }
 

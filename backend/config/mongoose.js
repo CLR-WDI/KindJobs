@@ -8,7 +8,7 @@ module.exports = function () {
   require('../models/sector.model');
   require('../models/location.model');
   require('../models/sgo.model');
-  require('../models/application.model');
   require('../models/kind_job.model');
+  require('../models/application.model');
   return db;
 }

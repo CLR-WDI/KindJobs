@@ -5,6 +5,7 @@ module.exports = {
   index: function(req, res, next) {
     Applications.find()
             .sort({createdAt: -1})
+            .populate(['kindjobs_id'])
             .exec(function (err, application) {
               if (err) {
                 res.status(400).send(err);
@@ -41,7 +42,15 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, application){
 			if (err) return next(err);
-			res.status(200).json([{message: 'Application successfully deleted'}])
+      Applications.find()
+              .sort({createdAt: -1})
+              .populate(['kindjobs_id'])
+              .exec(function (err, application) {
+                if (err) {
+                  res.status(400).send(err);
+                };
+                res.status(200).json(application)
+              });
 		})
   }
 

@@ -3,8 +3,9 @@ var mongoose = require('mongoose'),
 
 var ApplicationSchema = new Schema({
   kindjobs_id:{
-    type: String,
-    required:[true, "Kind Jobs ID is required"]
+    required:[true, "Kind Jobs ID is required"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'KindJob'
   },
   name: {
     type: String,
