@@ -3,19 +3,21 @@ var Sectors = require('mongoose').model('Sector');
 module.exports = {
 
   index: function(req, res, next) {
-    Sectors.find({}, function(err, kindjobs) {
+    Sectors.find({}, function(err, sectors) {
       if (err) return next(err);
-			res.status(200).json(kindjobs);
+			res.status(200).json(sectors);
     });
   },
 
   create: function(req, res, next) {
     var sector = new Sectors(req.body);
-    console.log(req.body);
 
     sector.save(function(err) {
       if (err) return next(err);
-      res.status(200).json(sector);
+      Sectors.find({}, function(err, sectors) {
+        if (err) return next(err);
+  			res.status(200).json(sectors);
+      });
     });
 
   },
@@ -25,7 +27,10 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(sector);
+        Sectors.find({}, function(err, sectors) {
+          if (err) return next(err);
+    			res.status(200).json(sectors);
+        });
 	    }
 	  });
 	},
@@ -35,7 +40,10 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.status(200).json([{message: 'Job successfully deleted'}])
+      Sectors.find({}, function(err, sectors) {
+        if (err) return next(err);
+  			res.status(200).json(sectors);
+      });
 		})
   }
 

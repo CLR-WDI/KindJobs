@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {Link} from "react-router";
-import fakeStore from "../fakeStore"
 // for dates
 import {dateToYYYY_MM_YY_Mongoose} from "../helpers/helpers"
 import {fetchKindJobs, deleteKindJob} from "../actions/kindjobActions"

@@ -29,20 +29,21 @@ export default class JobContainer extends React.Component {
           <div class="row">
             <div class="job-header col-sm-8">
               <h1>{job.title}</h1>
-              <h4>{job.location}</h4>
+              <h4>{job.location_id.name}</h4>
+              <h4>{job.employment_term_id.name}</h4>
             </div>
           </div>
           <h4>
-            <span class="label label-info">{job.sector}</span>
-            <span class="label label-default">{job.scope}</span>
+            <span class="label label-info">{job.sector_id.name}</span>
+            <span class="label label-default" >{job.scope_id.name}</span>
           </h4>
           <h5>Salary: $ {job.salary}</h5>
           <div class="divider-horizontal"></div>
           <p>{job.description}</p>
           <p>Minimum qualification: {job.min_qualification}</p>
           <p>Minimum job experience: {job.min_yrs_exp}</p>
-          <p>{formatDate(job.createdAt)}</p>
-          <p>{formatDate(job.deadline)}</p>
+          <p>Posted on:{formatDate(job.createdAt)}</p>
+          <p>Application deadline:{formatDate(job.deadline)}</p>
             <button class="btn btn-default" onClick={this.props.history.goBack.bind(this)}>Back</button>
             <Link to={'/apply/'+job._id}>
               <button type="button" class="btn btn-primary">Apply now</button>

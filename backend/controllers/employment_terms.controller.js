@@ -3,9 +3,9 @@ var EmploymentTerm = require('mongoose').model('EmploymentTerm');
 module.exports = {
 
   index: function(req, res, next) {
-    EmploymentTerm.find({}, function(err, kindjobs) {
+    EmploymentTerm.find({}, function(err, employmentTerms) {
       if (err) return next(err);
-			res.status(200).json(kindjobs);
+			res.status(200).json(employmentTerms);
     });
   },
 
@@ -15,7 +15,10 @@ module.exports = {
 
     employmentTerm.save(function(err) {
       if (err) return next(err);
-      res.status(200).json(employmentTerm);
+      EmploymentTerm.find({}, function(err, employmentTerms) {
+        if (err) return next(err);
+  			res.status(200).json(employmentTerms);
+      });
     });
 
   },
@@ -25,7 +28,10 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(employment_term);
+        EmploymentTerm.find({}, function(err, employmentTerms) {
+          if (err) return next(err);
+    			res.status(200).json(employmentTerms);
+        });
 	    }
 	  });
 	},
@@ -35,7 +41,10 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.status(200).json([{message: 'Job successfully deleted'}])
+      EmploymentTerm.find({}, function(err, employmentTerms) {
+        if (err) return next(err);
+  			res.status(200).json(employmentTerms);
+      });
 		})
   }
 

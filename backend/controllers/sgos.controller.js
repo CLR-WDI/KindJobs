@@ -3,9 +3,9 @@ var SGOs = require('mongoose').model('SGO');
 module.exports = {
 
   index: function(req, res, next) {
-    SGOs.find({}, function(err, kindjobs) {
+    SGOs.find({}, function(err, SGOs) {
       if (err) return next(err);
-			res.status(200).json(kindjobs);
+			res.status(200).json(SGOs);
     });
   },
 
@@ -15,7 +15,10 @@ module.exports = {
 
     sector.save(function(err) {
       if (err) return next(err);
-      res.status(200).json(sector);
+      SGOs.find({}, function(err, SGOs) {
+        if (err) return next(err);
+  			res.status(200).json(SGOs);
+      });
     });
 
   },
@@ -25,7 +28,10 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(sgo);
+        SGOs.find({}, function(err, SGOs) {
+          if (err) return next(err);
+    			res.status(200).json(SGOs);
+        });
 	    }
 	  });
 	},
@@ -35,7 +41,10 @@ module.exports = {
 			_id: req.params.id
 		}, function(err, kindjob){
 			if (err) return next(err);
-			res.status(200).json([{message: 'Job successfully deleted'}])
+      SGOs.find({}, function(err, SGOs) {
+        if (err) return next(err);
+  			res.status(200).json(SGOs);
+      });
 		})
   }
 
