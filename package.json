@@ -44,7 +44,6 @@
   "scripts": {
     "start": "webpack -p && nodemon server.js",
     "frontendServer": "webpack-dev-server --content-base src --inline --hot",
-    "postinstall": "webpack -p",
     "prod": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
