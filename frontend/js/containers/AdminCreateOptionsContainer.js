@@ -8,6 +8,7 @@ import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scope
 import {fetchSectors, deleteSector, editSector, createSector} from "../actions/sectorActions"
 import {fetchLocations, deleteLocation, editLocation, createLocation} from "../actions/locationActions"
 import {fetchTerms, deleteTerm, editTerm, createTerm} from "../actions/termActions"
+import {fetchSGOs, deleteSGO, editSGO, createSGO} from "../actions/SGOActions"
 // for redirect to home
 import {hashHistory} from "react-router"
 
@@ -15,7 +16,10 @@ import {hashHistory} from "react-router"
   return {
     scopes: store.scopes.scopes,
     sectors: store.sectors.sectors,
-    locations: store.locations.locations
+    locations: store.locations.locations,
+    terms: store.terms.terms,
+    SGOs: strore.sgos.sgos
+
   }
 })
 export default class AdminCreateOptionsContainer extends React.Component {
@@ -25,6 +29,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
     this._submitScope = this._submitScope.bind(this);
     this._submitLocation = this._submitLocation.bind(this);
     this._submitTerm = this._submitTerm.bind(this);
+    this._submitSGO = this._submitTerm.bind(this);
   }
 
   _submitSector(e) {
@@ -64,6 +69,15 @@ export default class AdminCreateOptionsContainer extends React.Component {
     alert( "Employment term created" );
   }
 
+  _submitSGO(e) {
+    e.preventDefault();
+    let form = {
+      name: ReactDOM.findDOMNode(this.refs.sgoName.refs.inp).value
+    }
+    this.props.dispatch(createSGO(form));
+    alert( "SGO created" );
+  }
+
   render() {
     return(
       <div class="container-fluid">
@@ -88,6 +102,9 @@ export default class AdminCreateOptionsContainer extends React.Component {
           </form>
           <form onSubmit={this._submitTerm}>
             <InputGroup _label="Employment Term" ref="termName" _type="text" _btnText="Submit"/>
+          </form>
+          <form onSubmit={this._submitSGO}>
+            <InputGroup _label="SGO" ref="sgoName" _type="text" _btnText="Submit"/>
           </form>
         </div>
       </div>
