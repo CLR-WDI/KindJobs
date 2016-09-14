@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
 import {Link} from "react-router"
-import fakeStore from "../fakeStore"
 import {formatDate} from "../helpers/helpers"
 import {fetchKindJob} from "../actions/kindjobActions"
 
