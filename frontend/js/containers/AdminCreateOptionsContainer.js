@@ -18,7 +18,7 @@ import {hashHistory} from "react-router"
     sectors: store.sectors.sectors,
     locations: store.locations.locations,
     terms: store.terms.terms,
-    SGOs: strore.sgos.sgos
+    SGOs: store.sgos.sgos
 
   }
 })
@@ -29,7 +29,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
     this._submitScope = this._submitScope.bind(this);
     this._submitLocation = this._submitLocation.bind(this);
     this._submitTerm = this._submitTerm.bind(this);
-    this._submitSGO = this._submitTerm.bind(this);
+    this._submitSGO = this._submitSGO.bind(this);
   }
 
   _submitSector(e) {
@@ -71,6 +71,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
 
   _submitSGO(e) {
     e.preventDefault();
+    console.log("submit sgo clicked");
     let form = {
       name: ReactDOM.findDOMNode(this.refs.sgoName.refs.inp).value
     }
