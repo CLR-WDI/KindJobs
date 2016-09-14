@@ -1,4 +1,3 @@
 module.exports = {
-  // put in the production database
-  db: 'mongodb://'
+  db: process.env.MONGODB_URI 
 }
