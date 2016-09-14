@@ -1,13 +1,17 @@
 var User = require('mongoose').model('User');
+// jwt token to encrypt a security token for server cookie
+var jwt = require('jsonwebtoken');
+// secret for jwt tokens
+var secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
 
 module.exports = {
 
-  // index: function(req, res, next) {
-  //   User.find({}, function(err, User) {
-  //     if (err) return next(err);
-	// 		res.status(200).json(User);
-  //   });
-  // },
+  index: function(req, res, next) {
+    User.find({}, function(err, User) {
+      if (err) return next(err);
+			res.status(200).json(User);
+    });
+  },
 
   signup: function(req, res, next) {
     var user = new User(req.body);
@@ -15,21 +19,33 @@ module.exports = {
 
     user.save(function(err) {
       if (err) return next(err);
-      User.find({}, function(err, User) {
-        if (err) return next(err);
-  			res.status(200).json(User);
-      });
+      // include the body of information sent in the jwt
+      var myInfo = {
+        _id: user._id,
+        name: user.name,
+        admin: user.admin
+      };
+      // make token & send as JSON
+      var token = jwt.sign(myInfo, secret);
+      return res.status(200).json({ user: user, message: "Valid Credentials !", token: token});
     });
   },
 
   login: function(req, res, next) {
     var userParams = new User(req.body);
-
     User.findOne({ email: userParams.email }, function(err, user){
       user.authenticate( userParams.password, function(err, isMatch){
         if (err) throw err;
         if (isMatch) {
-          return res.status(200).send({ message: "Valid Credentials !"});
+          // include the body of information sent in the jwt
+          var myInfo = {
+            _id: user._id,
+            name: user.name,
+            admin: user.admin
+          };
+          // make token & send as JSON
+          var token = jwt.sign(myInfo, secret);
+          return res.status(200).json({ message: "Valid Credentials !", token: token});
         } else {
           return res.status(401).send({ message: "No match of email and password found"});
         }
@@ -37,29 +53,29 @@ module.exports = {
     })
   },
 
-	// update: function(req, res, next) {
-	//   User.findByIdAndUpdate(req.params.id, req.body, function(err, sgo) {
-	//     if (err) {
-	//       return next(err);
-	//     } else {
-  //       User.find({}, function(err, User) {
-  //         if (err) return next(err);
-  //   			res.status(200).json(User);
-  //       });
-	//     }
-	//   });
-	// },
-  //
-	// destroy: function(req, res, next) {
-	// 	User.remove({
-	// 		_id: req.params.id
-	// 	}, function(err, kindjob){
-	// 		if (err) return next(err);
-  //     User.find({}, function(err, User) {
-  //       if (err) return next(err);
-  // 			res.status(200).json(User);
-  //     });
-	// 	})
-  // }
+	update: function(req, res, next) {
+	  User.findByIdAndUpdate(req.params.id, req.body, function(err, sgo) {
+	    if (err) {
+	      return next(err);
+	    } else {
+        User.find({}, function(err, User) {
+          if (err) return next(err);
+    			res.status(200).json(User);
+        });
+	    }
+	  });
+	},
+
+	destroy: function(req, res, next) {
+		User.remove({
+			_id: req.params.id
+		}, function(err, kindjob){
+			if (err) return next(err);
+      User.find({}, function(err, User) {
+        if (err) return next(err);
+  			res.status(200).json(User);
+      });
+		})
+  }
 
 }

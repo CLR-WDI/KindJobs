@@ -1,5 +1,7 @@
+// for no-SQL database
 var mongoose  = require('mongoose'),
     Schema    = mongoose.Schema,
+    // for encrypthing
     bcrypt    = require('bcrypt');
 
 var UserSchema = new mongoose.Schema({
@@ -35,6 +37,7 @@ UserSchema.methods.authenticate = function(password, callback){
   });
 }
 
+
 UserSchema.pre('save', function(next){
   var user = this;
 
@@ -53,7 +56,8 @@ UserSchema.pre('save', function(next){
       user.password = hash;
       next();
     })
-   })
+  })
 });
+
 
 mongoose.model( 'User', UserSchema );
