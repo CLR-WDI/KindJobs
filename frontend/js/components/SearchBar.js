@@ -22,7 +22,7 @@ export default class SearchBar extends React.Component {
 
   _sendSearch(e) {
     e.preventDefault();
-    this.props.dispatch( fetchKindJobs( 'keyword=' + ReactDOM.findDOMNode(this.refs.search).value ) );
+    this.props.dispatch( fetchKindJobs( 'keyword=' + (ReactDOM.findDOMNode(this.refs.search).value).toLowerCase() ) );
     HashHistory.push({
       pathname: 'results',
       query: {

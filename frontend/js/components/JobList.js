@@ -23,20 +23,20 @@ export default class JobList extends React.Component {
     let filteredList = [...this.props.kindjobs];
     let criteria = this.props.filters.criteria;
     console.log("criteria is ", criteria);
-    console.log("the pre filter list is ", filteredList);
     if (this.props._jobListName !== "Recent Jobs"){
+
       if (Object.keys(criteria).length > 0) {
-        filteredList = filteredList.filter(job => {
-          for (var key in criteria) {
-            return job[key]._id === criteria[key]
-          }
-        })
+
+        for (var key in criteria ) {
+          filteredList = filteredList.filter(job => {
+            return job[key]._id === criteria[key]})
+        }
+
+
       }
+
     }
-    // for (var key in criteria) {
-    //   filteredList = filteredList.filter(job => (job[key]._id === criteria[key])
-    //   console.log("the key is ", key);
-    // }
+
     if(!this.props.filters.employment_term.fulltime.state){
       filteredList = filteredList.filter( job => job.employment_term_id.name !== "Full-time" )
     }
