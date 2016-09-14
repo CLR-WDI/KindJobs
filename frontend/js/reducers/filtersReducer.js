@@ -21,8 +21,10 @@ export default function reducer(state = {
           class: "",
           state: true
         }
+      },
+      criteria: {
       }
-    }
+    },
   },
   action)
   {

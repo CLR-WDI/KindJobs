@@ -2,7 +2,9 @@ import React from "react";
 import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
 import FilterButton from "../components/FilterButton";
+import SearchFilters from "../components/SearchFilters";
 import {Link} from "react-router";
+
 // import {connect} from "react-redux";
 // import {fetchKindJobs} from "../actions/kindjobActions";
 //
@@ -21,7 +23,7 @@ export default class SearchResults extends React.Component {
       <div>
         <div class="jumbotron text-center">
           <SearchBar _jobListName="Results"/>
-          <Link to={'/advsearch'}>Advanced Search</Link>
+          <SearchFilters />
         </div>
         <div class="container-fluid">
           <FilterButton _name="fulltime" _title="Full Time"/>
