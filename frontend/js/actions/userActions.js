@@ -12,7 +12,13 @@ export function loginUser(user) {
   }
 }
 
+export function logoutUser() {
+  return {type:"LOGOUT_USER"}
+}
+
+
 export function signupUser(user) {
+  console.log(user);
   return function (dispatch) {
     axios.post('./api/users/signup', user)
         .then((response)=>{
@@ -28,7 +34,8 @@ export function signupUser(user) {
 export function fetchUsers(jwtToken) {
   let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.get('./api/users', headers: {'Authorization': key})
+    axios.get('./api/users',
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"FETCH_USERS_FULFILLED", payload: response.data})
         })
@@ -50,10 +57,11 @@ export function fetchUsers(jwtToken) {
 //   }
 // }
 
-export function deleteUser(user, jwtToken) {
+export function deleteUser(id, jwtToken) {
   let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/users/'+ id, headers: {'Authorization': key})
+    axios.delete('./api/users/'+ id,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"DELETE_USER_FULFILLED", payload: response.data})
         })

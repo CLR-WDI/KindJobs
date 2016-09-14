@@ -3,14 +3,8 @@ import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
 import FilterButton from "../components/FilterButton";
 import {Link} from "react-router";
-// import {connect} from "react-redux";
-// import {fetchKindJobs} from "../actions/kindjobActions";
-//
-// @connect((store) => {
-//   return {
-//     kindjobs: store.kindjobs.kindjobs
-//   }
-// })
+
+
 export default class SearchResults extends React.Component {
   constructor() {
     super();

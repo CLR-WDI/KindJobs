@@ -26,19 +26,19 @@ let routes = (
   <Router history={HashHistory}>
     <Route path="/" component={Layout}>
       <IndexRoute name="home" component={Home} />
-      <Route path='signup' component={SignupContainer} />
       <Route path='login' component={LoginContainer} />
-      <Route path='admin/users' component={AdminUsersContainer} />
-      <Route path='kindjobs/:id' component={JobContainer} />
-      <Route path='apply/:id' component={ApplyContainer} />
-      <Route path='admin/options' component={AdminCreateOptionsContainer} />
-      <Route path='admin/kindjobs' component={AdminJobsContainer} />
-      <Route path='jobform' component={JobFormContainer} />
-      <Route path='jobform/:id' component={JobFormContainer} />
-      <Route path='admin/applications' component={AdminApplicationsContainer} />
-      <Route path='admin/applications/:id' component={ApplicationContainer} />
       <Route path='results' component={SearchResultsContainer} />
       <Route path='advsearch' component={AdvancedSearchContainer } />
+      <Route path='kindjobs/:id' component={JobContainer} />
+      <Route path='apply/:id' component={ApplyContainer} />
+      <Route path='signup' component={SignupContainer} />
+      <Route path='admin/users' component={AdminUsersContainer} />
+      <Route path='admin/options' component={AdminCreateOptionsContainer} />
+      <Route path='admin/kindjobs' component={AdminJobsContainer} />
+      <Route path='admin/jobform' component={JobFormContainer} />
+      <Route path='admin/jobform/:id' component={JobFormContainer} />
+      <Route path='admin/applications' component={AdminApplicationsContainer} />
+      <Route path='admin/applications/:id' component={ApplicationContainer} />
     </Route>
   </Router>
 );

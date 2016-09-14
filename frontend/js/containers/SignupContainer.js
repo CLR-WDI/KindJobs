@@ -7,8 +7,7 @@ import ReactDOM from 'react-dom'; // to target input fields
 // actions
 import {signupUser} from "../actions/userActions" //actions for Users
 // for redirect
-import * as ReactRouter from 'react-router';
-let HashHistory = ReactRouter.hashHistory;
+import {hashHistory} from 'react-router';
 
 @connect((store) => {
 })
@@ -25,11 +24,8 @@ export default class SignupContainer extends React.Component {
       password: ReactDOM.findDOMNode(this.refs.password.refs.inp).value,
       admin: ReactDOM.findDOMNode(this.refs.admin.refs.inp).checked,
     };
-    console.log(userSignup);
     this.props.dispatch( signupUser(userSignup) );
-    HashHistory.push({
-      pathname: '/'
-    })
+    hashHistory.push({pathname: '/'});
   }
   render() {
     return(

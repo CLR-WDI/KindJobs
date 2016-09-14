@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import {fetchKindJob} from "../actions/kindjobActions"
-import {fetchApplications, deleteApplication, editApplication, createApplication} from "../actions/applicationActions"
+import {createApplication} from "../actions/applicationActions"
 // for redirect to home
 import {hashHistory} from "react-router"
 

@@ -8,8 +8,6 @@ import {fetchKindJob} from "../actions/kindjobActions"
   return {
     kindjobs: store.kindjobs.kindjobs
   }
-  // var newStore = fakeStore;
-  // return newStore;
 })
 export default class JobContainer extends React.Component {
   componentWillMount() {
@@ -19,7 +17,6 @@ export default class JobContainer extends React.Component {
   render() {
     let jobs = [ ...this.props.kindjobs];
     let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
-    console.log(job);
     return(
       <div class="container-fluid">
       <Link to={'admin/kindjobs'}><button>Index</button></Link>
@@ -52,4 +49,3 @@ export default class JobContainer extends React.Component {
     )
   }
 }
-//        <button onClick={this.props.history.goBack.bind(this)}>Back</button>

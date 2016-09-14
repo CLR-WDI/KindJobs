@@ -12,9 +12,11 @@ export function fetchScopes() {
   }
 }
 
-export function deleteScope(id) {
+export function deleteScope(id, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/scopes/' + id)
+    axios.delete('./api/scopes/' + id,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"DELETE_SCOPE_FULFILLED", payload: response.data})
         })
@@ -24,9 +26,11 @@ export function deleteScope(id) {
   }
 }
 
-export function editScope(id, scope) {
+export function editScope(id, scope, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.put('./api/scopes/' + id, scope)
+    axios.put('./api/scopes/' + id, scope,
+              { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"EDIT_SCOPE_FULFILLED", payload: response.data})
         })
@@ -36,9 +40,11 @@ export function editScope(id, scope) {
   }
 }
 
-export function createScope(scope) {
+export function createScope(scope, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.post('./api/scopes', scope)
+    axios.post('./api/scopes', scope,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"CREATE_SCOPE_FULFILLED", payload: response.data})
         })

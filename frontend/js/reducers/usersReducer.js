@@ -1,7 +1,7 @@
 export default function reducer(state = {
-    user: null,
     users: [],
     jwtToken: "",
+    admin: false,
     fetching: false,
     fetched: false,
     error: null
@@ -15,6 +15,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
+          admin: action.payload.admin,
           jwtToken: action.payload.jwtToken
         };
       }
@@ -25,12 +26,21 @@ export default function reducer(state = {
           error: action.payload
         };
       }
+      case "LOGOUT_USER":{
+        return{
+          ...state,
+          users: [],
+          jwtToken: "",
+          admin: false
+        };
+      }
 
       case "SIGNUP_USER_FULFILLED":{
         return {
           ...state,
           fetching: false,
           fetched: true,
+          admin: action.payload.admin,
           jwtToken: action.payload.jwtToken
         };
       }
@@ -89,6 +99,7 @@ export default function reducer(state = {
           error: action.payload
         };
       }
+
     }
   return state;
 }

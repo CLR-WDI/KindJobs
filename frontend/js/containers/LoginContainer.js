@@ -7,8 +7,7 @@ import ReactDOM from 'react-dom'; // to target input fields
 // actions
 import {loginUser} from "../actions/userActions" //actions for Users
 // for redirect
-import * as ReactRouter from 'react-router';
-let HashHistory = ReactRouter.hashHistory;
+import {hashHistory} from 'react-router';
 
 
 @connect((store) => {
@@ -26,9 +25,7 @@ export default class LoginContainer extends React.Component {
     };
     console.log(userLogin);
     this.props.dispatch( loginUser(userLogin) );
-    HashHistory.push({
-      pathname: '/'
-    });
+    hashHistory.push({pathname: '/'});
   }
   render() {
     return(

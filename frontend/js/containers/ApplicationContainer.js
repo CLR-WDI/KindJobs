@@ -3,10 +3,13 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import {formatDate} from "../helpers/helpers"
 import {fetchApplication, deleteApplication} from "../actions/applicationActions"
+import {hashHistory} from 'react-router';
 
 @connect((store) => {
   return {
-    applications: store.applications.applications
+    applications: store.applications.applications,
+    admin: store.users.admin,
+    jwtToken: store.users.jwtToken,
   }
 })
 export default class ApplicationContainer extends React.Component {
@@ -15,7 +18,7 @@ export default class ApplicationContainer extends React.Component {
     this._deleteApplication = this._deleteApplication.bind(this);
   }
   componentWillMount() {
-    this.props.dispatch( fetchApplication() );
+    this.props.dispatch( fetchApplication(this.props.jwtToken) );
   }
   _deleteApplication(e){
     e.preventDefault();
@@ -23,7 +26,7 @@ export default class ApplicationContainer extends React.Component {
     if(r==true){
       console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
-        this.props.dispatch( deleteApplication(this.props.routeParams.id) );
+        this.props.dispatch( deleteApplication(this.props.routeParams.id, this.props.jwtToken) );
         this.props.history.goBack();
       }
       else{
@@ -33,6 +36,7 @@ export default class ApplicationContainer extends React.Component {
   }
 
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applications = [ ...this.props.applications];
     let application = applications.filter( application => application._id === this.props.routeParams.id)[0];
     console.log(application);

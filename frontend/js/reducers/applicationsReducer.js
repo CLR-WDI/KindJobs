@@ -7,6 +7,12 @@ export default function reducer(state = {
   action)
   {
     switch (action.type) {
+      case "LOGOUT_USER":{
+        return{
+          ...state,
+          applications: []
+        };
+      }
       case "FETCH_APPLICATIONS":{
         return {...state, fetching: true};
       }

@@ -1,15 +1,16 @@
 import React from "react";
 import {connect} from 'react-redux'
-
+import {Link} from "react-router";
 
 // actions
 import { fetchUsers, deleteUser } from "../actions/userActions" //actions for Users
-
+import {hashHistory} from 'react-router';
 
 @connect((store) => {
   return {
     users: store.users.users,
-    jwtToken: store.users.jwtToken
+    jwtToken: store.users.jwtToken,
+    admin: store.users.admin
   }
 })
 export default class AdminUsersContainer extends React.Component {
@@ -20,21 +21,22 @@ export default class AdminUsersContainer extends React.Component {
   componentWillMount(){
     this.props.dispatch( fetchUsers(this.props.jwtToken) );
   }
-  _deleteUser( e, id , jwtToken ){
+  _deleteUser( e, id){
     e.preventDefault();
     var r = confirm("Delete this user?");
     if(r==true){
-      this.props.dispatch( deleteUser(id, jwtToken) );
+      this.props.dispatch( deleteUser(id, this.props.jwtToken) );
     }
   }
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let userList = this.props.users.map( (user) => {
       return (
         <tr key={user._id}>
           <td>{user.name}</td>
           <td>{user.email}</td>
-          <td>{user.admin}</td>
-          <td><button onClick={function(e){this._deleteUser( e, user._id, this.props.jwtToken )}.bind(this)}>Delete</button></td>
+          <td>{""+user.admin}</td>
+          <td><button onClick={function(e){this._deleteUser( e, user._id)}.bind(this)}>Delete</button></td>
         </tr>
       )
     })

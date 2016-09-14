@@ -8,24 +8,24 @@ var UserSchema = new mongoose.Schema({
   name: { type: String },
   email: {
     type: String,
-    // required: [true, 'Email is required'],
-    // unique: true,
-    // match: [/.+\@.+\..+/, 'Please enter a valid email address']
+    required: [true, 'Email is required'],
+    unique: true,
+    match: [/.+\@.+\..+/, 'Please enter a valid email address']
   },
   password: {
     type: String,
     required: [true, 'Password is required'],
-    // validate: [
-    //   function (password) {
-    //     return password.length >= 6;
-    //   },
-    //   'Password must be at least 6 characters'
-    // ]
+    validate: [
+      function (password) {
+        return password.length >= 6;
+      },
+      'Password must be at least 6 characters'
+    ]
    },
   admin: {
     type: Boolean,
-    // required: true,
-    // default: false
+    required: true,
+    default: false
   }
 });
 

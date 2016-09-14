@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-export function fetchApplications() {
+export function fetchApplications(jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.get('./api/applications')
+    axios.get('./api/applications',
+              { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"FETCH_APPLICATIONS_FULFILLED", payload: response.data})
         })
@@ -18,9 +20,11 @@ export function fetchApplication() {
   }
 }
 
-export function deleteApplication(id) {
+export function deleteApplication(id, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/applications/' + id)
+    axios.delete('./api/applications/' + id,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"DELETE_APPLICATION_FULFILLED", payload: response.data})
         })
@@ -31,9 +35,11 @@ export function deleteApplication(id) {
 }
 
 
-export function editApplication(id, application) {
+export function editApplication(id, application, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.put('./api/applications/' + id, application)
+    axios.put('./api/applications/' + id, application,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"EDIT_APPLICATION_FULFILLED", payload: response.data})
         })

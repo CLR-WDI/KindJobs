@@ -12,9 +12,10 @@ export function fetchSectors() {
   }
 }
 
-export function deleteSector(id) {
+export function deleteSector(id, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/sectors/' + id)
+    axios.delete('./api/sectors/' + id, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"DELETE_SECTOR_FULFILLED", payload: response.data})
         })
@@ -24,9 +25,10 @@ export function deleteSector(id) {
   }
 }
 
-export function editSector(id, sector) {
+export function editSector(id, sector, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.put('./api/sectors/' + id, sector)
+    axios.put('./api/sectors/' + id, sector, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"EDIT_SECTOR_FULFILLED", payload: response.data})
         })
@@ -36,9 +38,10 @@ export function editSector(id, sector) {
   }
 }
 
-export function createSector(sector) {
+export function createSector(sector, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.post('./api/sectors', sector)
+    axios.post('./api/sectors', sector, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"CREATE_SECTOR_FULFILLED", payload: response.data})
         })

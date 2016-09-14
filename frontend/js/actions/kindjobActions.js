@@ -18,9 +18,11 @@ export function fetchKindJob() {
   }
 }
 
-export function deleteKindJob(id) {
+export function deleteKindJob(id, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/kindjobs/' + id)
+    axios.delete('./api/kindjobs/' + id,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"DELETE_KINDJOB_FULFILLED", payload: response.data})
         })
@@ -31,9 +33,11 @@ export function deleteKindJob(id) {
 }
 
 
-export function editKindJob(id, kindjob) {
+export function editKindJob(id, kindjob, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.put('./api/kindjobs/' + id, kindjob)
+    axios.put('./api/kindjobs/' + id, kindjob,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"EDIT_KINDJOB_FULFILLED", payload: response.data})
         })
@@ -43,9 +47,11 @@ export function editKindJob(id, kindjob) {
   }
 }
 
-export function createKindJob(kindjob) {
+export function createKindJob(kindjob, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.post('./api/kindjobs', kindjob)
+    axios.post('./api/kindjobs', kindjob,
+              { headers: {Authorization: key} } )
         .then((response)=>{
           dispatch({type:"CREATE_KINDJOB_FULFILLED", payload: response.data})
         })
