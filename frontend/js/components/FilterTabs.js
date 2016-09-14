@@ -7,10 +7,6 @@ export default class FilterTabs extends React.Component{
 
   }
 
-  componentWillMount() {
-
-  }
-
   render() {
     var sorted_list = this.props._list.sort((a, b) => { return a.name > b.name})
     console.log(sorted_list);
@@ -20,7 +16,7 @@ export default class FilterTabs extends React.Component{
     console.log(this.props._list);
     return (
       <div>
-        <h3>{this.props._title}</h3>
+        <p>{this.props._title}</p>
         {filtersList}
       </div>
     )

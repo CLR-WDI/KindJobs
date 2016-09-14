@@ -18,16 +18,22 @@ export default class Home extends React.Component {
         <div class="jumbotron text-center">
           <h2>Advanced Search</h2>
           <SearchBar />
-          <SearchFilters />
         </div>
         <div class="container-fluid">
-          <FilterButton _name="fulltime" _title="Full Time"/>
-          <FilterButton _name="parttime" _title="Part Time"/>
-          <FilterButton _name="contract" _title="Contract"/>
-          <FilterButton _name="project" _title="Project"/>
-          <FilterButton _name="internship" _title="Internship"/>
+          <div class="row">
+            <div class="col-md-3">
+              <SearchFilters />
+            </div>
+            <div class="col-md-9">
+              <FilterButton _name="fulltime" _title="Full Time"/>
+              <FilterButton _name="parttime" _title="Part Time"/>
+              <FilterButton _name="contract" _title="Contract"/>
+              <FilterButton _name="project" _title="Project"/>
+              <FilterButton _name="internship" _title="Internship"/>
 
-          <JobList jobListName="Search Results" />
+              <JobList jobListName="Search Results" />
+            </div>
+          </div>
         </div>
       </div>
     )

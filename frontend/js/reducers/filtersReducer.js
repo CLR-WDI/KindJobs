@@ -23,7 +23,9 @@ export default function reducer(state = {
         }
       },
       criteria: {
-      }
+      },
+      criteriaName: {
+      },
     },
   },
   action)

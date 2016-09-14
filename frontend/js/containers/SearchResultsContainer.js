@@ -26,13 +26,20 @@ export default class SearchResults extends React.Component {
           <SearchFilters />
         </div>
         <div class="container-fluid">
-          <FilterButton _name="fulltime" _title="Full Time"/>
-          <FilterButton _name="parttime" _title="Part Time"/>
-          <FilterButton _name="contract" _title="Contract"/>
-          <FilterButton _name="project" _title="Project"/>
-          <FilterButton _name="internship" _title="Internship"/>
+          <div class="row">
+            <div class="col-md-3">
+              <SearchFilters />
+            </div>
+            <div class="col-md-9">
+              <FilterButton _name="fulltime" _title="Full Time"/>
+              <FilterButton _name="parttime" _title="Part Time"/>
+              <FilterButton _name="contract" _title="Contract"/>
+              <FilterButton _name="project" _title="Project"/>
+              <FilterButton _name="internship" _title="Internship"/>
 
-          <JobList _jobListName="Results" _searchterms={this.props.location.query.search}/>
+              <JobList _jobListName="Results" _searchterms={this.props.location.query.search}/>
+            </div>
+          </div>
         </div>
       </div>
     )

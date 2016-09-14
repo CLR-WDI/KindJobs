@@ -22,8 +22,10 @@ export default class FilterTab extends React.Component{
   _addFilter(e){
     e.preventDefault();
     let selectedFilters = { ...this.props.filters };
-    selectedFilters.criteria[this.props._filterType] = this.props._value
+    selectedFilters.criteria[this.props._filterType] = this.props._value;
+    selectedFilters.criteriaName[this.props._value] = this.props._name;
     this.props.dispatch( editFilters(selectedFilters) );
+
 
   }
 
