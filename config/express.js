@@ -1,7 +1,9 @@
 // INITIALIZER FOR MY EXPRESS APPLICATION
   var express = require('express');
   var morgan = require('morgan');
+  // logger
   var compress = require('compression');
+  var cookieParser = require('cookie-parser');
   var bodyParser = require('body-parser');
   var path = require('path');
 	// Parse incoming request bodies in a middleware before your handlers, availabe under the req.body property.
@@ -26,12 +28,12 @@ module.exports = function() {
 		next();
 	});
 
-  app.use(bodyParser.urlencoded({
+  app.use( bodyParser.urlencoded({
     extended: true
   }));
-  app.use(bodyParser.json());
-
-	app.use(methodOverride());
+  app.use( bodyParser.json() );
+  app.use( cookieParser() );
+	app.use( methodOverride() );
 
   app.use(express.static(path.resolve(__dirname, '../dist')));
 

@@ -6,7 +6,8 @@ module.exports = function(app) {
 	var sectorsController = require('../controllers/sectors.controller');
 	var locationsController = require('../controllers/locations.controller');
 	var sgosController = require('../controllers/sgos.controller');
-	var applicationController = require('../controllers/applications.controller');
+	var applicationsController = require('../controllers/applications.controller');
+	var usersController = require('../controllers/users.controller');
 
 	app.route('/api/kindjobs')
 		.get(kindJobsController.index)
@@ -57,11 +58,20 @@ module.exports = function(app) {
 		.delete(sgosController.destroy)
 
 	app.route('/api/applications')
-		.get(applicationController.index)
-		.post(applicationController.create)
+		.get(applicationsController.index)
+		.post(applicationsController.create)
 
 	app.route('/api/applications/:id')
-		.put(applicationController.update)
-		.delete(applicationController.destroy)
+		.put(applicationsController.update)
+		.delete(applicationsController.destroy)
+
+	app.post('/api/users/signup', usersController.signup)
+	app.post('/api/users/login',	usersController.login)
+	// app.get('/api/users', usersController.index)
+	//
+	//
+	// app.route('/api/users/:id')
+	// 	.put(usersController.update)
+	// 	.delete(usersController.destroy)
 
  };

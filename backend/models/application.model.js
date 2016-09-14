@@ -20,7 +20,7 @@ var ApplicationSchema = new Schema({
   },
   email: {
     type: String,
-    required: [true, 'Description is required'],
+    required: [true, 'Email is required'],
     match: [/.+\@.+\..+/, 'Please enter a valid email address']
   },
   tel_no: {
@@ -31,7 +31,7 @@ var ApplicationSchema = new Schema({
     required: [true,'Expected salary is required']},
   yrs_rel_exp: {
     type: Number,
-    required: [true,'Years of relevant salary is required']},
+    required: [true,'Years of relevant experience is required']},
   highest_qualification: {
     type: String,
     required: [true,'Highest relevant qualification is required']},
