@@ -26,8 +26,8 @@ module.exports = {
         admin: user.admin
       };
       // make token & send as JSON
-      var token = jwt.sign(myInfo, secret);
-      return res.status(200).json({ user: user, message: "Valid Credentials !", token: token});
+      var jwtToken = jwt.sign(myInfo, secret);
+      return res.status(200).json({ message: "Signed up !", jwtToken: jwtToken});
     });
   },
 
@@ -44,10 +44,10 @@ module.exports = {
             admin: user.admin
           };
           // make token & send as JSON
-          var token = jwt.sign(myInfo, secret);
-          return res.status(200).json({ message: "Valid Credentials !", token: token});
+          var jwtToken = jwt.sign(myInfo, secret);
+          return res.status(200).json({ message: "Valid Credentials !", jwtToken: jwtToken});
         } else {
-          return res.status(401).send({ message: "No match of email and password found"});
+          return res.status(401).send({ message: "No match of email and password found", jwtToken: ""});
         }
       })
     })

@@ -17,13 +17,18 @@ import AdvancedSearchContainer from '../containers/AdvancedSearchContainer';
 import JobFormContainer from '../containers/JobFormContainer';
 import AdminApplicationsContainer from '../containers/AdminApplicationsContainer';
 import ApplicationContainer from '../containers/ApplicationContainer';
-
+import SignupContainer from '../containers/SignupContainer';
+import LoginContainer from '../containers/LoginContainer';
+import AdminUsersContainer from '../containers/AdminUsersContainer';
 
 
 let routes = (
   <Router history={HashHistory}>
     <Route path="/" component={Layout}>
       <IndexRoute name="home" component={Home} />
+      <Route path='signup' component={SignupContainer} />
+      <Route path='login' component={LoginContainer} />
+      <Route path='admin/users' component={AdminUsersContainer} />
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
       <Route path='admin/options' component={AdminCreateOptionsContainer} />

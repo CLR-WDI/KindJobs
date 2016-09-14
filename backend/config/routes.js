@@ -20,7 +20,7 @@ module.exports = function(app) {
 	})
  			.unless({
 				path:	[
-					// '/api/users/signup', // route blocked till we look for admin users
+					'/api/users/signup', // route unblocked till we look for admin users
 					'/api/users/login',
 					{url: '/api/kindjobs',
 					methods: ['GET']},
