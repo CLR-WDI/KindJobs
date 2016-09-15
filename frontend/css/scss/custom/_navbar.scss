@@ -6,6 +6,8 @@
 
   .navbar-brand {
     color: $navbar-default-brand-color;
+    background-size: 100% auto;
+    height: 50px;
     &:hover,
     &:focus {
       color: $navbar-default-brand-hover-color;
@@ -130,4 +132,19 @@
       }
     }
   }
+}
+
+.icon-kindjobs-logo {
+  color: $color-logo;
+  font-size: 8rem;
+  height: 50px;
+  &:before {
+    height: 0;
+  }
+}
+
+.logo {
+  height: 25px;
+  width: 105px;
+  background-size: 100% auto;
 }
