@@ -4,42 +4,86 @@
   &.Full-time {
     .inner {
       border-color: $color-fulltime;
+      h1,h2,h3,.jobicon {
+        color: $color-fulltime;
+      }
+      .label {
+        border-color: $color-fulltime;
+        color: $color-fulltime;
+      }
     }
   }
 
   &.Part-time {
     .inner {
       border-color: $color-parttime;
+      h1,h2,h3,.jobicon {
+        color: $color-parttime;
+      }
+      .label {
+        border-color: $color-parttime;
+        color: $color-parttime;
+      }
     }
   }
 
   &.Contract {
     .inner {
       border-color: $color-contract;
+      h1,h2,h3,.jobicon {
+        color: $color-contract;
+      }
+      .label {
+        border-color: $color-contract;
+        color: $color-contract;
+      }
     }
   }
 
   &.Project {
     .inner {
       border-color: $color-project;
+      h1,h2,h3,.jobicon {
+        color: $color-project;
+      }
     }
   }
 
   &.Internship {
     .inner {
       border-color: $color-internship;
+      h1,h2,h3,.jobicon {
+        color: $color-internship;
+      }
+      .label {
+        border-color: $color-internship;
+        color: $color-internship;
+      }
     }
   }
 
   .inner {
     border-radius: $border-radius-base;
-    border: 1px solid $card-border-color;
+    border: 2px solid $card-border-color;
     text-align: center;
     padding: $card-margin-base ($card-margin-base * 2);
 
     img {
       max-width: 100px;
       width: 100%;
+    }
+
+    .content {
+      min-height: 200px;
+
+      h3 {
+        margin-top: 0;
+      }
+
+      .label {
+        border: 1px solid;
+        padding: .2rem .6rem .3rem;
+      }
     }
 
     .jobicon {
