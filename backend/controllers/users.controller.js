@@ -33,23 +33,30 @@ module.exports = {
 
   login: function(req, res, next) {
     var userParams = new User(req.body);
+
     User.findOne({ email: userParams.email }, function(err, user){
-      user.authenticate( userParams.password, function(err, isMatch){
-        if (err) throw err;
-        if (isMatch) {
-          // include the body of information sent in the jwt
-          var myInfo = {
-            _id: user._id,
-            name: user.name,
-            admin: user.admin
-          };
-          // make token & send as JSON
-          var jwtToken = jwt.sign(myInfo, secret);
-          return res.status(200).json({ message: "Valid Credentials !", admin: myInfo.admin, jwtToken: jwtToken});
-        } else {
-          return res.status(401).send({ message: "No match of email and password found", jwtToken: ""});
-        }
-      })
+      if(err) return next(err);
+      if (user) {
+        user.authenticate( userParams.password, function(err, isMatch){
+          if (err) throw err;
+          if (isMatch) {
+            // include the body of information sent in the jwt
+            var myInfo = {
+              _id: user._id,
+              name: user.name,
+              admin: user.admin
+            };
+            // make token & send as JSON
+            var jwtToken = jwt.sign(myInfo, secret);
+            return res.status(200).json({ message: "Valid Credentials !", admin: myInfo.admin, jwtToken: jwtToken});
+          } else {
+            return res.status(401).send({ message: "No match of email and password found", jwtToken: ""});
+          }
+        })
+      } else{
+        return res.status(400).send({message: "User does not exist", jwtToken: ""})
+      }
+
     })
   },
 
