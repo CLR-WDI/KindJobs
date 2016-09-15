@@ -21,8 +21,8 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-$color-fulltime: rgba(78, 205, 196, 1);
-$color-internship: darken(saturate(rgba(255, 230, 109, 1), 20%), 20%);
+$color-fulltime: rgba(2, 145, 211, 1);
+$color-internship: darken(saturate(rgba(255, 230, 109, 1), 30%), 20%);
 $color-parttime: mix($color-fulltime, $color-internship, 75%);
 $color-contract: mix($color-fulltime, $color-internship, 50%);
 $color-project: mix($color-fulltime, $color-internship, 25%);

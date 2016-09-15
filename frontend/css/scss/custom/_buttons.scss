@@ -32,7 +32,7 @@
     border-color: darken($color-fulltime, 20%);
     color: darken($color-fulltime, 20%);
   }
-  &.active, :active, :hover {
+  &.active, &:active, &:hover {
     background-color: $color-fulltime;
     color: lighten($color-fulltime, 50%);
   }
@@ -45,7 +45,7 @@
     border-color: darken($color-parttime, 20%);
     color: darken($color-parttime, 20%);
   }
-  &.active, :active, :hover {
+  &.active, &:active, &:hover {
     background-color: $color-parttime;
     color: lighten($color-parttime, 50%);
   }
@@ -58,7 +58,7 @@
     border-color: darken($color-contract, 20%);
     color: darken($color-contract, 20%);
   }
-  &.active, :active, :hover {
+  &.active, &:active, &:hover {
     background-color: $color-contract;
     color: lighten($color-contract, 50%);
   }
@@ -71,7 +71,7 @@
     border-color: darken($color-project, 20%);
     color: darken($color-project, 20%);
   }
-  &.active, :active, :hover {
+  &.active, &:active, &:hover {
     background-color: $color-project;
     color: lighten($color-project, 50%);
   }
@@ -84,7 +84,7 @@
     border-color: darken($color-internship, 20%);
     color: darken($color-internship, 20%);
   }
-  &.active, :active, :hover {
+  &.active, &:active, &:hover {
     background-color: $color-internship;
     color: lighten($color-internship, 50%);
   }
