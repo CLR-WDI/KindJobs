@@ -33,7 +33,7 @@ export default class LoginContainer extends React.Component {
         <div class="col-md-8 col-md-offset-2">
           <form onSubmit = {this._submitLogin}>
             <InputText ref="email" _label="Email" _type="text"/>
-            <InputText ref="password" _label="Password" _type="text"/>
+            <InputText ref="password" _label="Password" _type="password"/>
             <br/>
             <button class="btn btn-primary" type="submit">Login</button>
           </form>
