@@ -19,7 +19,6 @@ export default class JobContainer extends React.Component {
     let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
     return(
       <div class="container-fluid">
-      <Link to={'admin/kindjobs'}><button>Index</button></Link>
         <div class="col-md-8 col-md-offset-2">
           <img src={job.image} />
           <div class="row">
