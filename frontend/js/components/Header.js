@@ -37,7 +37,7 @@ class Header extends React.Component {
       <Navbar staticTop fluid>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to='/'>Kind Jobs</Link>
+            <Link to='/'><div class="logo"><img class="img-responsive" src="./images/kindjobs-logo.png" /></div></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
