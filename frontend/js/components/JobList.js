@@ -68,7 +68,7 @@ export default class JobList extends React.Component {
     })
     return (
       <div>
-        <h2>{this.props._jobListName}</h2>
+        <h2>{this.props._jobListName + ' for "'  + this.props._searchterms + '"'}</h2>
         <div class="row">
           {jobList}
         </div>
