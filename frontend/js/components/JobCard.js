@@ -5,7 +5,7 @@ const JobCard = (props) => {
   let description = props.description.substr(0,90);
   console.log(description);
   return(
-    <div className = {props.term+'Card jobCard col-md-4 col-sm-6'}>
+    <div className = {'jobCard '+props.term+' col-md-4 col-sm-6'}>
       <div class="inner">
         <h1><i class={"jobicon icon-"+props.image}></i></h1>
         <h4>{props.sector}</h4>

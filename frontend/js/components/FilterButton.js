@@ -19,7 +19,7 @@ class FilterButton extends React.Component{
     newFilters.employment_term[this.props._name].state = true;
 
 
-    newFilters.employment_term[this.props._name].class = "btn btn-" + this.props._name + " active"
+    newFilters.employment_term[this.props._name].class = "btn btn-term btn-" + this.props._name + " active"
 
     this.props.dispatch( editFilters(newFilters) );
     // this.props.dispatch( fetchFilters() );
@@ -31,9 +31,9 @@ class FilterButton extends React.Component{
     newFilters.employment_term[this.props._name].state = !newFilters.employment_term[this.props._name].state
 
     if(newFilters.employment_term[this.props._name].state){
-      newFilters.employment_term[this.props._name].class = "btn btn-" + this.props._name + " active"
+      newFilters.employment_term[this.props._name].class = "btn btn-term btn-" + this.props._name + " active"
     }else{
-      newFilters.employment_term[this.props._name].class = "btn btn-" + this.props._name
+      newFilters.employment_term[this.props._name].class = "btn btn-term btn-" + this.props._name
     }
 
     this.props.dispatch( editFilters(newFilters) );

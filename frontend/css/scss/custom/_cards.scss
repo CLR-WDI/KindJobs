@@ -1,6 +1,36 @@
 .jobCard {
   padding: $card-margin-base;
 
+  &.Full-time {
+    .inner {
+      border-color: $color-fulltime;
+    }
+  }
+
+  &.Part-time {
+    .inner {
+      border-color: $color-parttime;
+    }
+  }
+
+  &.Contract {
+    .inner {
+      border-color: $color-contract;
+    }
+  }
+
+  &.Project {
+    .inner {
+      border-color: $color-project;
+    }
+  }
+
+  &.Internship {
+    .inner {
+      border-color: $color-internship;
+    }
+  }
+
   .inner {
     border-radius: $border-radius-base;
     border: 1px solid $card-border-color;

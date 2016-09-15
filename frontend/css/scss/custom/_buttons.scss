@@ -15,3 +15,77 @@
 .form-action-btn {
   margin-top: 4rem;
 }
+
+.btn-term {
+  background: none;
+  border: 1px solid;
+
+  &.active {
+    box-shadow: none;
+  }
+}
+
+.btn-fulltime {
+  border-color: $color-fulltime;
+  color: $color-fulltime;
+  &:focus {
+    border-color: darken($color-fulltime, 20%);
+    color: darken($color-fulltime, 20%);
+  }
+  &.active, :active, :hover {
+    background-color: $color-fulltime;
+    color: lighten($color-fulltime, 50%);
+  }
+}
+
+.btn-parttime {
+  border-color: $color-parttime;
+  color: $color-parttime;
+  &:focus {
+    border-color: darken($color-parttime, 20%);
+    color: darken($color-parttime, 20%);
+  }
+  &.active, :active, :hover {
+    background-color: $color-parttime;
+    color: lighten($color-parttime, 50%);
+  }
+}
+
+.btn-contract {
+  border-color: $color-contract;
+  color: $color-contract;
+  &:focus {
+    border-color: darken($color-contract, 20%);
+    color: darken($color-contract, 20%);
+  }
+  &.active, :active, :hover {
+    background-color: $color-contract;
+    color: lighten($color-contract, 50%);
+  }
+}
+
+.btn-project {
+  border-color: $color-project;
+  color: $color-project;
+  &:focus {
+    border-color: darken($color-project, 20%);
+    color: darken($color-project, 20%);
+  }
+  &.active, :active, :hover {
+    background-color: $color-project;
+    color: lighten($color-project, 50%);
+  }
+}
+
+.btn-internship {
+  border-color: $color-internship;
+  color: $color-internship;
+  &:focus {
+    border-color: darken($color-internship, 20%);
+    color: darken($color-internship, 20%);
+  }
+  &.active, :active, :hover {
+    background-color: $color-internship;
+    color: lighten($color-internship, 50%);
+  }
+}
