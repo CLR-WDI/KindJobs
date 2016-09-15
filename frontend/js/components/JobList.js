@@ -66,9 +66,16 @@ export default class JobList extends React.Component {
         title = {job.title}
       />
     })
+    let titlebar = null;
+    if(this.props._searchterms){
+      titlebar = <h2>{this.props._jobListName + ' for "'  + this.props._searchterms + '"'}</h2>
+    }else {
+      titlebar = <h2>{this.props._jobListName}</h2>
+    }
+
     return (
       <div>
-        <h2>{this.props._jobListName + ' for "'  + this.props._searchterms + '"'}</h2>
+        {titlebar}
         <div class="row is-flex">
           {jobList}
         </div>
