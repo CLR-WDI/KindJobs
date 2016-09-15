@@ -13,10 +13,10 @@ export default class Home extends React.Component {
     };
     return(
       <div>
-        <div class="jumbotron text-center" style={divStyle}>
+        <div class="jumbotron home text-center" style={divStyle}>
           <h1>Come find your kind of job!</h1>
           <SearchBar />
-          <Link to={'/advsearch'}>Advanced Search</Link>
+          <h3><Link to={'/advsearch'}>Advanced Search</Link></h3>
         </div>
         <div class="container-fluid">
           <JobList _jobListName="Recent Jobs" />

@@ -7,9 +7,14 @@ import JobList from "../components/JobList";
 
 export default class Home extends React.Component {
   render() {
+    let divStyle = {
+      backgroundImage: 'url(./images/kindjobs-bg.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    };
     return(
       <div>
-        <div class="jumbotron text-center">
+        <div class="jumbotron text-center" style={divStyle}>
           <h2>Advanced Search</h2>
           <SearchBar />
         </div>

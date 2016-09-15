@@ -1,8 +1,8 @@
 // Custom navbar
 .navbar-default {
   margin-bottom: 0;
-  background-color: $navbar-default-bg;
-  border-color: $navbar-default-border;
+  background: none;
+  border: none;
 
   .navbar-brand {
     color: $navbar-default-brand-color;
@@ -61,6 +61,12 @@
   .navbar-collapse,
   .navbar-form {
     border-color: $navbar-default-border;
+  }
+
+  .navbar-collapse {
+    &.in {
+      background-color: $body-bg;
+    }
   }
 
   // Dropdown menu items
