@@ -33,7 +33,7 @@ module.exports = {
       if (err) {
         return res.status(400).send(err);
       }
-      res.status(200).json(Application);
+      getAllAppsFn(req, res, next);
     });
 
   },
@@ -43,7 +43,7 @@ module.exports = {
 	    if (err) {
 	      return next(err);
 	    } else {
-	      res.status(200).json(application);
+	      getAllAppsFn(req, res, next);
 	    }
 	  });
 	},
