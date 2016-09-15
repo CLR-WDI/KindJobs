@@ -25,12 +25,15 @@ export default class SelectedFilters extends React.Component{
       return <SelectedFiltersButton key={item} _id={item} _name={filterCriteria.criteriaName[item]} />
     })
     let title = null;
+    let divider = null;
     if (criteriaList.length > 0) {
-      title = <h4>Selected Filters</h4>;
+      title = <h3>Selected Filters</h3>;
+      divider = <div class="divider-horizontal"></div>;
     }
     return(
       <div>
         {title}
+        {divider}
         {listOfFilters}
       </div>
     )
