@@ -60,7 +60,7 @@ export default class JobList extends React.Component {
         key   = {job._id}
         id    = {job._id}
         term  = {job.employment_term_id.name}
-        image = {job.image}
+        image = {job.sector_id.image}
         description = {job.description}
         sector= {job.sector_id.name}
         title = {job.title}

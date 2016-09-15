@@ -7,7 +7,7 @@ const JobCard = (props) => {
   return(
     <div className = {props.term+'Card jobCard col-md-4 col-sm-6'}>
       <div class="inner">
-        <img src={props.image} />
+        <h1><i class={"icon-"+props.image}></i></h1>
         <h4>{props.sector}</h4>
         <p>{props.title}</p>
         <p>{description}</p>
