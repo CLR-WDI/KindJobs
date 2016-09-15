@@ -29,9 +29,12 @@ export default class SearchFilters extends React.Component {
     return (
       <div>
         <SelectedFilters />
-        <h4>Search Filters</h4>
+        <h3>Search Filters</h3>
+        <div class="divider-horizontal"></div>
         <FilterTabs _title="Scope" _type="scope" _list={this.props.scopes}/>
+        <div class="divider-horizontal"></div>
         <FilterTabs _title="Sector" _type="sector" _list={this.props.sectors}/>
+        <div class="divider-horizontal"></div>
         <FilterTabs _title="Location" _type="location" _list={this.props.locations}/>
       </div>
     );
