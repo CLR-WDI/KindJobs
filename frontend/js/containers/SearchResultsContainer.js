@@ -16,7 +16,6 @@ export default class SearchResults extends React.Component {
       <div>
         <div class="jumbotron text-center">
           <SearchBar _jobListName="Results"/>
-          <SearchFilters />
         </div>
         <div class="container-fluid">
           <div class="row">
