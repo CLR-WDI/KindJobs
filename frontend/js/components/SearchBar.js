@@ -42,7 +42,7 @@ export default class SearchBar extends React.Component {
           placeholder="Search"
           />
           <span className="input-group-btn">
-            <button className="btn btn-default" type="submit">Find it!</button>
+            <button className="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
           </span>
         </div>
       </form>
