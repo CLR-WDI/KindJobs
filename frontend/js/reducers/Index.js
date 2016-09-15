@@ -9,7 +9,7 @@ import applications from "./applicationsReducer"
 import terms from "./termsReducer"
 import sgos from "./sgosReducer"
 import filters from "./filtersReducer"
-
+import users from "./usersReducer"
 
 export default combineReducers({
   employmentTerms,
@@ -20,5 +20,6 @@ export default combineReducers({
   kindjobs,
   applications,
   filters,
-  terms
+  terms,
+  users,
 })

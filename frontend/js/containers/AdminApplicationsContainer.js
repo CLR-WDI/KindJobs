@@ -4,11 +4,13 @@ import {Link} from "react-router";
 // for dates
 import {dateToYYYY_MM_YY_Mongoose} from "../helpers/helpers"
 import {fetchApplications, deleteApplication} from "../actions/applicationActions"
-
+import {hashHistory} from "react-router"
 
 @connect((store) => {
   return {
-    applications: store.applications.applications
+    applications: store.applications.applications,
+    jwtToken: store.users.jwtToken,
+    admin: store.users.admin
   }
 })
 export default class AdminApplicationsContainer extends React.Component {
@@ -17,18 +19,19 @@ export default class AdminApplicationsContainer extends React.Component {
     this._deleteApplication = this._deleteApplication.bind(this);
   }
   componentWillMount(){
-    this.props.dispatch( fetchApplications() );
+    this.props.dispatch( fetchApplications(this.props.jwtToken) );
   }
   _deleteApplication( e, id ){
     console.log(id);
     e.preventDefault();
     var r = confirm("Delete this application?");
     if(r==true){
-      this.props.dispatch( deleteApplication(id) );
+      this.props.dispatch( deleteApplication(id, this.props.jwtToken) );
       console.log("deleted app!")
     }
   }
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applicationList = this.props.applications.map( (application) => {
       application.createdAt = dateToYYYY_MM_YY_Mongoose(application.createdAt)
       return (
