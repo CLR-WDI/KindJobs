@@ -28,12 +28,11 @@ export default class SearchFilters extends React.Component {
   render() {
     return (
       <div>
+        <SelectedFilters />
         <h4>Search Filters</h4>
         <FilterTabs _title="Scope" _type="scope" _list={this.props.scopes}/>
         <FilterTabs _title="Sector" _type="sector" _list={this.props.sectors}/>
         <FilterTabs _title="Location" _type="location" _list={this.props.locations}/>
-        <h4>Selected Filters</h4>
-        <SelectedFilters />
       </div>
     );
   }

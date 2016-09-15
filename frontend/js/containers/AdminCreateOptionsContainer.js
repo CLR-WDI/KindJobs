@@ -4,11 +4,11 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import InputGroup from "../components/InputGroup"
-import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scopeActions"
-import {fetchSectors, deleteSector, editSector, createSector} from "../actions/sectorActions"
-import {fetchLocations, deleteLocation, editLocation, createLocation} from "../actions/locationActions"
-import {fetchTerms, deleteTerm, editTerm, createTerm} from "../actions/termActions"
-import {fetchSGOs, deleteSGO, editSGO, createSGO} from "../actions/SGOActions"
+import {createScope} from "../actions/scopeActions"
+import {createSector} from "../actions/sectorActions"
+import {createLocation} from "../actions/locationActions"
+import {createTerm} from "../actions/termActions"
+import {createSGO} from "../actions/SGOActions"
 // for redirect to home
 import {hashHistory} from "react-router"
 
@@ -18,8 +18,9 @@ import {hashHistory} from "react-router"
     sectors: store.sectors.sectors,
     locations: store.locations.locations,
     terms: store.terms.terms,
-    SGOs: store.sgos.sgos
-
+    SGOs: store.sgos.sgos,
+    admin: store.users.admin,
+    jwtToken: store.users.jwtToken,
   }
 })
 export default class AdminCreateOptionsContainer extends React.Component {
@@ -38,7 +39,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
       name: ReactDOM.findDOMNode(this.refs.sectorName.refs.inp).value,
       image: ReactDOM.findDOMNode(this.refs.sectorImage.refs.inp).value
     }
-    this.props.dispatch(createSector(form));
+    this.props.dispatch(createSector(form, this.props.jwtToken));
     alert( "Sector created" );
   }
 
@@ -47,7 +48,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
     let form = {
       name: ReactDOM.findDOMNode(this.refs.scopeName.refs.inp).value
     }
-    this.props.dispatch(createScope(form));
+    this.props.dispatch(createScope(form, this.props.jwtToken));
     alert( "Scope created" );
   }
 
@@ -56,7 +57,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
     let form = {
       name: ReactDOM.findDOMNode(this.refs.locationName.refs.inp).value
     }
-    this.props.dispatch(createLocation(form));
+    this.props.dispatch(createLocation(form, this.props.jwtToken));
     alert( "Location created" );
   }
 
@@ -65,21 +66,21 @@ export default class AdminCreateOptionsContainer extends React.Component {
     let form = {
       name: ReactDOM.findDOMNode(this.refs.termName.refs.inp).value
     }
-    this.props.dispatch(createTerm(form));
+    this.props.dispatch(createTerm(form, this.props.jwtToken));
     alert( "Employment term created" );
   }
 
   _submitSGO(e) {
     e.preventDefault();
-    console.log("submit sgo clicked");
     let form = {
       name: ReactDOM.findDOMNode(this.refs.sgoName.refs.inp).value
     }
-    this.props.dispatch(createSGO(form));
+    this.props.dispatch(createSGO(form, this.props.jwtToken));
     alert( "SGO created" );
   }
 
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">

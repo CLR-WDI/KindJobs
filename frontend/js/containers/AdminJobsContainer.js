@@ -4,11 +4,13 @@ import {Link} from "react-router";
 // for dates
 import {dateToYYYY_MM_YY_Mongoose} from "../helpers/helpers"
 import {fetchKindJobs, deleteKindJob} from "../actions/kindjobActions"
-
+import {hashHistory} from 'react-router';
 
 @connect((store) => {
   return {
-    kindjobs: store.kindjobs.kindjobs
+    kindjobs: store.kindjobs.kindjobs,
+    admin: store.users.admin,
+    jwtToken: store.users.jwtToken,
   }
 })
 export default class AdminJobsContainer extends React.Component {
@@ -23,10 +25,11 @@ export default class AdminJobsContainer extends React.Component {
     e.preventDefault();
     var r = confirm("Delete this job?");
     if(r==true){
-      this.props.dispatch( deleteKindJob(id) );
+      this.props.dispatch( deleteKindJob(id, this.props.jwtToken) );
     }
   }
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let jobList = this.props.kindjobs.map( (job) => {
       job.createdAt = dateToYYYY_MM_YY_Mongoose(job.createdAt)
       job.deadline = dateToYYYY_MM_YY_Mongoose(job.deadline)
@@ -36,7 +39,7 @@ export default class AdminJobsContainer extends React.Component {
           <td>{job.deadline}</td>
           <td>{job.sgo_id.name}</td>
           <td><Link to={'kindjobs/'+job._id}><div>{job.title}</div></Link></td>
-          <td><Link to={'jobform/'+job._id}><div>Edit</div></Link></td>
+          <td><Link to={'admin/jobform/'+job._id}><div>Edit</div></Link></td>
           <td><button onClick={function(e){this._deleteJob( e, job._id )}.bind(this)}>Delete</button></td>
         </tr>
       )
@@ -46,7 +49,7 @@ export default class AdminJobsContainer extends React.Component {
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
           <h1>Admin Jobs View</h1>
-          <Link to='jobform'><button class="btn btn-primary">Create new JobForm</button></Link>
+          <Link to='admin/jobform'><button class="btn btn-primary">Create new JobForm</button></Link>
           <div class="table-responsive">
             <table className="table table-hover">
               <thead>

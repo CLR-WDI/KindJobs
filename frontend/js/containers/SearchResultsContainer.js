@@ -5,14 +5,7 @@ import FilterButton from "../components/FilterButton";
 import SearchFilters from "../components/SearchFilters";
 import {Link} from "react-router";
 
-// import {connect} from "react-redux";
-// import {fetchKindJobs} from "../actions/kindjobActions";
-//
-// @connect((store) => {
-//   return {
-//     kindjobs: store.kindjobs.kindjobs
-//   }
-// })
+
 export default class SearchResults extends React.Component {
   constructor() {
     super();

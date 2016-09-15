@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import {fetchKindJob} from "../actions/kindjobActions"
-import {fetchApplications, deleteApplication, editApplication, createApplication} from "../actions/applicationActions"
+import {createApplication} from "../actions/applicationActions"
 // for redirect to home
 import {hashHistory} from "react-router"
 
@@ -48,7 +48,7 @@ export default class ApplyContainer extends React.Component {
         <div class="col-md-8 col-md-offset-2">
           <form onSubmit = {this._submitApplication}>
             <h1>Application Form</h1>
-            <h4>{job.title} - {job.sector_id.sector_name} sector, {job.location_id.location_name}</h4>
+            <h4>{job.title} - {job.sector_id.name} sector, {job.location_id.name}</h4>
             <div class="inner">
               <InputText _label="Name*" _type="text" ref="name"  _default="" />
               <InputText _label="Email*" _type="text" ref="email"  _default="" />

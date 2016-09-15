@@ -12,9 +12,10 @@ export function fetchSGOs() {
   }
 }
 
-export function deleteSGO(id) {
+export function deleteSGO(id, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.delete('./api/sgos/' + id)
+    axios.delete('./api/sgos/' + id, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"DELETE_SGO_FULFILLED", payload: response.data})
         })
@@ -25,9 +26,10 @@ export function deleteSGO(id) {
 }
 
 
-export function editSGO(id, sgo) {
+export function editSGO(id, sgo, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.put('./api/sgos/' + id, sgo)
+    axios.put('./api/sgos/' + id, sgo, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"EDIT_SGO_FULFILLED", payload: response.data})
         })
@@ -37,9 +39,10 @@ export function editSGO(id, sgo) {
   }
 }
 
-export function createSGO(sgo) {
+export function createSGO(sgo, jwtToken) {
+  let key = 'Bearer ' + jwtToken;
   return function (dispatch) {
-    axios.post('./api/sgos', sgo)
+    axios.post('./api/sgos', sgo, { headers: {Authorization: key} })
         .then((response)=>{
           dispatch({type:"CREATE_SGO_FULFILLED", payload: response.data})
         })

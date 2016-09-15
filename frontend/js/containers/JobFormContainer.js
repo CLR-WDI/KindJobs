@@ -12,16 +12,11 @@ import Dropdown from "../components/Dropdown" //dropdown selectors
 import {hashHistory} from "react-router"
 // actions for redux
 import {fetchKindJobs, deleteKindJob, editKindJob, createKindJob} from "../actions/kindjobActions" //actions for kindjobs
-
-import {fetchSGOs, deleteSGO, editSGO, createSGO} from "../actions/sgoActions" //actions for SGOs
-
-import {fetchSectors, deleteSector, editSector, createSector} from "../actions/sectorActions" //actions for Sectors
-
-import {fetchScopes, deleteScope, editScope, createScope} from "../actions/scopeActions" //actions for Scopes
-
-import {fetchLocations, deleteLocation, editLocation, createLocation} from "../actions/locationActions" //actions for Locations
-
-import {fetchEmploymentTerms, deleteEmploymentTerm, editEmploymentTerm, createEmploymentTerm} from "../actions/employmentTermActions" //actions for EmploymentTerms
+import {fetchSGOs} from "../actions/sgoActions" //actions for SGOs
+import {fetchSectors} from "../actions/sectorActions" //actions for Sectors
+import {fetchScopes} from "../actions/scopeActions" //actions for Scopes
+import {fetchLocations} from "../actions/locationActions" //actions for Locations
+import {fetchEmploymentTerms} from "../actions/employmentTermActions" //actions for EmploymentTerms
 
 @connect((store) => {
   return {
@@ -30,7 +25,9 @@ import {fetchEmploymentTerms, deleteEmploymentTerm, editEmploymentTerm, createEm
     scopes: store.scopes.scopes,
     sectors: store.sectors.sectors,
     sgos: store.sgos.sgos,
-    kindjobs: store.kindjobs.kindjobs
+    kindjobs: store.kindjobs.kindjobs,
+    admin: store.users.admin,
+    jwtToken: store.users.jwtToken,
   }
 })
 export default class JobForm extends React.Component {
@@ -55,7 +52,7 @@ export default class JobForm extends React.Component {
       // console.log(this.props);
       // console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
-        this.props.dispatch( deleteKindJob(this.props.routeParams.id) );
+        this.props.dispatch( deleteKindJob(this.props.routeParams.id, this.props.jwtToken) );
         this.props.history.goBack();
       }
       else{
@@ -82,18 +79,19 @@ export default class JobForm extends React.Component {
 
     if(this.props.routeParams.id){
       let id = this.props.routeParams.id;
-      this.props.dispatch( editKindJob(id, jobSave) );
+      this.props.dispatch( editKindJob(id, jobSave, this.props.jwtToken) );
       // console.log(jobSave);
       hashHistory.go(-1);
     }
     else{
-      this.props.dispatch( createKindJob(jobSave) );
+      this.props.dispatch( createKindJob(jobSave, this.props.jwtToken) );
       // console.log(jobSave);
       hashHistory.go(-1);
     }
   }
 
   render() {
+    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     if(this.props.routeParams.id){
       var jobs = [ ...this.props.kindjobs];
       var job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
@@ -142,7 +140,7 @@ export default class JobForm extends React.Component {
             _default={job.min_yrs_exp}/>
             <InputText ref="salary" _label="salary" _type="number"
             _default={job.salary}/>
-            
+
             <label> Description:
               <textarea class="form-control" ref="description"
               defaultValue={job.description}></textarea>

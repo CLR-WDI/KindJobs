@@ -10,10 +10,10 @@ module.exports = {
   },
 
   create: function(req, res, next) {
-    var sector = new SGOs(req.body);
+    var sgo = new SGOs(req.body);
     console.log(req.body);
 
-    sector.save(function(err) {
+    sgo.save(function(err) {
       if (err) return next(err);
       SGOs.find({}, function(err, SGOs) {
         if (err) return next(err);
