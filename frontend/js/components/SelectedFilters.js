@@ -24,8 +24,15 @@ export default class SelectedFilters extends React.Component{
     let listOfFilters = criteriaList.map( (item) => {
       return <SelectedFiltersButton key={item} _id={item} _name={filterCriteria.criteriaName[item]} />
     })
+    let title = null;
+    if (criteriaList.length > 0) {
+      title = <h4>Selected Filters</h4>;
+    }
     return(
-      <div>{listOfFilters}</div>
+      <div>
+        {title}
+        {listOfFilters}
+      </div>
     )
   }
 }
