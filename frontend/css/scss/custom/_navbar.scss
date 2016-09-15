@@ -63,12 +63,6 @@
     border-color: $navbar-default-border;
   }
 
-  .navbar-collapse {
-    &.in {
-      background-color: $body-bg;
-    }
-  }
-
   // Dropdown menu items
   .navbar-nav {
     // Remove background color from open dropdown

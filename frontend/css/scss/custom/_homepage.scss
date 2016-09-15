@@ -4,9 +4,6 @@
   padding-top: ($navbar-height * 2);
   padding-bottom: ($navbar-height * 2);
   &.home {
-    h1 {
-      color: darken($color-logo, 20%);
-    }
 
     a {
       color: darken($color-logo, 20%);
@@ -16,4 +13,17 @@
       }
     }
   }
+}
+
+.pushDaFoota {
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+
+footer {
+  background-color: $brand-grey;
+  color: white;
+  padding: 2rem;
+  text-align: center;
 }
