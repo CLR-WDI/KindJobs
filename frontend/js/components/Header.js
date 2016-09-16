@@ -24,8 +24,8 @@ class Header extends React.Component {
     if( this.props.admin ){
       adminOrNot = (
       <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-        <li><Link to='admin/kindjobs'>Job Postings</Link></li>
         <li><Link to='admin/applications'>Applications</Link></li>
+        <li><Link to='admin/kindjobs'>Job Postings</Link></li>
         <li><Link to='admin/options'>Options</Link></li>
         <li><Link to='admin/users'>Users</Link></li>
         <li><a href="#" onClick={this._logout}>Logout</a></li>
