@@ -4,9 +4,12 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import {fetchKindJob} from "../actions/kindjobActions"
-import {createApplication} from "../actions/applicationActions"
+import {createApplication, uploadCV} from "../actions/applicationActions"
 // for redirect to home
 import {hashHistory} from "react-router"
+
+//Dropzone for file uploads
+import Dropzone from 'react-dropzone'
 
 @connect((store) => {
   return {
@@ -20,6 +23,12 @@ export default class ApplyContainer extends React.Component {
   constructor(){
     super();
     this._submitApplication = this._submitApplication.bind(this);
+    this._onDrop = this._onDrop.bind(this);
+  }
+
+  _onDrop(files) {
+    let file = files[0];
+    this.props.dispatch( uploadCV(file) );
   }
 
   _submitApplication(e){
@@ -63,10 +72,11 @@ export default class ApplyContainer extends React.Component {
               <p>
                 <label>Attach your CV*</label>
               </p>
-              <div class="btn-group">
-                <button class="btn btn-default" type="button">Default CV</button>
-                <button class="btn btn-secondary" type="button">Customized CV</button>
-              </div>
+              <Dropzone onDrop={ this._onDrop } size={ 150 }>
+                <div>
+                  Drop some files here!
+                </div>
+              </Dropzone>
               <div class="form-action-btn">
                 <p>* required</p>
                 <button class="btn btn-default" type="button" onClick={function(e){e.preventDefault; hashHistory.go( -1 ); }}>Back</button>
