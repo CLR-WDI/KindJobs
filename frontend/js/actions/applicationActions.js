@@ -60,3 +60,38 @@ export function createApplication(application) {
         })
   }
 }
+
+export function uploadCV(file) {
+  console.log("the file is ", file);
+  console.log("filename is ", file.name);
+  console.log("filetype is ", file.type);
+  // let fileData = {
+  //   filename: file.name,
+  //   filetype: file.type
+  // }
+
+  return function (dispatch) {
+    axios.get(`./api/applications/fileupload?filename=${file.name}&filetype=${file.type}`)
+    .then((result) => {
+      let signedUrl = result.data;
+
+      let options = {
+        headers: {
+          'Content-Type': file.type
+        }
+      };
+      console.log("the signed url is ", signedUrl);
+      console.log("the options are ", options);
+      axios.put(signedUrl, file, options)
+        .then((response) => {
+          dispatch({type:"UPLOAD_CV_FULFILLED", payload: response.data})
+        })
+        .catch((err)=>{
+          dispatch({type:"UPLOAD_CV_REJECTED", payload: err})
+        })
+    })
+    .catch((err)=>{
+      dispatch({type:"UPLOAD_CV_REJECTED", payload: err})
+    })
+  }
+}

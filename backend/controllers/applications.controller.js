@@ -1,5 +1,9 @@
 var Applications = require('mongoose').model('Application');
 
+var AWS = require('aws-sdk');
+
+AWS.config.region = process.env.S3_REGION;
+
 var getAllAppsFn = function(req, res, next) {
           Applications.find()
           .sort({createdAt: -1})
@@ -55,5 +59,27 @@ module.exports = {
 			if (err) return next(err);
       getAllAppsFn(req, res, next);
 		})
-  }
+  },
+
+  sign: function(req, res, next) {
+        var s3 = new AWS.S3();
+        var filename = req.query.filename;
+        var filetype = req.query.filetype;
+        console.log("query is ", req.query);
+        console.log("filename is ", filename);
+        console.log("filetype is ", filetype);
+
+        var params = {
+            Bucket: process.env.S3_BUCKET,
+            Key: filename,
+            Expires: 60,
+            ContentType: filetype,
+            ACL: 'public-read'
+        };
+
+        s3.getSignedUrl('putObject', params, function(err, data) {
+            if (err) return next(err);
+            res.status(200).json(data);
+        });
+    }
 }
