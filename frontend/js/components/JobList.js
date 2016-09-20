@@ -4,6 +4,7 @@ import JobCard from "./JobCard"
 import {fetchKindJobs} from "../actions/kindjobActions"
 import {fetchFilters} from "../actions/filterActions";
 
+
 @connect((store) => {
   return {
     kindjobs: store.kindjobs.kindjobs,
