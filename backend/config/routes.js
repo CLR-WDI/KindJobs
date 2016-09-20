@@ -8,6 +8,27 @@ module.exports = function(app) {
 	var sgosController = require('../controllers/sgos.controller');
 	var applicationsController = require('../controllers/applications.controller');
 	var usersController = require('../controllers/users.controller');
+
+	// for passport
+	var passport          = require("passport");
+	var usersAuthController = require('../controllers/usersauth.controller');
+
+	// add routes before JWT FOR TESTING PURPOSES
+	router.route('/signupAuth')
+	  .get(usersAuthController.getSignup)
+	  .post(usersAuthController.postSignup)
+
+	router.route('/loginAuth')
+	  .get(usersAuthController.getLogin)
+	  .post(usersAuthController.postLogin)
+
+	router.route("/logoutAuth")
+	  .get(usersAuthController.getLogout)
+
+
+
+
+
 	// tokens for managing access
 	var expressJWT = require('express-jwt');
 	var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";

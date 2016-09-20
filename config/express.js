@@ -10,6 +10,10 @@
   var methodOverride = require('method-override');
 	// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 
+  // for passport
+  var passport       = require('passport');
+  var flash          = require('connect-flash');
+  var session        = require('express-session');
 
 
 module.exports = function() {
@@ -34,9 +38,19 @@ module.exports = function() {
   }));
   app.use( bodyParser.json() );
   app.use( cookieParser() );
+
+  // for passport
+  app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
+
 	app.use( methodOverride() );
 
   app.use(express.static(path.resolve(__dirname, '../dist')));
+
+  // for passport
+  require('./config/passport')(passport);
 
   require('../backend/config/routes')(app);
 
