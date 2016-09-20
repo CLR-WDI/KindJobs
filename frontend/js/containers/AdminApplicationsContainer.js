@@ -36,13 +36,16 @@ export default class AdminApplicationsContainer extends React.Component {
 
   _exportCSV(e){
     e.preventDefault();
-    let fields = ['name',  'expected_salary', 'highest_qualification', 'yrs_rel_exp', 'message_to_recruiters', 'tel_no', 'email', 'kindjobs_id.title', 'kindjobs_id.sgo_id.name', 'kindjobs_id.description', 'kindjobs_id.description', 'kindjobs_id.min_qualification', 'kindjobs_id.min_yrs_exp', 'kindjobs_id.salary']
-    json2csv({data: this.props.applications, fields: fields}, function (err, csv) {
+    let fields = ['name',  'expected_salary', 'highest_qualification', 'yrs_rel_exp', 'message_to_recruiters', 'tel_no', 'email', 'kindjobs_id.title', 'kindjobs_id.sgo_id.name', 'kindjobs_id.description', 'kindjobs_id.min_qualification', 'kindjobs_id.min_yrs_exp', 'kindjobs_id.salary']
+
+    let fieldNames = ['Applicant Name',  'Expected Salary', 'Highest Relevant Qualifcation', 'Years of Relevant Experience', 'Message to Recruiters', 'Contact Number', 'Email Address', 'Title of Job Applied For', 'SGO Name', 'Kindjob Description', 'Minimum Qualification Required', 'Minimum Years of Relevant Experience Required', 'Salary Range Offered']
+
+    json2csv({data: this.props.applications, fields: fields, fieldNames: fieldNames}, function (err, csv) {
       if(err) console.log(err);
       console.log("the csv is ", csv);
-      var blob = new window.Blob([csv], {type: 'text/csv, charset=UTF-8'});
-      var objectURL = window.URL.createObjectURL(blob);
-      var a = document.createElement("a");
+      let blob = new window.Blob([csv], {type: 'text/csv, charset=UTF-8'});
+      let objectURL = window.URL.createObjectURL(blob);
+      let a = document.createElement("a");
       document.body.appendChild(a);
       a.style = "display: none";
       a.href = objectURL;
