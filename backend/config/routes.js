@@ -21,6 +21,7 @@ module.exports = function(app) {
  			.unless({
 				path:	[
 					'/images',
+					'/api/applications/fileupload' ,
 					'/api/users/signup', // route unblocked till we look for admin users
 					'/api/users/login',
 					{url: '/api/kindjobs',
@@ -111,5 +112,8 @@ module.exports = function(app) {
 	app.route('/api/applications/:id')
 		.put(applicationsController.update)
 		.delete(applicationsController.destroy)
+
+	app.route('/api/applications/fileupload')
+		.get(applicationsController.sign)
 
  };

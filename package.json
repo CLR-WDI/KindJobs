@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "aws-sdk": "^2.6.3",
     "axios": "^0.12.0",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
@@ -22,6 +23,7 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^0.14.6",
+    "react-dropzone": "^3.6.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "redux": "^3.6.0",
@@ -50,7 +52,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "webpack -p && nodemon server.js",
+    "start": "source ~/.zshrc && webpack -p && nodemon server.js",
     "frontendServer": "webpack-dev-server --content-base src --inline --hot",
     "prod": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
