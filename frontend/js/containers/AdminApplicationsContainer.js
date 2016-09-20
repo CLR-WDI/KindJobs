@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {Link} from "react-router";
+import json2csv from "json2csv";
+
 // for dates
 import {dateToYYYY_MM_YY_Mongoose} from "../helpers/helpers"
 import {fetchApplications, deleteApplication} from "../actions/applicationActions"
@@ -17,6 +19,7 @@ export default class AdminApplicationsContainer extends React.Component {
   constructor(){
     super();
     this._deleteApplication = this._deleteApplication.bind(this);
+    this._exportCSV = this._exportCSV.bind(this);
   }
   componentWillMount(){
     this.props.dispatch( fetchApplications(this.props.jwtToken) );
@@ -30,6 +33,26 @@ export default class AdminApplicationsContainer extends React.Component {
       console.log("deleted app!")
     }
   }
+
+  _exportCSV(e){
+    e.preventDefault();
+    let fields = ['name',  'expected_salary', 'highest_qualification', 'yrs_rel_exp', 'message_to_recruiters', 'tel_no', 'email', 'kindjobs_id.title', 'kindjobs_id.sgo_id.name', 'kindjobs_id.description', 'kindjobs_id.description', 'kindjobs_id.min_qualification', 'kindjobs_id.min_yrs_exp', 'kindjobs_id.salary']
+    json2csv({data: this.props.applications, fields: fields}, function (err, csv) {
+      if(err) console.log(err);
+      console.log("the csv is ", csv);
+      var blob = new window.Blob([csv], {type: 'text/csv, charset=UTF-8'});
+      var objectURL = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = objectURL;
+      a.download = 'csv';
+      a.click();
+      window.URL.revokeObjectURL(objectURL);
+    })
+
+  }
+
   render() {
     if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applicationList = this.props.applications.map( (application) => {
@@ -68,6 +91,7 @@ export default class AdminApplicationsContainer extends React.Component {
             {applicationList}
           </tbody>
         </table>
+        <button onClick={ function(e){this._exportCSV( e)}.bind(this)}>Export to CSV</button>
       </div>
     )
   }

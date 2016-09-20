@@ -39,7 +39,6 @@ export default class ApplicationContainer extends React.Component {
     if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applications = [ ...this.props.applications];
     let application = applications.filter( application => application._id === this.props.routeParams.id)[0];
-    console.log(application);
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">

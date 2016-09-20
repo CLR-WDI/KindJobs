@@ -3,6 +3,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
+var fs = require('fs');
+
 
 
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
