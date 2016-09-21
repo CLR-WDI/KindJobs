@@ -8,6 +8,51 @@ module.exports = function(app) {
 	var sgosController = require('../controllers/sgos.controller');
 	var applicationsController = require('../controllers/applications.controller');
 	var usersController = require('../controllers/users.controller');
+
+	// for passport
+	var passport          = require("passport");
+	var usersAuthController = require('../controllers/usersauth.controller');
+
+	// authenticate by passport
+	function authenticatedUser(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.isAuthenticated()) return next();
+
+	  // Otherwise the request is always redirected to the home page
+	  req.flash('errorMessage', 'Login to access!');
+	  res.redirect('/loginAuth');
+	}
+
+	function unAuthenticatedUser(req, res, next) {
+	  if(!req.isAuthenticated()) return next();
+	  req.flash('errorMessage', 'You are already logged in!')
+	  res.redirect('/');
+	}
+
+
+
+	// add routes before JWT FOR TESTING PURPOSES
+	app.route('/signupAuth')
+	  .get(usersAuthController.getSignup) //unAuthenticatedUser,
+	  .post(usersAuthController.postSignup)
+
+	app.route('/loginAuth')
+	  .get(usersAuthController.getLogin) //unAuthenticatedUser,
+	  .post(usersAuthController.postLogin)
+
+	app.route("/logoutAuth")
+	  .get(authenticatedUser, usersAuthController.getLogout);
+
+	app.route("/testAuth")
+		.get(authenticatedUser, usersAuthController.getTest)
+	// app.route("/secret")
+	// 		.get(authenticatedUser, usersController.getSecret)
+	//
+	//
+
+
+
+
 	// tokens for managing access
 	var expressJWT = require('express-jwt');
 	var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";

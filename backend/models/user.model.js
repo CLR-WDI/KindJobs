@@ -29,6 +29,8 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
+UserSchema.set('timestamps',{});
+
 UserSchema.methods.authenticate = function(password, callback){
   // compare is a bcrypt method that returns a boolean,
   // if the first argument once encrypted corresponds to the second arguement
