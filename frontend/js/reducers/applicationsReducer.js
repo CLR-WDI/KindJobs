@@ -2,7 +2,8 @@ export default function reducer(state = {
     applications: [],
     fetching: false,
     fetched: false,
-    error: null
+    error: null,
+    cv: ""
   },
   action)
   {
@@ -10,7 +11,8 @@ export default function reducer(state = {
       case "LOGOUT_USER":{
         return{
           ...state,
-          applications: []
+          applications: [],
+          cv: ""
         };
       }
       case "FETCH_APPLICATIONS":{
@@ -101,6 +103,24 @@ export default function reducer(state = {
           fetching: false,
           error: action.payload
         };
+      }
+      case "UPLOAD_CV_FULFILLED":{
+        return{
+          ...state,
+          cv: action.payload
+        }
+      }
+      case "UPLOAD_CV_REJECTED":{
+        return{
+          ...state,
+          error: action.payload
+        }
+      }
+      case "CLEAR_CV_FULFILLED":{
+        return{
+          ...state,
+          cv: ""
+        }
       }
     }
   return state;
