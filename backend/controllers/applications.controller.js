@@ -1,8 +1,6 @@
 var Applications = require('mongoose').model('Application');
 var AWS = require('aws-sdk');
 
-AWS.config.region = process.env.S3_REGION;
-
 var getAllAppsFn = function(req, res, next) {
           Applications.find()
           .sort({createdAt: -1})
@@ -78,7 +76,11 @@ module.exports = {
 
         s3.getSignedUrl('putObject', params, function(err, data) {
             if (err) return next(err);
-            res.status(200).json(data);
+            var returnData = {
+              signedRequest: data,
+              url: 'https://' + process.env.S3_BUCKET + '.s3.amazonaws.com/' + filename
+            };
+            res.status(200).json(returnData);
         });
     }
 }

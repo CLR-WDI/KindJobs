@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import {fetchKindJob} from "../actions/kindjobActions"
-import {createApplication, uploadCV} from "../actions/applicationActions"
+import {createApplication, uploadCV, clearCV} from "../actions/applicationActions"
 // for redirect to home
 import {hashHistory} from "react-router"
 
@@ -13,13 +13,19 @@ import Dropzone from 'react-dropzone'
 
 @connect((store) => {
   return {
-    kindjobs: store.kindjobs.kindjobs
+    kindjobs: store.kindjobs.kindjobs,
+    cv: store.applications.cv
   }
 })
 export default class ApplyContainer extends React.Component {
   componentWillMount() {
     this.props.dispatch( fetchKindJob() );
   }
+
+  componentWillUnmount() {
+    this.props.dispatch( clearCV() );
+  }
+
   constructor(){
     super();
     this._submitApplication = this._submitApplication.bind(this);
@@ -32,6 +38,7 @@ export default class ApplyContainer extends React.Component {
       return alert('No file selected.');
     }
     this.props.dispatch( uploadCV(file) );
+    console.log(this.props.cv);
   }
 
   _submitApplication(e){
@@ -45,6 +52,7 @@ export default class ApplyContainer extends React.Component {
       yrs_rel_exp: ReactDOM.findDOMNode(this.refs.yrs_rel_exp.refs.inp).value,
       highest_qualification: ReactDOM.findDOMNode(this.refs.highest_qualification.refs.inp).value,
       message_to_recruiters: ReactDOM.findDOMNode(this.refs.message_to_recruiters).value,
+      link_to_cv: this.props.cv
     }
     this.props.dispatch( createApplication(form) );
     alert( "Application submitted" );

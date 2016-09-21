@@ -73,18 +73,19 @@ export function uploadCV(file) {
   return function (dispatch) {
     axios.get(`./api/applications/fileupload?filename=${file.name}&filetype=${file.type}`)
     .then((result) => {
-      let signedUrl = result.data;
+      let signedUrl = result.data.signedRequest;
 
       let options = {
         headers: {
           'Content-Type': file.type
         }
       };
+      console.log("the result is ", result);
       console.log("the signed url is ", signedUrl);
       console.log("the options are ", options);
-      axios.put(file, signedUrl, options)
+      axios.put(signedUrl, file, options)
         .then((response) => {
-          dispatch({type:"UPLOAD_CV_FULFILLED", payload: response.data})
+          dispatch({type:"UPLOAD_CV_FULFILLED", payload: result.data.url})
         })
         .catch((err)=>{
           dispatch({type:"UPLOAD_CV_REJECTED", payload: err})
@@ -93,5 +94,11 @@ export function uploadCV(file) {
     .catch((err)=>{
       dispatch({type:"UPLOAD_CV_REJECTED", payload: err})
     })
+  }
+}
+
+export function clearCV() {
+  return {
+    type: "CLEAR_CV_FULFILLED"
   }
 }
