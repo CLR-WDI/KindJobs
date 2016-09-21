@@ -33,7 +33,7 @@ export default class SelectedFiltersButton extends React.Component {
 
   render() {
     return(
-      <button class="btn btn-default" id={this.props._id} onClick={this._removeFilter}>{this.props._name+ "  "}<i class="fa fa-times-circle"></i></button>
+      <button class="btn btn-filter" id={this.props._id} onClick={this._removeFilter}>{this.props._name+ "  "}<i class="fa fa-times-circle"></i></button>
     )
   }
 }

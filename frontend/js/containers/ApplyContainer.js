@@ -28,6 +28,9 @@ export default class ApplyContainer extends React.Component {
 
   _onDrop(files) {
     let file = files[0];
+    if(file == null){
+      return alert('No file selected.');
+    }
     this.props.dispatch( uploadCV(file) );
   }
 

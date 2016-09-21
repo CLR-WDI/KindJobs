@@ -82,7 +82,7 @@ export function uploadCV(file) {
       };
       console.log("the signed url is ", signedUrl);
       console.log("the options are ", options);
-      axios.put(signedUrl, file, options)
+      axios.put(file, signedUrl, options)
         .then((response) => {
           dispatch({type:"UPLOAD_CV_FULFILLED", payload: response.data})
         })

@@ -25,11 +25,9 @@ export default class FilterTab extends React.Component{
     selectedFilters.criteria[this.props._filterType] = this.props._value;
     selectedFilters.criteriaName[this.props._value] = this.props._name;
     this.props.dispatch( editFilters(selectedFilters) );
-
-
   }
 
   render() {
-    return <button ref="tab" class="btn btn-default" key={this.props.key} value={this.props.key} onClick={this._addFilter}>{this.props._name}</button>
+    return <button ref="tab" class="btn btn-filter" key={this.props.key} value={this.props.key} onClick={this._addFilter}>{this.props._name}</button>
   }
 }

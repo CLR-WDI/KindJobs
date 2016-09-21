@@ -5,6 +5,10 @@ form {
 }
 
 .input-group {
+  .form-control {
+    border-top-left-radius:  $btn-border-radius-base;
+    border-bottom-left-radius:  $btn-border-radius-base;
+  }
   .input-group-btn {
     .btn {
       margin: 0;
