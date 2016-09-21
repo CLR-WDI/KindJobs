@@ -13,18 +13,42 @@ module.exports = function(app) {
 	var passport          = require("passport");
 	var usersAuthController = require('../controllers/usersauth.controller');
 
+	// authenticate by passport
+	function authenticatedUser(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.isAuthenticated()) return next();
+
+	  // Otherwise the request is always redirected to the home page
+	  req.flash('errorMessage', 'Login to access!');
+	  res.redirect('/loginAuth');
+	}
+
+	function unAuthenticatedUser(req, res, next) {
+	  if(!req.isAuthenticated()) return next();
+	  req.flash('errorMessage', 'You are already logged in!')
+	  res.redirect('/');
+	}
+
+
+
 	// add routes before JWT FOR TESTING PURPOSES
-	router.route('/signupAuth')
-	  .get(usersAuthController.getSignup)
+	app.route('/signupAuth')
+	  .get(usersAuthController.getSignup) //unAuthenticatedUser,
 	  .post(usersAuthController.postSignup)
 
-	router.route('/loginAuth')
-	  .get(usersAuthController.getLogin)
+	app.route('/loginAuth')
+	  .get(usersAuthController.getLogin) //unAuthenticatedUser,
 	  .post(usersAuthController.postLogin)
 
-	router.route("/logoutAuth")
-	  .get(usersAuthController.getLogout)
+	app.route("/logoutAuth")
+	  .get(authenticatedUser, usersAuthController.getLogout);
 
+	app.route("/testAuth")
+		.get(authenticatedUser, usersAuthController.getTest)
+	// app.route("/secret")
+	// 		.get(authenticatedUser, usersController.getSecret)
+	//
+	//
 
 
 

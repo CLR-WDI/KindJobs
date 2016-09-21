@@ -29,7 +29,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-KindJobSchema.set('timestamps',{});
+UserSchema.set('timestamps',{});
 
 UserSchema.methods.authenticate = function(password, callback){
   // compare is a bcrypt method that returns a boolean,

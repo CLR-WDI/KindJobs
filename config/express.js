@@ -39,9 +39,12 @@ module.exports = function() {
   app.use( bodyParser.json() );
   app.use( cookieParser() );
 
-  // for passport
+  // middleware for passport
+  // be sure to use express.session() before passport.session() to ensure that the login session is restored in the correct order
+  // express session is to stash a cookie in the client's session
   app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
   app.use(passport.initialize());
+  // the passport session is equivalent to app.use(passport.authenticate('session')); this in turn pulls the serializeUser and deserializeUser functions
   app.use(passport.session());
   app.use(flash());
 
@@ -50,10 +53,14 @@ module.exports = function() {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 
   // for passport
-  require('./config/passport')(passport);
+  require('../backend/config/passport')(passport);
+
+  app.use(function (req, res, next) {
+    global.currentUser = req.user;
+    next();
+  });
 
   require('../backend/config/routes')(app);
-
 
   return app;
 };

@@ -1,6 +1,6 @@
 // for no-SQL database
 var mongoose  = require('mongoose'),
-    Schema    = mongoose.Schema,
+//    Schema    = mongoose.Schema,
     // for encrypthing
     bcrypt    = require('bcrypt');
 
@@ -9,12 +9,17 @@ var UserAuthSchema = new mongoose.Schema({
     email        : String,
     password     : String,
   }
+
 });
 
-KindJobSchema.set('timestamps',{});
+UserAuthSchema.set('timestamps',{});
 
-UserAuth.statics.encrypt = function(password) {
+UserAuthSchema.statics.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-mongoose.model( 'UserAuth', UserAuthSchema );
+UserAuthSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+};
+
+module.exports = mongoose.model( 'UserAuth', UserAuthSchema );
