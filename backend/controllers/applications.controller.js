@@ -1,5 +1,4 @@
 var Applications = require('mongoose').model('Application');
-
 var AWS = require('aws-sdk');
 
 AWS.config.region = process.env.S3_REGION;

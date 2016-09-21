@@ -16,6 +16,21 @@
   margin-top: 4rem;
 }
 
+.btn-filter {
+  padding: $padding-base-vertical $padding-base-horizontal;
+  border-radius: $border-radius-base;
+  margin: 1px 2px 1px 0;
+  background-color: $color-filter;
+  color: darken($color-filter, 40%);
+
+  &.active, &:active, &:hover {
+    background-color: darken($color-filter, 80%);
+    color: $color-filter;
+  }
+}
+
+// Employment Terms Buttons
+
 .btn-term {
   background: none;
   border: 1px solid;
