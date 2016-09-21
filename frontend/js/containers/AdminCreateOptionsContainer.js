@@ -116,7 +116,8 @@ export default class AdminCreateOptionsContainer extends React.Component {
           </tr>
         )
       })
-    let scopesList = this.props.scopes.map( (scope) => {
+    var sortedScopes =this.props.scopes.sort((a, b) => { return a.name > b.name})
+    let scopesList = sortedScopes.map( (scope) => {
       return (
           <tr key={scope._id}>
             <td onClick={this._editScope} id={scope._id}>{scope.name}</td>
