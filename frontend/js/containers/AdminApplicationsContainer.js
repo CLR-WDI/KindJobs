@@ -42,7 +42,6 @@ export default class AdminApplicationsContainer extends React.Component {
 
     json2csv({data: this.props.applications, fields: fields, fieldNames: fieldNames}, function (err, csv) {
       if(err) console.log(err);
-      console.log("the csv is ", csv);
       let blob = new window.Blob([csv], {type: 'text/csv, charset=UTF-8'});
       let objectURL = window.URL.createObjectURL(blob);
       window.open(objectURL, "_blank");
