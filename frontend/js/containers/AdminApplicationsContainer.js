@@ -43,7 +43,8 @@ export default class AdminApplicationsContainer extends React.Component {
           <td>{application.expected_salary}</td>
           <td>{application.yrs_rel_exp}</td>
           <td><Link to={'admin/applications/'+application._id}>{application.name}</Link></td>
-          <td><button onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
+          <td><a href={application.link_to_cv} class="btn btn-primary" download>Download CV</a></td>
+          <td><button class="btn btn-danger" onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
         </tr>
       )
     })
@@ -60,7 +61,8 @@ export default class AdminApplicationsContainer extends React.Component {
               <th className="col-md-1">Qualification</th>
               <th className="col-md-1">Salary</th>
               <th className="col-md-1">Yrs Exp</th>
-              <th className="col-md-3">Name</th>
+              <th className="col-md-2">Name</th>
+              <th className="col-md-1">CV</th>
               <th className="col-md-1">Delete</th>
             </tr>
           </thead>
