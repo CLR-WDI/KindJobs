@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
 import InputGroup from "../components/InputGroup"
-import {createScope, deleteScope, fetchScopes} from "../actions/scopeActions"
+import {editScope} from "../actions/scopeActions"
 import {createSector, fetchSectors} from "../actions/sectorActions"
 import {createLocation} from "../actions/locationActions"
 import {createTerm} from "../actions/termActions"
@@ -18,17 +18,14 @@ export default class EditOptions extends React.Component {
 
   _updateOption(e){
     e.preventDefault();
+    const targetId = this.props._id
     let form = {
       name: ReactDOM.findDOMNode(this.refs.updateOption.refs.inp).value
     }
-    console.log("the input value of the update option is ", form);
-    console.log("the jwtToken is ", this.props._token);
+    this.props._props.dispatch( editScope(targetId, form, this.props._token)  );
   }
 
   render() {
-    const targetId = this.props._id
-    console.log("the option to edit is ", this.props._optionEdit);
-    console.log("id in second component is ", targetId);
 
     return(
       <div>

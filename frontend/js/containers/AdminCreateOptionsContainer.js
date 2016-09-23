@@ -93,7 +93,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
     console.log("the default text should be ", targetText);
     console.log("the name of the scope is ", this.props.scopes);
 
-    var editForm = <EditOptions _optionEdit="scope" _id={targetId} _token={this.props.jwtToken} _defaultValue = {targetText}/>
+    var editForm = <EditOptions _props={this.props} _optionEdit="scope" _id={targetId} _token={this.props.jwtToken} _defaultValue = {targetText}/>
     ReactDOM.render(editForm, document.getElementById(targetId))
 
 
