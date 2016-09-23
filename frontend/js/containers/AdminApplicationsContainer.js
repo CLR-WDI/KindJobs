@@ -44,7 +44,12 @@ export default class AdminApplicationsContainer extends React.Component {
       if(err) console.log(err);
       let blob = new window.Blob([csv], {type: 'text/csv, charset=UTF-8'});
       let objectURL = window.URL.createObjectURL(blob);
-      window.open(objectURL, "_blank");
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = objectURL;
+      a.download = 'csv';
+      a.click();
       window.URL.revokeObjectURL(objectURL);
     })
 
