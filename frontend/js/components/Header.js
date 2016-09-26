@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux"
 import {Link} from "react-router";
-import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap';
 import {logoutUser} from "../actions/userActions";
 
 @connect((store) => {
@@ -23,30 +23,30 @@ class Header extends React.Component {
     let adminOrNot
     if( this.props.admin ){
       adminOrNot = (
-      <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-        <li><Link to='admin/applications'>Applications</Link></li>
-        <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-        <li><Link to='admin/options'>Options</Link></li>
-        <li><Link to='admin/users'>Users</Link></li>
-        <li><a href="#" onClick={this._logout}>Logout</a></li>
-      </NavDropdown>)
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+        <div class="dropdown-menu">
+          <li><Link to='admin/applications'>Applications</Link></li>
+          <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+          <li><Link to='admin/options'>Options</Link></li>
+          <li><Link to='admin/users'>Users</Link></li>
+          <li><a href="#" onClick={this._logout}>Logout</a></li>
+        </div>
+      </li>
+    )
     }else{
       adminOrNot = <li><Link to='/login'>Login</Link></li>
     }
     return(
-      <Navbar staticTop fluid>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to='/'><div class="logo"><img class="img-responsive" src="./images/kindjobs-logo.png" /></div></Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
+      <Navbar color="faded" light full>
+        <NavbarToggler />
+        <div class="collapse navbar-toggleable-xs" id="navbarCollapse">
+          <a class="navbar-brand" href="#">Responsive navbar</a>
+          <Nav className="pull-xs-right" navbar>
             {adminOrNot}
-            <li><Link to='/'>Home</Link></li>
+            <NavItem><Link to='/'>Home</Link></NavItem>
           </Nav>
-        </Navbar.Collapse>
+        </div>
       </Navbar>
     )
   }

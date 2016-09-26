@@ -1,5 +1,5 @@
 import React from "react";
-import {FormControl} from "react-bootstrap";
+import {FormControl} from 'reactstrap';
 
 class Dropdown extends React.Component{
 

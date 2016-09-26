@@ -3,6 +3,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
+var autoprefixer = require('autoprefixer');
+var postCSSBugFixes = require('postcss-flexbugs-fixes');
 
 
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -31,6 +33,10 @@ module.exports = {
         // loader: ExtractTextPlugin.extract('css!sass')
       },
       {
+        test:   /\.css$/,
+        loader: "style-loader!css-loader!postcss-loader"
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
@@ -48,6 +54,9 @@ module.exports = {
   },
   sassLoader:{
     includePaths: [path.resolve(__dirname, "./frontend")]
+  },
+  postcss: function () {
+      return [autoprefixer, postCSSBugFixes];
   },
   // output: {
   //   path: __dirname + "/frontend/",

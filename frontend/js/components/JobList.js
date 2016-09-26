@@ -77,7 +77,7 @@ export default class JobList extends React.Component {
     return (
       <div>
         {titlebar}
-        <div class="row is-flex">
+        <div class="row">
           {jobList}
         </div>
       </div>

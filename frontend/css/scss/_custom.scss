@@ -1,3 +1,9 @@
+// Bootstrap overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+
+@import "custom/variables";
 @import "custom/navbar";
 @import "custom/cards";
 @import "custom/jobpage";

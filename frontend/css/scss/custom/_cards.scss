@@ -1,17 +1,9 @@
-.row.is-flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-.row.is-flex > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
-}
 
 .jobCard {
   padding: $card-margin-base;
 
   &.Full-time {
-    .inner {
+    .card {
       border-color: $color-fulltime;
       h1,h2,h3,.jobicon {
         color: $color-fulltime;
@@ -24,7 +16,7 @@
   }
 
   &.Part-time {
-    .inner {
+    .card {
       border-color: $color-parttime;
       h1,h2,h3,.jobicon {
         color: $color-parttime;
@@ -37,7 +29,7 @@
   }
 
   &.Contract {
-    .inner {
+    .card {
       border-color: $color-contract;
       h1,h2,h3,.jobicon {
         color: $color-contract;
@@ -50,7 +42,7 @@
   }
 
   &.Project {
-    .inner {
+    .card {
       border-color: $color-project;
       h1,h2,h3,.jobicon {
         color: $color-project;
@@ -63,7 +55,7 @@
   }
 
   &.Internship {
-    .inner {
+    .card {
       border-color: $color-internship;
       h1,h2,h3,.jobicon {
         color: $color-internship;
@@ -75,7 +67,7 @@
     }
   }
 
-  .inner {
+  .card {
     border-radius: $border-radius-base;
     border: 2px solid $card-border-color;
     text-align: center;

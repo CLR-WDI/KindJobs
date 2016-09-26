@@ -6,12 +6,12 @@ const JobCard = (props) => {
   console.log(description);
   return(
     <div className = {'jobCard '+props.term+' col-md-4 col-sm-6'}>
-      <div class="inner">
+      <div class="card card-block">
         <i class={"jobicon icon-"+props.image}></i>
         <div class="content">
-          <h3>{props.title}</h3>
+          <h3 class="card-title">{props.title}</h3>
           <h4><span class="label">{props.sector}</span></h4>
-          <p>{description}</p>
+          <p class="card-text">{description}</p>
         </div>
         <Link to={'/kindjobs/'+props.id}>
           <button type="button" class="btn btn-primary">Details</button>
