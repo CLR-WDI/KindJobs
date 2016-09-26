@@ -10,7 +10,7 @@ const JobCard = (props) => {
         <i class={"jobicon icon-"+props.image}></i>
         <div class="content">
           <h3 class="card-title">{props.title}</h3>
-          <h4><span class="label">{props.sector}</span></h4>
+          <h4><Tag class="label">{props.sector}</Tag></h4>
           <p class="card-text">{description}</p>
         </div>
         <Link to={'/kindjobs/'+props.id}>

@@ -13,7 +13,7 @@ export default class Home extends React.Component {
     };
     return(
       <div>
-        <div class="jumbotron home text-center" style={divStyle}>
+        <div class="jumbotron jumbotron-fluid home text-center" style={divStyle}>
           <h2>Come find your kind of job!</h2>
           <SearchBar />
           <h3><Link to={'/advsearch'}>Advanced Search</Link></h3>

@@ -14,10 +14,20 @@ class Header extends React.Component {
   constructor() {
     super();
     this._logout = this._logout.bind(this);
+    this._toggleCollapse = this._toggleCollapse.bind(this);
+    this.state = {
+      _collapsed: true
+    }
   }
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
+  }
+  _toggleCollapse(e) {
+    e.preventDefault();
+    this.setState({
+      _collapsed: !this.state._collapsed
+    });
   }
   render() {
     let adminOrNot
@@ -35,14 +45,18 @@ class Header extends React.Component {
       </li>
     )
     }else{
-      adminOrNot = <li><Link to='/login'>Login</Link></li>
+      adminOrNot = <NavItem><Link to='/login'>Login</Link></NavItem>
+    }
+    let collapseState = "collapse"
+    if(!this.state._collapsed) {
+      collapseState = "collapse in"
     }
     return(
       <Navbar color="faded" light full>
-        <NavbarToggler />
-        <div class="collapse navbar-toggleable-xs" id="navbarCollapse">
-          <a class="navbar-brand" href="#">Responsive navbar</a>
-          <Nav className="pull-xs-right" navbar>
+        <Link to='/' className="navbar-brand"><div class="logo"><img class="img-fluid" src="./images/kindjobs-logo.png" /></div></Link>
+        <NavbarToggler className="hidden-sm-up" data-toggle="collapse" data-target="#navbarCollapse" ref="navbarCollapser" onClick={this._toggleCollapse}/>
+        <div class={"navbar-toggleable-xs " + collapseState} id="navbarCollapse" ref="navbarCollapse">
+          <Nav className="pull-md-right pull-lg-right" navbar>
             {adminOrNot}
             <NavItem><Link to='/'>Home</Link></NavItem>
           </Nav>
