@@ -38,7 +38,7 @@ module.exports = {
 	destroy: function(req, res, next) {
 		Sectors.remove({
 			_id: req.params.id
-		}, function(err, kindjob){
+		}, function(err){
 			if (err) return next(err);
       Sectors.find({}, function(err, sectors) {
         if (err) return next(err);
