@@ -38,8 +38,8 @@ export default class SignupContainer extends React.Component {
           <form onSubmit = {this._submitSignup}>
             <InputText ref="name" _label="Name" _type="text"/>
             <InputText ref="email" _label="Email" _type="text"/>
-            <InputText ref="password" _label="Password" _type="text"/>
-            <InputText ref="confirmPassword" _label="Confirm Password" _type="text"/>
+            <InputText ref="password" _label="Password" _type="password"/>
+            <InputText ref="confirmPassword" _label="Confirm Password" _type="password"/>
             <br/>
             <button class="btn btn-primary" type="submit">Sign Up</button>
           </form>
