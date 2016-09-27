@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux"
 import {Link} from "react-router";
 import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
-import {logoutUser, getUser} from "../actions/userActions";
+import {logoutUser, getMe} from "../actions/userActions";
 
 @connect((store) => {
   return {
@@ -22,7 +22,7 @@ class Header extends React.Component {
   }
   componentDidUpdate() {
     if(this.props.loggedIn) {
-      this.props.dispatch( getUser() );
+      this.props.dispatch( getMe() );
     }
   }
   render() {

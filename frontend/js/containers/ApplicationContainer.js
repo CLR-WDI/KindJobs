@@ -8,8 +8,8 @@ import {hashHistory} from 'react-router';
 @connect((store) => {
   return {
     applications: store.applications.applications,
-    admin: store.users.admin,
-    jwtToken: store.users.jwtToken,
+    // admin: store.users.admin,
+    // jwtToken: store.users.jwtToken,
   }
 })
 export default class ApplicationContainer extends React.Component {
