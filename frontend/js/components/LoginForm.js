@@ -36,8 +36,8 @@ export default class LoginForm extends React.Component {
           <br/>
           <button class="btn btn-primary" type="submit">Login</button>
         </form>
-        <a href= '/api/users/auth/facebook' ><button class="btn btn-primary" type="button">Login with Facebook</button></a>
-        <a href= '/api/users/auth/linkedin' ><button class="btn btn-primary" type="button">Login with LinkedIn</button></a>
+        <a href='/api/users/auth/facebook' class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span> Login with Facebook</a>
+        <a href='/api/users/auth/linkedin' class="btn btn-block btn-social btn-linkedin"><span class="fa fa-linkedin"></span> Login with LinkedIn</a>
       </div>
     )
   }

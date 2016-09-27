@@ -13,7 +13,15 @@ export function loginUser(user) {
 }
 
 export function logoutUser() {
-  return {type:"LOGOUT_USER"}
+  return function (dispatch) {
+    axios.get('./api/users/logoutAuth')
+      .then((response)=>{
+        dispatch({type:"LOGOUT_USER"})
+      })
+      .catch((err)=>{
+        dispatch({type:"LOGOUT_USER_REJECTED"})
+      })
+  }
 }
 
 

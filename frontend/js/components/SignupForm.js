@@ -42,8 +42,8 @@ export default class SignupForm extends React.Component {
           <br/>
           <button class="btn btn-primary" type="submit">Sign Up</button>
         </form>
-        <a href= '/auth/facebook' ><button class="btn btn-primary" type="button">Signup with Facebook</button></a>
-        <a href= '/auth/login' ><button class="btn btn-primary" type="button">Signup with LinkedIn</button></a>
+        <a href= '/auth/facebook' class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span> Signup with Facebook</a>
+        <a href= '/auth/login' class="btn btn-block btn-social btn-linkedin"><span class="fa fa-linkedin"></span> Signup with LinkedIn</a>
       </div>
     )
   }

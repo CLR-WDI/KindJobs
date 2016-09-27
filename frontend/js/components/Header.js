@@ -7,8 +7,7 @@ import {logoutUser} from "../actions/userActions";
 @connect((store) => {
   return {
     jwtToken: store.users.jwtToken,
-    admin: store.users.admin,
-    loggedIn: store.users.loggedIn
+    userType: store.users.userType
   }
 })
 class Header extends React.Component {
@@ -22,6 +21,39 @@ class Header extends React.Component {
   }
   render() {
     let navbarLinks
+    switch (this.props.userType) {
+      case "none":
+        navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
+        break;
+      case "Jobseeker":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
+      case "Admin":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
+            <li><Link to='admin/applications'>Applications</Link></li>
+            <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+            <li><Link to='admin/options'>Options</Link></li>
+            <li><Link to='admin/users'>Users</Link></li>
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
+      case "SGO":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
+    }
     if(this.props.loggedIn && this.props.admin) {
       navbarLinks = (
         <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
