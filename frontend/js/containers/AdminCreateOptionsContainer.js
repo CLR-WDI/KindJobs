@@ -20,8 +20,8 @@ import {hashHistory} from "react-router"
     locations: store.locations.locations,
     terms: store.terms.terms,
     SGOs: store.sgos.sgos,
-    admin: store.users.admin,
-    jwtToken: store.users.jwtToken,
+    // admin: store.users.admin,
+    // jwtToken: store.users.jwtToken,
   }
 })
 export default class AdminCreateOptionsContainer extends React.Component {

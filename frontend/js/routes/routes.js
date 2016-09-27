@@ -20,7 +20,7 @@ import ApplicationContainer from '../containers/ApplicationContainer';
 import SignupContainer from '../containers/SignupContainer';
 import LoginContainer from '../containers/LoginContainer';
 import AdminUsersContainer from '../containers/AdminUsersContainer';
-import ProfileContainter from '../containers/ProfileContainer'
+import ProfileContainer from '../containers/ProfileContainer'
 
 
 let routes = (

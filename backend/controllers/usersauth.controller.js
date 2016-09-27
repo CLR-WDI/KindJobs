@@ -58,7 +58,7 @@ module.exports = {
 		}, function(err){
 			if (err) return next(err);
       req.logout();
-      res.redirect('/');
+      res.redirect('/#');
 		})
   },
 
@@ -68,14 +68,14 @@ module.exports = {
   // logout
   getLogout: function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/#');
   },
 
   // LOCAL STRATEGIES
   // POST /signup
   postSignup: function(req, res) {
     var signupStrategy = passport.authenticate('local-signup', {
-      successRedirect: '/',
+      successRedirect: '/#',
       failureRedirect: '/#/signup',
       failureFlash: true,
       // session: false // if you want to remove stored sessions
@@ -86,7 +86,7 @@ module.exports = {
   // POST /login
   postLogin: function(req, res) {
     var loginStrategy = passport.authenticate('local-login', {
-      successRedirect: '/',
+      successRedirect: '/#',
       failureRedirect: '/#/login',
       failureFlash: true,
       // session: false // if you want to remove stored sessions
@@ -106,7 +106,7 @@ module.exports = {
   getFacebookCallback: function(req,res){
     res.testMe = { userType: "Admin" };
     var facebookCallback = passport.authenticate('facebook', {
-      successRedirect: '/',
+      successRedirect: '/#',
       failureRedirect: '/#/login',
       failureFlash: true, });
     return facebookCallback(req,res);
@@ -119,7 +119,7 @@ module.exports = {
   },
   getLinkedinCallback: function(req, res){
     var linkedinCallback = passport.authenticate('linkedin', {
-      successRedirect: '/',
+      successRedirect: '/#',
       failureRedirect: '/#/login',
       failureFlash: true, });
     return linkedinCallback(req, res);

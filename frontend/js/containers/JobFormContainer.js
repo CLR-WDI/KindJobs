@@ -26,8 +26,8 @@ import {fetchEmploymentTerms} from "../actions/employmentTermActions" //actions 
     sectors: store.sectors.sectors,
     sgos: store.sgos.sgos,
     kindjobs: store.kindjobs.kindjobs,
-    admin: store.users.admin,
-    jwtToken: store.users.jwtToken,
+    // admin: store.users.admin,
+    // jwtToken: store.users.jwtToken,
   }
 })
 export default class JobForm extends React.Component {

@@ -10,6 +10,9 @@ import {signupUser} from "../actions/userActions" //actions for Users
 import {hashHistory} from 'react-router';
 
 @connect((store) => {
+  return {
+    me: store.users.me,
+  }
 })
 export default class ProfileContainer extends React.Component {
   constructor(){
