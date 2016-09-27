@@ -22,6 +22,14 @@ module.exports = function(app) {
 	  res.redirect('/');
 	}
 
+	// authenticate by passport
+	function authenticatedUserNoRedirect(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.isAuthenticated()) return next();
+	  // Otherwise the request is always redirected to the home page
+	  res.status(401).json({message: 'You need to log in to view this information.'});
+	}
+
 	function unAuthenticatedUser(req, res, next) {
 	  if(!req.isAuthenticated()) return next();
 	  req.flash('errorMessage', 'You are already logged in!')
@@ -102,7 +110,7 @@ module.exports = function(app) {
 
 	// USER API ROUTES
 	app.route('/api/users/me')
-			.get(authenticatedUser, usersAuthController.getMe)
+			.get(authenticatedUserNoRedirect, usersAuthController.getMe)
 			.post(authenticatedUser, usersAuthController.editMe)
 			.delete(authenticatedUser, usersAuthController.destroyMe)
 

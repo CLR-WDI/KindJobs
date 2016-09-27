@@ -20,10 +20,7 @@ import ApplicationContainer from '../containers/ApplicationContainer';
 import LoginContainer from '../containers/LoginContainer';
 import AdminUsersContainer from '../containers/AdminUsersContainer';
 import ProfileContainer from '../containers/ProfileContainer'
-<<<<<<< HEAD
-=======
 import AboutContainer from '../containers/AboutContainer'
->>>>>>> 68121f9f4556adc3b0424c993176c6b6acf35edc
 
 
 let routes = (
@@ -36,11 +33,7 @@ let routes = (
       <Route path='advsearch' component={AdvancedSearchContainer } />
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
-<<<<<<< HEAD
-=======
-      <Route path='signup' component={SignupContainer} />
       <Route path='about' component={AboutContainer} />
->>>>>>> 68121f9f4556adc3b0424c993176c6b6acf35edc
       <Route path='admin/users' component={AdminUsersContainer} />
       <Route path='admin/options' component={AdminCreateOptionsContainer} />
       <Route path='admin/kindjobs' component={AdminJobsContainer} />
