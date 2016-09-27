@@ -7,7 +7,8 @@ import {logoutUser} from "../actions/userActions";
 @connect((store) => {
   return {
     jwtToken: store.users.jwtToken,
-    admin: store.users.admin
+    admin: store.users.admin,
+    loggedIn: store.users.loggedIn
   }
 })
 class Header extends React.Component {
@@ -20,18 +21,21 @@ class Header extends React.Component {
     this.props.dispatch( logoutUser() );
   }
   render() {
-    let adminOrNot
-    if( this.props.admin ){
-      adminOrNot = (
-      <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-        <li><Link to='admin/applications'>Applications</Link></li>
-        <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-        <li><Link to='admin/options'>Options</Link></li>
-        <li><Link to='admin/users'>Users</Link></li>
-        <li><a href="#" onClick={this._logout}>Logout</a></li>
-      </NavDropdown>)
-    }else{
-      adminOrNot = <li><Link to='/login'>Login</Link></li>
+    let navbarLinks
+    if(this.props.loggedIn && this.props.admin) {
+      navbarLinks = (
+        <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
+          <li><Link to='admin/applications'>Applications</Link></li>
+          <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+          <li><Link to='admin/options'>Options</Link></li>
+          <li><Link to='admin/users'>Users</Link></li>
+          <li><a href="#" onClick={this._logout}>Logout</a></li>
+        </NavDropdown>
+      )
+    } else if(this.props.loggedIn && !this.props.admin) {
+      navbarLinks = <li><a href='/api/users/logoutAuth'>Logout</a></li>
+    } else if(!this.props.loggedIn && !this.props.admin) {
+      navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>
     }
     return(
       <Navbar staticTop fluid>
@@ -43,7 +47,7 @@ class Header extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {adminOrNot}
+            {navbarLinks}
             <li><Link to='/'>Home</Link></li>
           </Nav>
         </Navbar.Collapse>

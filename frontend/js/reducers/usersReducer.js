@@ -2,6 +2,7 @@ export default function reducer(state = {
     users: [],
     jwtToken: "",
     admin: false,
+    loggedIn: false,
     fetching: false,
     fetched: false,
     error: null
@@ -15,6 +16,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
+          loggedIn: true,
           admin: action.payload.admin,
           jwtToken: action.payload.jwtToken
         };
@@ -31,7 +33,8 @@ export default function reducer(state = {
           ...state,
           users: [],
           jwtToken: "",
-          admin: false
+          admin: false,
+          loggedIn: false
         };
       }
 
@@ -40,6 +43,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
+          loggedIn: true,
           admin: action.payload.admin,
           jwtToken: action.payload.jwtToken
         };
