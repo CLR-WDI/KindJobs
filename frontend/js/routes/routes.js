@@ -21,6 +21,7 @@ import SignupContainer from '../containers/SignupContainer';
 import LoginContainer from '../containers/LoginContainer';
 import AdminUsersContainer from '../containers/AdminUsersContainer';
 import ProfileContainer from '../containers/ProfileContainer'
+import AboutContainer from '../containers/AboutContainer'
 
 
 let routes = (
@@ -34,6 +35,7 @@ let routes = (
       <Route path='kindjobs/:id' component={JobContainer} />
       <Route path='apply/:id' component={ApplyContainer} />
       <Route path='signup' component={SignupContainer} />
+      <Route path='about' component={AboutContainer} />
       <Route path='admin/users' component={AdminUsersContainer} />
       <Route path='admin/options' component={AdminCreateOptionsContainer} />
       <Route path='admin/kindjobs' component={AdminJobsContainer} />

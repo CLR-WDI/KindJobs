@@ -1,6 +1,6 @@
 export default function reducer(state = {
     users: [],
-    me: null,
+    me: {},
     // jwtToken: "",
     // admin: false,
     fetching: false,
@@ -11,7 +11,7 @@ export default function reducer(state = {
   {
     switch (action.type) {
       case "LOGIN_USER_FULFILLED":{
-        console.log(action.payload.message);
+        // console.log(action.payload.message);
         return {
           ...state,
           fetching: false,

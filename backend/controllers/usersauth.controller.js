@@ -42,6 +42,9 @@ module.exports = {
 
   // edit details of logged in user
   editMe: function(req, res, next){
+    if(req.user.userType !== "Admin"){
+      req.body.userType = req.user.userType;
+    }
     UserAuth.findByIdAndUpdate(req.user.id, req.body, function(err) {
 	    if (err) { return next(err);}
       UserAuth.findById(req.user.id , function(err, User) {
