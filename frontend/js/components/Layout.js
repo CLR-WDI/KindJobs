@@ -1,25 +1,21 @@
 import React from "react";
-import {connect} from "react-redux"
-
-import {signupUser} from "../actions/userActions" //actions for Users
-
+// import {connect} from "react-redux";
 import Footer from "./Footer";
 import Header from "./Header";
 
-@connect((store) => {
-  return{
+// import {getUser} from "../actions/userActions";
 
-  }
-})
+// @connect((store) => {
+//   return {
+//     loggedIn: store.users.loggedIn
+//   }
+// })
 class Layout extends React.Component {
   getChildContext() {
     return {
       history: this.props.history,
       route: this.props.route
     };
-  }
-  componentWillMount() {
-
   }
   render() {
     return (

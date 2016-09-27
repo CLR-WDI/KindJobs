@@ -24,6 +24,18 @@ export function logoutUser() {
   }
 }
 
+export function getUser() {
+  return function (dispatch) {
+    axios.get('./api/users/me')
+      .then((response)=>{
+        dispatch({type:"GET_USER_FULFILLED", payload: response.data})
+      })
+      .catch((err)=>{
+        dispatch({type:"GET_USER_REJECTED", payload: err})
+      })
+  }
+}
+
 
 export function signupUser(user) {
   console.log(user);

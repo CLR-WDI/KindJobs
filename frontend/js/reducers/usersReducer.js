@@ -1,21 +1,22 @@
 export default function reducer(state = {
     users: [],
     jwtToken: "",
-    userType: 'none',
+    userType: "none",
     fetching: false,
     fetched: false,
     error: null,
-    defaultCV: ""
+    defaultCV: "",
+    loggedIn: false
   },
   action)
   {
     switch (action.type) {
       case "LOGIN_USER_FULFILLED":{
-        console.log(action.payload.message);
         return {
           ...state,
           fetching: false,
           fetched: true,
+          loggedIn: true,
           userType: action.payload.userType,
           jwtToken: action.payload.jwtToken
         };
@@ -32,7 +33,8 @@ export default function reducer(state = {
           ...state,
           users: [],
           jwtToken: "",
-          userType: 'none'
+          userType: "none",
+          loggedIn: false,
         };
       }
 
@@ -41,6 +43,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
+          loggedIn: true,
           userType: action.payload.userType,
           jwtToken: action.payload.jwtToken
         };

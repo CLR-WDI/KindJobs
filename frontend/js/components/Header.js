@@ -2,12 +2,13 @@ import React from "react";
 import {connect} from "react-redux"
 import {Link} from "react-router";
 import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
-import {logoutUser} from "../actions/userActions";
+import {logoutUser, getUser} from "../actions/userActions";
 
 @connect((store) => {
   return {
     jwtToken: store.users.jwtToken,
-    userType: store.users.userType
+    userType: store.users.userType,
+    loggedIn: store.users.loggedIn
   }
 })
 class Header extends React.Component {
@@ -18,6 +19,11 @@ class Header extends React.Component {
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
+  }
+  componentDidUpdate() {
+    if(this.props.loggedIn) {
+      this.props.dispatch( getUser() );
+    }
   }
   render() {
     let navbarLinks
@@ -53,21 +59,6 @@ class Header extends React.Component {
           </NavDropdown>
         );
         break;
-    }
-    if(this.props.loggedIn && this.props.admin) {
-      navbarLinks = (
-        <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-          <li><Link to='admin/applications'>Applications</Link></li>
-          <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-          <li><Link to='admin/options'>Options</Link></li>
-          <li><Link to='admin/users'>Users</Link></li>
-          <li><a href="#" onClick={this._logout}>Logout</a></li>
-        </NavDropdown>
-      )
-    } else if(this.props.loggedIn && !this.props.admin) {
-      navbarLinks = <li><a href='/api/users/logoutAuth'>Logout</a></li>
-    } else if(!this.props.loggedIn && !this.props.admin) {
-      navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>
     }
     return(
       <Navbar staticTop fluid>
