@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function loginUser(user) {
   return function (dispatch) {
-    axios.post('./api/users/login', user)
+    axios.post('./api/users/loginAuth', user)
         .then((response)=>{
           dispatch({type:"LOGIN_USER_FULFILLED", payload: response.data})
         })
@@ -20,7 +20,7 @@ export function logoutUser() {
 export function signupUser(user) {
   console.log(user);
   return function (dispatch) {
-    axios.post('./api/users/signup', user)
+    axios.post('./api/users/signupAuth', user)
         .then((response)=>{
           dispatch({type:"SIGNUP_USER_FULFILLED", payload: response.data})
         })

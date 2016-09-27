@@ -29,7 +29,7 @@ export default class AdminUsersContainer extends React.Component {
     }
   }
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let userList = this.props.users.map( (user) => {
       return (
         <tr key={user._id}>

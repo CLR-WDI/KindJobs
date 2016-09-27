@@ -17,10 +17,9 @@ module.exports = function(app) {
 	function authenticatedUser(req, res, next) {
 	  // If the user is authenticated, then we continue the execution
 	  if (req.isAuthenticated()) return next();
-
 	  // Otherwise the request is always redirected to the home page
-	  req.flash('errorMessage', 'Login to access!');
-	  res.redirect('/loginAuth');
+	  res.status(401).json({message: 'You need to log in to view this information.'});
+	  res.redirect('/');
 	}
 
 	function unAuthenticatedUser(req, res, next) {
@@ -29,132 +28,139 @@ module.exports = function(app) {
 	  res.redirect('/');
 	}
 
+	function checkIfAdmin(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.user.userType === "Admin") return next();
+	  // Otherwise the request is always redirected to the home page
+	  res.status(401).json({message: 'Access limited to Special Users'});
+	  res.redirect('/');
+	}
 
 
-	// add routes before JWT FOR TESTING PURPOSES
-	app.route('/signupAuth')
-	  .get(usersAuthController.getSignup) //unAuthenticatedUser,
+	// User authentication routes
+	app.route('/api/users/signupAuth')
 	  .post(usersAuthController.postSignup)
 
-	app.route('/loginAuth')
-	  .get(usersAuthController.getLogin) //unAuthenticatedUser,
+	app.route('/api/users/loginAuth')
 	  .post(usersAuthController.postLogin)
 
-	app.route("/logoutAuth")
+	app.route("/api/users/logoutAuth")
 	  .get(authenticatedUser, usersAuthController.getLogout);
 
-	app.route("/testAuth")
-		.get(authenticatedUser, usersAuthController.getTest)
-	// app.route("/secret")
-	// 		.get(authenticatedUser, usersController.getSecret)
-	//
-	//
+	// Redirect the user to Facebook for authentication.  When complete,
+	// Facebook will redirect the user back to the application at
+	//     /auth/facebook/callback
+	app.get('/api/users/auth/facebook', usersAuthController.getFacebook);
+	app.get('/api/users/auth/facebook/callback', usersAuthController.getFacebookCallback); // usersAuthController.getFacebookCallbackSuccess
 
+	app.get('/api/users/auth/linkedin', usersAuthController.getLinkedin);
+  app.get('/api/users/auth/linkedin/callback', usersAuthController.getLinkedinCallback); // usersAuthController.getLinkedinCallbackSuccess
 
-
-
-	// tokens for managing access
-	var expressJWT = require('express-jwt');
-	var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
+	// // tokens for managing access
+	// var expressJWT = require('express-jwt');
+	// var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
 
 	// JWT access control. Important to have these before our routes, so it can run first!
 	// ACCESS RESTRICTIONS FOR
-	app.use( expressJWT({
-		secret: jwt_secret,
-		// isRevoked: blacklist.isRevoked  // install to revoke access of offending individuals
-	})
- 			.unless({
-				path:	[
-					'/images',
-					'/api/users/signup', // route unblocked till we look for admin users
-					'/api/users/login',
-					{url: '/api/kindjobs',
-					methods: ['GET']},
-					{url: '/api/scopes',
-					methods: ['GET']},
-					{url: '/api/employment_terms',
-					methods: ['GET']},
-					{url: '/api/sectors',
-					methods: ['GET']},
-					{url: '/api/locations',
-					methods: ['GET']},
-					{url: '/api/sgos',
-					methods: ['GET']},
-					{url: '/api/applications',
-					methods: ['POST']}, // note method will not block the GET method
-				]
-			})
-		);
+	// app.use( expressJWT({
+	// 	secret: jwt_secret,
+	// 	// isRevoked: blacklist.isRevoked  // install to revoke access of offending individuals
+	// })
+ // 			.unless({
+	// 			path:	[
+	// 				'/images',
+	// 				'/api/users/signup', // route unblocked till we look for admin users
+	// 				'/api/users/login',
+	// 				{url: '/api/kindjobs',
+	// 				methods: ['GET']},
+	// 				{url: '/api/scopes',
+	// 				methods: ['GET']},
+	// 				{url: '/api/employment_terms',
+	// 				methods: ['GET']},
+	// 				{url: '/api/sectors',
+	// 				methods: ['GET']},
+	// 				{url: '/api/locations',
+	// 				methods: ['GET']},
+	// 				{url: '/api/sgos',
+	// 				methods: ['GET']},
+	// 				{url: '/api/applications',
+	// 				methods: ['POST']}, // note method will not block the GET method
+	// 			]
+	// 		})
+	// 	);
 
-	app.use(function (error, request, response, next) {
-	  if (error.name === 'UnauthorizedError') {
-	    response.status(401).json({message: 'You need to log in to view this information.'});
-	  }
-	});
+	// app.use(function (error, request, response, next) {
+	//   if (error.name === 'UnauthorizedError') {
+	//     response.status(401).json({message: 'You need to log in to view this information.'});
+	//   }
+	// });
 
 
-	app.post('/api/users/signup', usersController.signup)
-	app.post('/api/users/login',	usersController.login)
-	app.get('/api/users', usersController.index)
+	// app.post('/api/users/signup', usersController.signup)
+	// app.post('/api/users/login',	usersController.login)
+
+	// USER API ROUTES
+	app.get('/api/users', authenticatedUser, usersAuthController.index)
 
 	app.route('/api/users/:id')
-		.put(usersController.update)
-		.delete(usersController.destroy)
+		.put(authenticatedUser, usersAuthController.update)
+		.delete(authenticatedUser, usersAuthController.destroy)
 
+	// JOBS API
 	app.route('/api/kindjobs')
 		.get(kindJobsController.index)
-		.post(kindJobsController.create)
+		.post(authenticatedUser, checkIfAdmin, kindJobsController.create)
 
 	app.route('/api/kindjobs/:id')
-	 	.put(kindJobsController.update)
-	 	.delete(kindJobsController.destroy)
+	 	.put(authenticatedUser, checkIfAdmin, kindJobsController.update)
+	 	.delete(authenticatedUser, checkIfAdmin, kindJobsController.destroy)
 
 	app.route('/api/scopes')
 		.get(scopesController.index)
-		.post(scopesController.create)
+		.post(authenticatedUser, checkIfAdmin, scopesController.create)
 
 	app.route('/api/scopes/:id')
-	 	.put(scopesController.update)
-	 	.delete(scopesController.destroy)
+	 	.put(authenticatedUser, checkIfAdmin, scopesController.update)
+	 	.delete(authenticatedUser, checkIfAdmin, scopesController.destroy)
 
 	app.route('/api/employment_terms')
 		.get(employmentTermsController.index)
-		.post(employmentTermsController.create)
+		.post(authenticatedUser, checkIfAdmin, employmentTermsController.create)
 
 	app.route('/api/employment_terms/:id')
-		.put(employmentTermsController.update)
-		.delete(employmentTermsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, employmentTermsController.update)
+		.delete(authenticatedUser, checkIfAdmin, employmentTermsController.destroy)
 
 	app.route('/api/sectors')
 		.get(sectorsController.index)
-		.post(sectorsController.create)
+		.post(authenticatedUser, checkIfAdmin, sectorsController.create)
 
 	app.route('/api/sectors/:id')
-		.put(sectorsController.update)
-		.delete(sectorsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, sectorsController.update)
+		.delete(authenticatedUser, checkIfAdmin, sectorsController.destroy)
 
 	app.route('/api/locations')
 		.get(locationsController.index)
-		.post(locationsController.create)
+		.post(authenticatedUser, checkIfAdmin, locationsController.create)
 
 	app.route('/api/locations/:id')
-		.put(locationsController.update)
-		.delete(locationsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, locationsController.update)
+		.delete(authenticatedUser, checkIfAdmin, locationsController.destroy)
 
 	app.route('/api/sgos')
 		.get(sgosController.index)
-		.post(sgosController.create)
+		.post(authenticatedUser, checkIfAdmin, sgosController.create)
 
 	app.route('/api/sgos/:id')
-		.put(sgosController.update)
-		.delete(sgosController.destroy)
+		.put(authenticatedUser, checkIfAdmin, sgosController.update)
+		.delete(authenticatedUser, checkIfAdmin, sgosController.destroy)
 
 	app.route('/api/applications')
-		.get(applicationsController.index)
+		.get(authenticatedUser, checkIfAdmin, applicationsController.index)
 		.post(applicationsController.create)
 
 	app.route('/api/applications/:id')
-		.put(applicationsController.update)
-		.delete(applicationsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, applicationsController.update)
+		.delete(authenticatedUser, checkIfAdmin, applicationsController.destroy)
 
  };

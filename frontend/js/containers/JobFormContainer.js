@@ -91,7 +91,7 @@ export default class JobForm extends React.Component {
   }
 
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     if(this.props.routeParams.id){
       var jobs = [ ...this.props.kindjobs];
       var job = jobs.filter( job => job._id === this.props.routeParams.id)[0];

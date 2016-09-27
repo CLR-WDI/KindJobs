@@ -29,7 +29,7 @@ export default class AdminJobsContainer extends React.Component {
     }
   }
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let jobList = this.props.kindjobs.map( (job) => {
       job.createdAt = dateToYYYY_MM_YY_Mongoose(job.createdAt)
       job.deadline = dateToYYYY_MM_YY_Mongoose(job.deadline)

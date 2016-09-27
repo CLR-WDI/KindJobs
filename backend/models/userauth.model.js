@@ -5,11 +5,22 @@ var mongoose  = require('mongoose'),
     bcrypt    = require('bcrypt');
 
 var UserAuthSchema = new mongoose.Schema({
-  local : {
-    email        : String,
-    password     : String,
-  }
-
+  email           : {
+    type: String,
+    required: true
+  },
+  local           : {
+    password      : String,
+  },
+  facebookId      : String,
+  linkedinId      : String,
+  userType        : {
+    type: String,
+    required: true,
+    default: 'Jobseeker'
+  },
+  name            : String,
+  defaultCV       : String,
 });
 
 UserAuthSchema.set('timestamps',{});

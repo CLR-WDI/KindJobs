@@ -80,7 +80,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
   }
 
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     return(
       <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">

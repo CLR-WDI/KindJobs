@@ -19,6 +19,8 @@
     "mongoose": "^4.6.0",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-linkedin-oauth2": "^1.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "react": "^0.14.6",
@@ -53,6 +55,7 @@
   },
   "scripts": {
     "start": "webpack -p && nodemon server.js",
+    "dev": "source ~/.zshrc && webpack -p && nodemon server.js", 
     "frontendServer": "webpack-dev-server --content-base src --inline --hot",
     "prod": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
