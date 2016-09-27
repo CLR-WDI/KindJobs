@@ -34,7 +34,7 @@ export default class ProfileContainer extends React.Component {
   _submitDelete(e){
     e.preventDefault();
     if (confirm("Are you sure you want to delete your profile?")){
-      this.props.dispatch( deleteMe() );
+      this.props.dispatch( destroyMe() );
       hashHistory.push({pathname: '/'});
     }
   }

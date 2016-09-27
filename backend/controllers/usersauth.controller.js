@@ -44,9 +44,9 @@ module.exports = {
   editMe: function(req, res, next){
     UserAuth.findByIdAndUpdate(req.user.id, req.body, function(err) {
 	    if (err) { return next(err);}
-      UserAuth.find({ id: req.user.id }, function(err, Users) {
+      UserAuth.findById(req.user.id , function(err, User) {
         if (err) return next(err);
-        res.status(200).json(Users);
+        res.status(200).json(User);
       });
     });
   },

@@ -101,9 +101,11 @@ module.exports = function(app) {
 	// app.post('/api/users/login',	usersController.login)
 
 	// USER API ROUTES
-	app.get('/api/users/me', authenticatedUser, usersAuthController.getMe)
-	app.post('/api/users/me', authenticatedUser, usersAuthController.editMe)
-	app.delete('/api/users/me', authenticatedUser, usersAuthController.destroyMe)
+	app.route('/api/users/me')
+			.get(authenticatedUser, usersAuthController.getMe)
+			.post(authenticatedUser, usersAuthController.editMe)
+			.delete(authenticatedUser, usersAuthController.destroyMe)
+
 	app.get('/api/users', authenticatedUser, checkIfAdmin, usersAuthController.index)
 
 	app.route('/api/users/:id')

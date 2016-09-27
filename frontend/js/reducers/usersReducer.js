@@ -1,10 +1,11 @@
 export default function reducer(state = {
     users: [],
-    jwtToken: "",
-    admin: false,
+    me: null,
+    // jwtToken: "",
+    // admin: false,
     fetching: false,
     fetched: false,
-    error: null
+    error: null,
   },
   action)
   {
@@ -15,8 +16,8 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          admin: action.payload.admin,
-          jwtToken: action.payload.jwtToken
+          // admin: action.payload.admin,
+          // jwtToken: action.payload.jwtToken
         };
       }
       case "LOGIN_USER_REJECTED":{
@@ -26,12 +27,20 @@ export default function reducer(state = {
           error: action.payload
         };
       }
-      case "LOGOUT_USER":{
+      case "LOGOUT_USER_FULFILLED":{
         return{
           ...state,
           users: [],
-          jwtToken: "",
-          admin: false
+          me: null
+          // jwtToken: "",
+          // admin: false
+        };
+      }
+      case "LOGOUT_USER_REJECTED":{
+        return{
+          ...state,
+          fetching: false,
+          error: action.payload
         };
       }
 
@@ -40,8 +49,8 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          admin: action.payload.admin,
-          jwtToken: action.payload.jwtToken
+          // admin: action.payload.admin,
+          // jwtToken: action.payload.jwtToken
         };
       }
       case "SIGNUP_USER_REJECTED":{
@@ -51,6 +60,54 @@ export default function reducer(state = {
           error: action.payload
         };
       }
+
+      case "GET_ME_FULFILLED":{
+        return{
+          ...state,
+          fetching: false,
+          fetched: true,
+          me: action.payload
+        }
+      }
+      case "GET_ME_REJECTED":{
+        return{
+          ...state,
+          fetching: false,
+          error: action.payload
+        }
+      }
+      case "EDIT_ME_FULFILLED":{
+        return{
+          ...state,
+          fetching: false,
+          fetched: true,
+          me: action.payload
+        }
+      }
+      case "EDIT_ME_REJECTED":{
+        return{
+          ...state,
+          fetching: false,
+          error: action.payload
+        }
+      }
+      case "DESTROY_ME_FULFILLED":{
+        return{
+          ...state,
+          fetching: false,
+          fetched: true,
+          me: null
+        }
+      }
+      case "DESTROY_ME_REJECTED":{
+        return{
+          ...state,
+          fetching: false,
+          error: action.payload
+        }
+      }
+
+
 
       case "FETCH_USERS_FULFILLED":{
         return {

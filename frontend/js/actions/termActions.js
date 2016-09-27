@@ -12,11 +12,9 @@ export function fetchTerms() {
   }
 }
 
-export function deleteTerm(id, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function deleteTerm(id) {
   return function (dispatch) {
-    axios.delete('./api/employment_terms/' + id,
-              { headers: {Authorization: key} } )
+    axios.delete('./api/employment_terms/' + id)
         .then((response)=>{
           dispatch({type:"DELETE_TERM_FULFILLED", payload: response.data})
         })
@@ -26,10 +24,9 @@ export function deleteTerm(id, jwtToken) {
   }
 }
 
-export function editTerm(id, term, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function editTerm(id, term) {
   return function (dispatch) {
-    axios.put('./api/employment_terms/' + id, term, { headers: {Authorization: key} } )
+    axios.put('./api/employment_terms/' + id, term )
         .then((response)=>{
           dispatch({type:"EDIT_TERM_FULFILLED", payload: response.data})
         })
@@ -39,10 +36,9 @@ export function editTerm(id, term, jwtToken) {
   }
 }
 
-export function createTerm(term, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function createTerm(term) {
   return function (dispatch) {
-    axios.post('./api/employment_terms', term , { headers: {Authorization: key} })
+    axios.post('./api/employment_terms', term )
         .then((response)=>{
           dispatch({type:"CREATE_TERM_FULFILLED", payload: response.data})
         })
