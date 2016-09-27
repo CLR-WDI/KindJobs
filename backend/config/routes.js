@@ -101,7 +101,8 @@ module.exports = function(app) {
 	// app.post('/api/users/login',	usersController.login)
 
 	// USER API ROUTES
-	app.get('/api/users', authenticatedUser, usersAuthController.index)
+	app.get('/api/users/me', authenticatedUser, usersAuthController.getMe)
+	app.get('/api/users', authenticatedUser, checkIfAdmin, usersAuthController.index)
 
 	app.route('/api/users/:id')
 		.put(authenticatedUser, usersAuthController.update)
