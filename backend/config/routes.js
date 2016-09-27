@@ -8,110 +8,161 @@ module.exports = function(app) {
 	var sgosController = require('../controllers/sgos.controller');
 	var applicationsController = require('../controllers/applications.controller');
 	var usersController = require('../controllers/users.controller');
-	// tokens for managing access
-	var expressJWT = require('express-jwt');
-	var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
+
+	// for passport
+	var passport          = require("passport");
+	var usersAuthController = require('../controllers/usersauth.controller');
+
+	// authenticate by passport
+	function authenticatedUser(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.isAuthenticated()) return next();
+	  // Otherwise the request is always redirected to the home page
+	  res.status(401).json({message: 'You need to log in to view this information.'});
+	  res.redirect('/');
+	}
+
+	function unAuthenticatedUser(req, res, next) {
+	  if(!req.isAuthenticated()) return next();
+	  req.flash('errorMessage', 'You are already logged in!')
+	  res.redirect('/');
+	}
+
+	function checkIfAdmin(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.user.userType === "Admin") return next();
+	  // Otherwise the request is always redirected to the home page
+	  res.status(401).json({message: 'Access limited to Special Users'});
+	  res.redirect('/');
+	}
+
+
+	// User authentication routes
+	app.route('/api/users/signupAuth')
+	  .post(usersAuthController.postSignup)
+
+	app.route('/api/users/loginAuth')
+	  .post(usersAuthController.postLogin)
+
+	app.route("/api/users/logoutAuth")
+	  .get(authenticatedUser, usersAuthController.getLogout);
+
+	// Redirect the user to Facebook for authentication.  When complete,
+	// Facebook will redirect the user back to the application at
+	//     /auth/facebook/callback
+	app.get('/api/users/auth/facebook', usersAuthController.getFacebook);
+	app.get('/api/users/auth/facebook/callback', usersAuthController.getFacebookCallback); // usersAuthController.getFacebookCallbackSuccess
+
+	app.get('/api/users/auth/linkedin', usersAuthController.getLinkedin);
+  app.get('/api/users/auth/linkedin/callback', usersAuthController.getLinkedinCallback); // usersAuthController.getLinkedinCallbackSuccess
+
+	// // tokens for managing access
+	// var expressJWT = require('express-jwt');
+	// var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
 
 	// JWT access control. Important to have these before our routes, so it can run first!
 	// ACCESS RESTRICTIONS FOR
-	app.use( expressJWT({
-		secret: jwt_secret,
-		// isRevoked: blacklist.isRevoked  // install to revoke access of offending individuals
-	})
- 			.unless({
-				path:	[
-					'/images',
-					'/api/applications/fileupload' ,
-					'/api/users/signup', // route unblocked till we look for admin users
-					'/api/users/login',
-					{url: '/api/kindjobs',
-					methods: ['GET']},
-					{url: '/api/scopes',
-					methods: ['GET']},
-					{url: '/api/employment_terms',
-					methods: ['GET']},
-					{url: '/api/sectors',
-					methods: ['GET']},
-					{url: '/api/locations',
-					methods: ['GET']},
-					{url: '/api/sgos',
-					methods: ['GET']},
-					{url: '/api/applications',
-					methods: ['POST']}, // note method will not block the GET method
-				]
-			})
-		);
 
-	app.use(function (error, request, response, next) {
-	  if (error.name === 'UnauthorizedError') {
-	    response.status(401).json({message: 'You need to log in to view this information.'});
-	  }
-	});
+	// app.use( expressJWT({
+	// 	secret: jwt_secret,
+	// 	// isRevoked: blacklist.isRevoked  // install to revoke access of offending individuals
+	// })
+ // 			.unless({
+	// 			path:	[
+	// 				'/images',
+	// 				'/api/users/signup', // route unblocked till we look for admin users
+	// 				'/api/users/login',
+	// 				{url: '/api/kindjobs',
+	// 				methods: ['GET']},
+	// 				{url: '/api/scopes',
+	// 				methods: ['GET']},
+	// 				{url: '/api/employment_terms',
+	// 				methods: ['GET']},
+	// 				{url: '/api/sectors',
+	// 				methods: ['GET']},
+	// 				{url: '/api/locations',
+	// 				methods: ['GET']},
+	// 				{url: '/api/sgos',
+	// 				methods: ['GET']},
+	// 				{url: '/api/applications',
+	// 				methods: ['POST']}, // note method will not block the GET method
+	// 			]
+	// 		})
+	// 	);
+
+	// app.use(function (error, request, response, next) {
+	//   if (error.name === 'UnauthorizedError') {
+	//     response.status(401).json({message: 'You need to log in to view this information.'});
+	//   }
+	// });
 
 
-	app.post('/api/users/signup', usersController.signup)
-	app.post('/api/users/login',	usersController.login)
-	app.get('/api/users', usersController.index)
+	// app.post('/api/users/signup', usersController.signup)
+	// app.post('/api/users/login',	usersController.login)
+
+	// USER API ROUTES
+	app.get('/api/users', authenticatedUser, usersAuthController.index)
 
 	app.route('/api/users/:id')
-		.put(usersController.update)
-		.delete(usersController.destroy)
+		.put(authenticatedUser, usersAuthController.update)
+		.delete(authenticatedUser, usersAuthController.destroy)
 
+	// JOBS API
 	app.route('/api/kindjobs')
 		.get(kindJobsController.index)
-		.post(kindJobsController.create)
+		.post(authenticatedUser, checkIfAdmin, kindJobsController.create)
 
 	app.route('/api/kindjobs/:id')
-	 	.put(kindJobsController.update)
-	 	.delete(kindJobsController.destroy)
+	 	.put(authenticatedUser, checkIfAdmin, kindJobsController.update)
+	 	.delete(authenticatedUser, checkIfAdmin, kindJobsController.destroy)
 
 	app.route('/api/scopes')
 		.get(scopesController.index)
-		.post(scopesController.create)
+		.post(authenticatedUser, checkIfAdmin, scopesController.create)
 
 	app.route('/api/scopes/:id')
-	 	.put(scopesController.update)
-	 	.delete(scopesController.destroy)
+	 	.put(authenticatedUser, checkIfAdmin, scopesController.update)
+	 	.delete(authenticatedUser, checkIfAdmin, scopesController.destroy)
 
 	app.route('/api/employment_terms')
 		.get(employmentTermsController.index)
-		.post(employmentTermsController.create)
+		.post(authenticatedUser, checkIfAdmin, employmentTermsController.create)
 
 	app.route('/api/employment_terms/:id')
-		.put(employmentTermsController.update)
-		.delete(employmentTermsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, employmentTermsController.update)
+		.delete(authenticatedUser, checkIfAdmin, employmentTermsController.destroy)
 
 	app.route('/api/sectors')
 		.get(sectorsController.index)
-		.post(sectorsController.create)
+		.post(authenticatedUser, checkIfAdmin, sectorsController.create)
 
 	app.route('/api/sectors/:id')
-		.put(sectorsController.update)
-		.delete(sectorsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, sectorsController.update)
+		.delete(authenticatedUser, checkIfAdmin, sectorsController.destroy)
 
 	app.route('/api/locations')
 		.get(locationsController.index)
-		.post(locationsController.create)
+		.post(authenticatedUser, checkIfAdmin, locationsController.create)
 
 	app.route('/api/locations/:id')
-		.put(locationsController.update)
-		.delete(locationsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, locationsController.update)
+		.delete(authenticatedUser, checkIfAdmin, locationsController.destroy)
 
 	app.route('/api/sgos')
 		.get(sgosController.index)
-		.post(sgosController.create)
+		.post(authenticatedUser, checkIfAdmin, sgosController.create)
 
 	app.route('/api/sgos/:id')
-		.put(sgosController.update)
-		.delete(sgosController.destroy)
+		.put(authenticatedUser, checkIfAdmin, sgosController.update)
+		.delete(authenticatedUser, checkIfAdmin, sgosController.destroy)
 
 	app.route('/api/applications')
-		.get(applicationsController.index)
+		.get(authenticatedUser, checkIfAdmin, applicationsController.index)
 		.post(applicationsController.create)
 
 	app.route('/api/applications/:id')
-		.put(applicationsController.update)
-		.delete(applicationsController.destroy)
+		.put(authenticatedUser, checkIfAdmin, applicationsController.update)
+		.delete(authenticatedUser, checkIfAdmin, applicationsController.destroy)
 
 	app.route('/api/applications/fileupload')
 		.get(applicationsController.sign)

@@ -56,7 +56,7 @@ export default class AdminApplicationsContainer extends React.Component {
   }
 
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applicationList = this.props.applications.map( (application) => {
       application.createdAt = dateToYYYY_MM_YY_Mongoose(application.createdAt)
       return (

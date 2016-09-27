@@ -176,7 +176,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
   }
 
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
+    // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     // show list of sectors and allow to edit
     let sectorsList = this.props.sectors.map( (sector) => {
       return (

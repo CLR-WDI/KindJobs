@@ -30,7 +30,7 @@ export default class LoginContainer extends React.Component {
   render() {
     return(
       <div class="container-fluid">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-4 col-md-offset-1">
           <form onSubmit = {this._submitLogin}>
             <InputText ref="email" _label="Email" _type="text"/>
             <InputText ref="password" _label="Password" _type="password"/>
@@ -38,6 +38,11 @@ export default class LoginContainer extends React.Component {
             <button class="btn btn-primary" type="submit">Login</button>
           </form>
         </div>
+        <div class="col-md-4 col-md-offset-1">
+          <a href= '/api/users/auth/facebook' ><button class="btn btn-primary" type="button">Login with Facebook</button></a>
+          <a href= '/api/users/auth/linkedin' ><button class="btn btn-primary" type="button">Login with LinkedIn</button></a>
+        </div>
+
       </div>
     )
   }
