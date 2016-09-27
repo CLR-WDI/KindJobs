@@ -31,14 +31,15 @@ export default class ProfileContainer extends React.Component {
     if (ReactDOM.findDOMNode(this.refs.password.refs.inp).value !== ReactDOM.findDOMNode(this.refs.confirmPassword.refs.inp).value){
       alert("Passwords do not match");
     }else{
+      let userDetails;
       // if password is left blank, don't edit password
       if(ReactDOM.findDOMNode(this.refs.password.refs.inp).value === ""){
-        let userDetails = {
+        userDetails = {
           name: ReactDOM.findDOMNode(this.refs.name.refs.inp).value,
           email: ReactDOM.findDOMNode(this.refs.email.refs.inp).value,
         };
       }else{
-        let userDetails = {
+        userDetails = {
           name: ReactDOM.findDOMNode(this.refs.name.refs.inp).value,
           email: ReactDOM.findDOMNode(this.refs.email.refs.inp).value,
           password: ReactDOM.findDOMNode(this.refs.password.refs.inp).value,
