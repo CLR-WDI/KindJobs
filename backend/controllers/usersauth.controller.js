@@ -52,7 +52,7 @@ module.exports = {
   },
 
   // delete details of logged in user
-  deleteMe: function(req, res, next){
+  destroyMe: function(req, res, next){
     UserAuth.remove({
 			_id: req.user.id
 		}, function(err){
@@ -106,7 +106,7 @@ module.exports = {
   getFacebookCallback: function(req,res){
     res.testMe = { userType: "Admin" };
     var facebookCallback = passport.authenticate('facebook', {
-      successRedirect: '/#',
+      successRedirect: '/',
       failureRedirect: '/#/login',
       failureFlash: true, });
     return facebookCallback(req,res);
@@ -119,7 +119,7 @@ module.exports = {
   },
   getLinkedinCallback: function(req, res){
     var linkedinCallback = passport.authenticate('linkedin', {
-      successRedirect: '/#',
+      successRedirect: '/',
       failureRedirect: '/#/login',
       failureFlash: true, });
     return linkedinCallback(req, res);

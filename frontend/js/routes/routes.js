@@ -20,6 +20,7 @@ import ApplicationContainer from '../containers/ApplicationContainer';
 import SignupContainer from '../containers/SignupContainer';
 import LoginContainer from '../containers/LoginContainer';
 import AdminUsersContainer from '../containers/AdminUsersContainer';
+import ProfileContainter from '../containers/ProfileContainer'
 
 
 let routes = (
@@ -27,6 +28,7 @@ let routes = (
     <Route path="/" component={Layout}>
       <IndexRoute name="home" component={Home} />
       <Route path='login' component={LoginContainer} />
+      <Route path='profile' component={ProfileContainer} />
       <Route path='results' component={SearchResultsContainer} />
       <Route path='advsearch' component={AdvancedSearchContainer } />
       <Route path='kindjobs/:id' component={JobContainer} />

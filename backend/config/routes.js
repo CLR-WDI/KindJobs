@@ -102,6 +102,8 @@ module.exports = function(app) {
 
 	// USER API ROUTES
 	app.get('/api/users/me', authenticatedUser, usersAuthController.getMe)
+	app.post('/api/users/me', authenticatedUser, usersAuthController.editMe)
+	app.delete('/api/users/me', authenticatedUser, usersAuthController.destroyMe)
 	app.get('/api/users', authenticatedUser, checkIfAdmin, usersAuthController.index)
 
 	app.route('/api/users/:id')
