@@ -1,12 +1,10 @@
 export default function reducer(state = {
     users: [],
-    jwtToken: "",
     userType: "none",
     fetching: false,
     fetched: false,
     error: null,
     defaultCV: "",
-    loggedInCheck: true,
     me: {}
   },
   action)
@@ -18,7 +16,6 @@ export default function reducer(state = {
           fetching: false,
           fetched: true,
           userType: "Jobseeker",
-          loggedInCheck: true
         };
       }
       case "LOGIN_USER_REJECTED":{
@@ -33,7 +30,6 @@ export default function reducer(state = {
           ...state,
           users: [],
           userType: "none",
-          loggedInCheck: false,
           me: null
         };
       }
@@ -50,7 +46,6 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          loggedInCheck: true,
           userType: action.payload.userType
         };
       }
@@ -67,7 +62,6 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          loggedInCheck: false,
           me: action.payload,
           userType: action.payload.userType
         }
@@ -76,7 +70,6 @@ export default function reducer(state = {
         return{
           ...state,
           fetching: false,
-          loggedInCheck: false,
           error: action.payload
         }
       }

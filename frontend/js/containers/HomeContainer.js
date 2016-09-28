@@ -1,10 +1,20 @@
 import React from "react";
+// create store
+import {connect} from "react-redux"
+
 import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
 import {Link} from "react-router";
 
-
+@connect((store) => {
+})
 export default class Home extends React.Component {
+  componentDidMount() {
+    // home page is landing page after log in, get profile of logged in user
+    if( typeof this.props.me.email === "undefined" ){
+      this.props.dispatch( getMe() );
+    }
+  }
   render() {
     let divStyle = {
       backgroundImage: 'url(./images/kindjobs-bg.jpg)',

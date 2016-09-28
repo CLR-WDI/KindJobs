@@ -24,7 +24,7 @@ import Dropzone from 'react-dropzone'
 export default class ApplyContainer extends React.Component {
   componentWillMount() {
     this.props.dispatch( fetchKindJob() );
-    if( typeof this.props.me.email === "undefined" || (typeof this.refs.email !== "undefined") ){
+    if( typeof this.props.me.email === "undefined" || (typeof this.refs.email === "undefined") ){
       this.props.dispatch( getMe() );
     }
   }

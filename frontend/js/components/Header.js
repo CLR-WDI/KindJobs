@@ -6,9 +6,7 @@ import {logoutUser, getMe} from "../actions/userActions";
 
 @connect((store) => {
   return {
-    jwtToken: store.users.jwtToken,
-    userType: store.users.userType,
-    loggedInCheck: store.users.loggedInCheck
+    me: store.users.me,
   }
 })
 class Header extends React.Component {
@@ -21,17 +19,15 @@ class Header extends React.Component {
     this.props.dispatch( logoutUser() );
     hashHistory.push({pathname: '/'});
   }
-  // componentDidMount() {
-  //   if(this.props.loggedInCheck) {
-  //     this.props.dispatch( getMe() );
-  //   }
-  // }
+  componentWillMount() {
+    if( typeof this.props.me.email === "undefined" ){
+      this.props.dispatch( getMe() );
+    }
+  }
+
   render() {
     let navbarLinks
-    switch (this.props.userType) {
-      case "none":
-        navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
-        break;
+    switch (this.props.me.userType) {
       case "Jobseeker":
         navbarLinks = (
           <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
@@ -60,6 +56,8 @@ class Header extends React.Component {
           </NavDropdown>
         );
         break;
+      default:
+        navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
     }
     return(
       <Navbar staticTop fluid>
