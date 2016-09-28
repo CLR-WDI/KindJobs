@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {Link} from "react-router";
+import {Link, hashHistory} from "react-router";
 import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
 import {logoutUser, getMe} from "../actions/userActions";
 
