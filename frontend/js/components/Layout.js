@@ -1,15 +1,15 @@
 import React from "react";
-// import {connect} from "react-redux"
-
+// import {connect} from "react-redux";
 import Footer from "./Footer";
 import Header from "./Header";
 
+// import {getUser} from "../actions/userActions";
+
 // @connect((store) => {
-//   return{
-//
+//   return {
+//     loggedIn: store.users.loggedIn
 //   }
 // })
-
 class Layout extends React.Component {
   getChildContext() {
     return {

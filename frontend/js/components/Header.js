@@ -1,13 +1,14 @@
 import React from "react";
 import {connect} from "react-redux"
-import {Link} from "react-router";
+import {Link, hashHistory} from "react-router";
 import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
-import {logoutUser} from "../actions/userActions";
+import {logoutUser, getMe} from "../actions/userActions";
 
 @connect((store) => {
   return {
     jwtToken: store.users.jwtToken,
-    admin: store.users.admin
+    userType: store.users.userType,
+    loggedInCheck: store.users.loggedInCheck
   }
 })
 class Header extends React.Component {
@@ -18,20 +19,47 @@ class Header extends React.Component {
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
+    hashHistory.push({pathname: '/'});
   }
+  // componentDidMount() {
+  //   if(this.props.loggedInCheck) {
+  //     this.props.dispatch( getMe() );
+  //   }
+  // }
   render() {
-    let adminOrNot
-    if( this.props.admin ){
-      adminOrNot = (
-      <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-        <li><Link to='admin/applications'>Applications</Link></li>
-        <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-        <li><Link to='admin/options'>Options</Link></li>
-        <li><Link to='admin/users'>Users</Link></li>
-        <li><a href="#" onClick={this._logout}>Logout</a></li>
-      </NavDropdown>)
-    }else{
-      adminOrNot = <li><Link to='/login'>Login</Link></li>
+    let navbarLinks
+    switch (this.props.userType) {
+      case "none":
+        navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
+        break;
+      case "Jobseeker":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
+      case "Admin":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
+            <li><Link to='admin/applications'>Applications</Link></li>
+            <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+            <li><Link to='admin/options'>Options</Link></li>
+            <li><Link to='admin/users'>Users</Link></li>
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
+      case "SGO":
+        navbarLinks = (
+          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+            <li><Link to='profile'>My profile</Link></li>
+            <li><a href="#" onClick={this._logout}>Logout</a></li>
+          </NavDropdown>
+        );
+        break;
     }
     return(
       <Navbar staticTop fluid>
@@ -43,7 +71,7 @@ class Header extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {adminOrNot}
+            {navbarLinks}
             <li><Link to='/'>Home</Link></li>
           </Nav>
         </Navbar.Collapse>

@@ -4,7 +4,15 @@ export function loginUser(user) {
   return function (dispatch) {
     axios.post('./api/users/loginAuth', user)
         .then((response)=>{
+          console.log("the res is ", response);
           dispatch({type:"LOGIN_USER_FULFILLED", payload: response.data})
+          axios.get('./api/users/me')
+            .then((res)=>{
+              dispatch({type:"GET_ME_FULFILLED", payload: res.data})
+            })
+            .catch((err)=>{
+              dispatch({type:"GET_ME_REJECTED", payload: err})
+            })
         })
         .catch((err)=>{
           dispatch({type:"LOGIN_USER_REJECTED", payload: err})
@@ -13,14 +21,14 @@ export function loginUser(user) {
 }
 
 export function logoutUser() {
-  return function (dispatch){
+  return function (dispatch) {
     axios.get('./api/users/logoutAuth')
-        .then((response)=>{
-          dispatch({type:"LOGOUT_USER_FULFILLED", payload: response.data})
-        })
-        .catch((err)=>{
-          dispatch({type:"LOGOUT_USER_REJECTED", payload: err})
-        })
+      .then((response)=>{
+        dispatch({type:"LOGOUT_USER_FULFILLED"})
+      })
+      .catch((err)=>{
+        dispatch({type:"LOGOUT_USER_REJECTED"})
+      })
   }
 }
 
@@ -29,7 +37,15 @@ export function signupUser(user) {
   return function (dispatch) {
     axios.post('./api/users/signupAuth', user)
         .then((response)=>{
+          console.log("the res is ", response);
           dispatch({type:"SIGNUP_USER_FULFILLED", payload: response.data})
+          axios.get('./api/users/me')
+            .then((res)=>{
+              dispatch({type:"GET_ME_FULFILLED", payload: res.data})
+            })
+            .catch((err)=>{
+              dispatch({type:"GET_ME_REJECTED", payload: err})
+            })
         })
         .catch((err)=>{
           dispatch({type:"SIGNUP_USER_REJECTED", payload: err})

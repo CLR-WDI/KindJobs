@@ -1,23 +1,24 @@
 export default function reducer(state = {
     users: [],
-    me: {},
-    // jwtToken: "",
-    // admin: false,
+    jwtToken: "",
+    userType: "none",
     fetching: false,
     fetched: false,
     error: null,
+    defaultCV: "",
+    loggedInCheck: true,
+    me: {}
   },
   action)
   {
     switch (action.type) {
       case "LOGIN_USER_FULFILLED":{
-        // console.log(action.payload.message);
         return {
           ...state,
           fetching: false,
           fetched: true,
-          // admin: action.payload.admin,
-          // jwtToken: action.payload.jwtToken
+          userType: "Jobseeker",
+          loggedInCheck: true
         };
       }
       case "LOGIN_USER_REJECTED":{
@@ -31,9 +32,9 @@ export default function reducer(state = {
         return{
           ...state,
           users: [],
+          userType: "none",
+          loggedInCheck: false,
           me: null
-          // jwtToken: "",
-          // admin: false
         };
       }
       case "LOGOUT_USER_REJECTED":{
@@ -49,8 +50,8 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          // admin: action.payload.admin,
-          // jwtToken: action.payload.jwtToken
+          loggedInCheck: true,
+          userType: action.payload.userType
         };
       }
       case "SIGNUP_USER_REJECTED":{
@@ -66,13 +67,16 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          me: action.payload
+          loggedInCheck: false,
+          me: action.payload,
+          userType: action.payload.userType
         }
       }
       case "GET_ME_REJECTED":{
         return{
           ...state,
           fetching: false,
+          loggedInCheck: false,
           error: action.payload
         }
       }
