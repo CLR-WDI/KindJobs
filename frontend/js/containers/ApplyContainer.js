@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
+
+// actions
+import {getMe} from "../actions/userActions" //actions for Users
 import {fetchKindJob} from "../actions/kindjobActions"
 import {createApplication, uploadCV, clearCV} from "../actions/applicationActions"
 // for redirect to home
@@ -14,12 +17,16 @@ import Dropzone from 'react-dropzone'
 @connect((store) => {
   return {
     kindjobs: store.kindjobs.kindjobs,
-    cv: store.applications.cv
+    cv: store.applications.cv,
+    me: store.users.me
   }
 })
 export default class ApplyContainer extends React.Component {
   componentWillMount() {
     this.props.dispatch( fetchKindJob() );
+    if( this.props.me === {} ){
+      this.props.dispatch( getMe() );
+    }
   }
 
   componentWillUnmount() {
@@ -62,6 +69,11 @@ export default class ApplyContainer extends React.Component {
   render() {
     let jobs = [ ...this.props.kindjobs];
     let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
+
+    if( (typeof this.refs.email !== "undefined") && (typeof this.props.me.email !== "undefined") ){
+      this.refs.name.refs.inp.defaultValue = this.props.me.name;
+      this.refs.email.refs.inp.defaultValue = this.props.me.email;
+    }
 
     return(
       <div class="container-fluid">

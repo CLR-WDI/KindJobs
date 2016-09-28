@@ -4,7 +4,6 @@ export function loginUser(user) {
   return function (dispatch) {
     axios.post('./api/users/loginAuth', user)
         .then((response)=>{
-          console.log("the res is ", response);
           dispatch({type:"LOGIN_USER_FULFILLED", payload: response.data})
           axios.get('./api/users/me')
             .then((res)=>{
@@ -37,7 +36,6 @@ export function signupUser(user) {
   return function (dispatch) {
     axios.post('./api/users/signupAuth', user)
         .then((response)=>{
-          console.log("the res is ", response);
           dispatch({type:"SIGNUP_USER_FULFILLED", payload: response.data})
           axios.get('./api/users/me')
             .then((res)=>{
@@ -101,17 +99,17 @@ export function fetchUsers() {
   }
 }
 
-// export function editUser(user) {
-//   return function (dispatch) {
-//     axios.put('./api/users/:id')
-//         .then((response)=>{
-//           dispatch({type:"EDIT_USER_FULFILLED", payload: response.data})
-//         })
-//         .catch((err)=>{
-//           dispatch({type:"EDIT_USER_REJECTED", payload: err})
-//     })
-//   }
-// }
+export function editUser( id, userDetails) {
+  return function (dispatch) {
+    axios.put( './api/users/' + id, userDetails )
+        .then((response)=>{
+          dispatch({type:"EDIT_USER_FULFILLED", payload: response.data})
+        })
+        .catch((err)=>{
+          dispatch({type:"EDIT_USER_REJECTED", payload: err})
+    })
+  }
+}
 
 export function deleteUser(id) {
   return function (dispatch) {

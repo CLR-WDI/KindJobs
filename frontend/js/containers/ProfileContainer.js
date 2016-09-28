@@ -83,13 +83,13 @@ export default class ProfileContainer extends React.Component {
     var facebookButton
     var linkedInButton
 
-    if(this.props.me.facebookId === null || (typeof this.props.me.facebookId === "undefined") || (typeof this.props.me === "undefined")){
+    if((typeof this.props.me === "undefined") || (typeof this.props.me.facebookId === "undefined") || this.props.me.facebookId === null  ){
       facebookButton = <a href= '/api/users/auth/facebook' class="btn btn-primary inactive">Link Facebook</a>
     }else{
       facebookButton = <button type="button" class="btn btn-primary active" onClick={this._removeFacebook}>Unlink Facebook</button>
     }
 
-    if(this.props.me.linkedinId === null || (typeof this.props.me.linkedinId === "undefined") || (typeof this.props.me === "undefined") ){
+    if( (typeof this.props.me === "undefined") || (typeof this.props.me.linkedinId === "undefined") ||  this.props.me.linkedinId === null ){
       linkedInButton = <a href= '/api/users/auth/linkedin' class="btn btn-primary inactive">Link LinkedIn</a>
     }else{
       linkedInButton = <button type="button" class="btn btn-primary active" onClick={this._removeLinkedIn}>Unlink LinkedIn</button>

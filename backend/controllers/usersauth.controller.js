@@ -4,10 +4,13 @@ var UserAuth          = require('../models/userauth.model');
 module.exports = {
   // NON PASSPORT FUNCTIONS
   index: function(req, res, next) {
-    UserAuth.find({}, function(err, users) {
-      if (err) return next(err);
-      res.status(200).json(users);
-    });
+    UserAuth.find({})
+            .populate(['sgo_id'])
+            .exec(
+              function(err, Users) {
+                if (err) return next(err);
+                res.status(200).json(Users);
+              });
   },
 
   update: function(req, res, next) {
@@ -15,10 +18,13 @@ module.exports = {
 	  UserAuth.findByIdAndUpdate(req.params.id, req.body, function(err) {
 	    if (err) { return next(err);}
       // update all users for the store
-      UserAuth.find({}, function(err, Users) {
-        if (err) return next(err);
-  			res.status(200).json(Users);
-      });
+      UserAuth.find({})
+              .populate(['sgo_id'])
+              .exec(
+                function(err, Users) {
+                  if (err) return next(err);
+                  res.status(200).json(Users);
+                });
 	  });
   },
 
@@ -27,10 +33,13 @@ module.exports = {
 			_id: req.params.id
 		}, function(err){
 			if (err) return next(err);
-      UserAuth.find({}, function(err, Users) {
-        if (err) return next(err);
-  			res.status(200).json(Users);
-      });
+      UserAuth.find({})
+              .populate(['sgo_id'])
+              .exec(
+                function(err, Users) {
+                  if (err) return next(err);
+                  res.status(200).json(Users);
+                });
 		})
   },
 
@@ -91,7 +100,6 @@ module.exports = {
 
   // POST /login
   postLogin: function(req, res) {
-    // console.log("the req is ", req);
     var loginStrategy = passport.authenticate('local-login', {
       successRedirect: '/#',
       failureRedirect: '/#/login',
@@ -114,9 +122,11 @@ module.exports = {
     res.testMe = { userType: "Admin" };
     var facebookCallback = passport.authenticate('facebook', {
       successRedirect: '/#',
-      // failureRedirect: '/#/login',
+      failureRedirect: '/#/login',
       failureFlash: true, });
-    return facebookCallback(req,res);
+    return facebookCallback(req,res, function(err){
+      return res.status(401).json({message: err});
+    });
   },
 
   // LINKED IN
@@ -127,9 +137,11 @@ module.exports = {
   getLinkedinCallback: function(req, res){
     var linkedinCallback = passport.authenticate('linkedin', {
       successRedirect: '/#',
-      // failureRedirect: '/#/login',
+      failureRedirect: '/#/login',
       failureFlash: true, });
-    return linkedinCallback(req, res);
+    return linkedinCallback(req, res, function(err){
+      return res.status(401).json({message: err});
+    });
   },
 
 }
