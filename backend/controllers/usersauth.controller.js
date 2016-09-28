@@ -45,11 +45,13 @@ module.exports = {
     if(req.user.userType !== "Admin"){
       req.body.userType = req.user.userType;
     }
+
     UserAuth.findByIdAndUpdate(req.user.id, req.body, function(err) {
 	    if (err) { return next(err);}
-      UserAuth.findById(req.user.id , function(err, User) {
+      // update all user for the store
+      UserAuth.findById(req.user.id, function(err, User) {
         if (err) return next(err);
-        res.status(200).json(User);
+  			res.status(200).json(User);
       });
     });
   },
@@ -110,7 +112,7 @@ module.exports = {
     res.testMe = { userType: "Admin" };
     var facebookCallback = passport.authenticate('facebook', {
       successRedirect: '/#',
-      failureRedirect: '/#/login',
+      // failureRedirect: '/#/login',
       failureFlash: true, });
     return facebookCallback(req,res);
   },
@@ -123,7 +125,7 @@ module.exports = {
   getLinkedinCallback: function(req, res){
     var linkedinCallback = passport.authenticate('linkedin', {
       successRedirect: '/#',
-      failureRedirect: '/#/login',
+      // failureRedirect: '/#/login',
       failureFlash: true, });
     return linkedinCallback(req, res);
   },

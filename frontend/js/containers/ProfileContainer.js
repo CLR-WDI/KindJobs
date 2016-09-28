@@ -17,12 +17,15 @@ import {hashHistory} from 'react-router';
 export default class ProfileContainer extends React.Component {
   constructor(){
     super();
-    this._submitUpdate = this._submitUpdate.bind(this);
-    this._submitDelete = this._submitDelete.bind(this);
+    this._submitUpdate    =   this._submitUpdate.bind(this);
+    this._submitDelete    =   this._submitDelete.bind(this);
+    this._removeFacebook  =   this._removeFacebook.bind(this);
+    this._removeLinkedIn  =   this._removeLinkedIn.bind(this);
   }
 
   componentWillMount() {
     this.props.dispatch( getMe() );
+
   }
 
 
@@ -57,26 +60,59 @@ export default class ProfileContainer extends React.Component {
       hashHistory.push({pathname: '/'});
     }
   }
+  _removeFacebook(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to unlink facebook from your profile?")){
+      this.props.dispatch( editMe({facebookId: null}) );
+    }
+  }
+  _removeLinkedIn(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to unlink linkedin from your profile?")){
+      this.props.dispatch( editMe({linkedinId: null}) );
+    }
+  }
+
   render() {
-    var me = {... this.props.me};
-    console.log(me);
-    console.log(me.name);
+    // insert default values
+    if(typeof this.refs.email !== "undefined"){
+      this.refs.name.refs.inp.defaultValue = this.props.me.name;
+      this.refs.email.refs.inp.defaultValue = this.props.me.email;
+    }
+
+    var facebookButton
+    var linkedInButton
+
+    if(this.props.me.facebookId === null || (typeof this.props.me.facebookId === "undefined") || (typeof this.props.me === "undefined")){
+      facebookButton = <a href= '/api/users/auth/facebook' class="btn btn-primary inactive">Link Facebook</a>
+    }else{
+      facebookButton = <button type="button" class="btn btn-primary active" onClick={this._removeFacebook}>Unlink Facebook</button>
+    }
+
+    if(this.props.me.linkedinId === null || (typeof this.props.me.linkedinId === "undefined") || (typeof this.props.me === "undefined") ){
+      linkedInButton = <a href= '/api/users/auth/linkedin' class="btn btn-primary inactive">Link LinkedIn</a>
+    }else{
+      linkedInButton = <button type="button" class="btn btn-primary active" onClick={this._removeLinkedIn}>Unlink LinkedIn</button>
+    }
+
+
+
     return(
       <div class="container-fluid">
         <div class="col-md-4 col-md-offset-1">
           <form onSubmit = {this._submitUpdate}>
-            <InputText ref="name" _label="Name" _type="text" _default={me.name} />
-            <InputText ref="email" _label="Email" _type="text" _default={me.email} />
-            <InputText ref="password" _label="Password" _type="password" _default=""/>
-            <InputText ref="confirmPassword" _label="Confirm Password" _type="password" _default=""/>
+            <InputText ref="name" _label="Name" _type="text" />
+            <InputText ref="email" _label="Email" _type="text" />
+            <InputText ref="password" _label="Password" _type="password"/>
+            <InputText ref="confirmPassword" _label="Confirm Password" _type="password"/>
             <br/>
             <button class="btn btn-primary" type="submit">Update profile</button>
             <button class="btn btn-primary" type="button" onClick={this._submitDelete} >Delete my profile</button>
           </form>
         </div>
         <div class="col-md-4 col-md-offset-1">
-          <a href= '/auth/facebook' class="btn btn-primary" >Link Facebook</a>
-          <a href= '/auth/login' class="btn btn-primary">Link LinkedIn</a>
+          {facebookButton}
+          {linkedInButton}
         </div>
       </div>
     )

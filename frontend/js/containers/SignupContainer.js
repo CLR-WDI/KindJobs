@@ -45,8 +45,8 @@ export default class SignupContainer extends React.Component {
           </form>
         </div>
         <div class="col-md-4 col-md-offset-1">
-          <a href= '/auth/facebook' ><button class="btn btn-primary" type="button">Signup with Facebook</button></a>
-          <a href= '/auth/login' ><button class="btn btn-primary" type="button">Signup with LinkedIn</button></a>
+          <a href= '/api/users/auth/facebook' ><button class="btn btn-primary" type="button">Signup with Facebook</button></a>
+          <a href= '/api/users/auth/linkedin' ><button class="btn btn-primary" type="button">Signup with LinkedIn</button></a>
         </div>
       </div>
     )
