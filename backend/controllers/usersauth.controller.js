@@ -1,5 +1,5 @@
-const passport          = require("passport");
-var   UserAuth          = require('../models/userauth.model');
+var passport          = require("passport");
+var UserAuth          = require('../models/userauth.model');
 
 module.exports = {
   // NON PASSPORT FUNCTIONS
@@ -37,7 +37,7 @@ module.exports = {
   // USER EDITS ON OWN DETAILS
   // get details of logged in user from middleware
   getMe: function(req, res, next){
-    if (err) return next(err);
+    // if (err) return next(err);
     res.status(200).json(req.user);
   },
 
@@ -89,6 +89,7 @@ module.exports = {
 
   // POST /login
   postLogin: function(req, res) {
+    // console.log("the req is ", req);
     var loginStrategy = passport.authenticate('local-login', {
       successRedirect: '/#',
       failureRedirect: '/#/login',

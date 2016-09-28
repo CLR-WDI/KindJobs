@@ -6,7 +6,7 @@ export default function reducer(state = {
     fetched: false,
     error: null,
     defaultCV: "",
-    loggedIn: false,
+    loggedInCheck: true,
     me: {}
   },
   action)
@@ -17,7 +17,8 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          loggedIn: true
+          userType: "Jobseeker",
+          loggedInCheck: true
         };
       }
       case "LOGIN_USER_REJECTED":{
@@ -32,7 +33,7 @@ export default function reducer(state = {
           ...state,
           users: [],
           userType: "none",
-          loggedIn: false,
+          loggedInCheck: false,
           me: null
         };
       }
@@ -49,7 +50,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          loggedIn: true,
+          loggedInCheck: true,
           userType: action.payload.userType
         };
       }
@@ -66,13 +67,16 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          me: action.payload
+          loggedInCheck: false,
+          me: action.payload,
+          userType: action.payload.userType
         }
       }
       case "GET_ME_REJECTED":{
         return{
           ...state,
           fetching: false,
+          loggedInCheck: false,
           error: action.payload
         }
       }

@@ -24,6 +24,7 @@ module.exports = function(app) {
 
 	// authenticate by passport
 	function authenticatedUserNoRedirect(req, res, next) {
+		console.log("req is ", req);
 	  // If the user is authenticated, then we continue the execution
 	  if (req.isAuthenticated()) return next();
 	  // Otherwise the request is always redirected to the home page

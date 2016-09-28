@@ -8,7 +8,7 @@ import {logoutUser, getMe} from "../actions/userActions";
   return {
     jwtToken: store.users.jwtToken,
     userType: store.users.userType,
-    loggedIn: store.users.loggedIn
+    loggedInCheck: store.users.loggedInCheck
   }
 })
 class Header extends React.Component {
@@ -19,12 +19,13 @@ class Header extends React.Component {
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
+    hashHistory.push({pathname: '/'});
   }
-  componentDidUpdate() {
-    if(this.props.loggedIn) {
-      this.props.dispatch( getMe() );
-    }
-  }
+  // componentDidMount() {
+  //   if(this.props.loggedInCheck) {
+  //     this.props.dispatch( getMe() );
+  //   }
+  // }
   render() {
     let navbarLinks
     switch (this.props.userType) {
