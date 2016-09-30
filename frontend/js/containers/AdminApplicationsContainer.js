@@ -58,6 +58,13 @@ export default class AdminApplicationsContainer extends React.Component {
     // if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applicationList = this.props.applications.map( (application) => {
       application.createdAt = dateToYYYY_MM_YY_Mongoose(application.createdAt)
+      let individual_cv
+      if(typeof application.link_to_cv === "string"){
+        let filename = (application.kindjobs_id.title + "-" + application.name).replace(/\s+/g,'_')
+        individual_cv = <td><a href={application.link_to_cv} download={filename}>Download CV</a></td>
+      }else{
+        individual_cv = <td></td>
+      }
       return (
         <tr key={application._id}>
           <td>{application.kindjobs_id.sgo_id.name}</td>
@@ -67,7 +74,7 @@ export default class AdminApplicationsContainer extends React.Component {
           <td>{application.expected_salary}</td>
           <td>{application.yrs_rel_exp}</td>
           <td><Link to={'admin/applications/'+application._id}>{application.name}</Link></td>
-          <td><a href={application.link_to_cv} download={application.kindjobs_id.title +"_"+ application.name}>Download CV</a></td>
+          {individual_cv}
           <td><button onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
         </tr>
       )
