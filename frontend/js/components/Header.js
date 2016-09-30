@@ -18,8 +18,6 @@ class Header extends React.Component {
     e.preventDefault();
     this.props.dispatch( logoutUser() );
     // document.cookie = 'connect.sid =;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    console.log(window);
-    console.log(document);
     hashHistory.push({pathname: '/'});
   }
   componentWillMount() {

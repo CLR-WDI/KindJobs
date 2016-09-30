@@ -47,7 +47,6 @@ module.exports = {
   // get details of logged in user from middleware
   getMe: function(req, res, next){
     // if (err) return next(err);
-    console.log(req.user);
     res.status(200).json(req.user);
   },
 
