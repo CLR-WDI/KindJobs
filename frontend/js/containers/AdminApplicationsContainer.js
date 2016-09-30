@@ -67,7 +67,7 @@ export default class AdminApplicationsContainer extends React.Component {
           <td>{application.expected_salary}</td>
           <td>{application.yrs_rel_exp}</td>
           <td><Link to={'admin/applications/'+application._id}>{application.name}</Link></td>
-          <td><a href={cv} download>Download CV</a></td>
+          <td><a href={application.cv} download>Download CV</a></td>
           <td><button onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
         </tr>
       )
