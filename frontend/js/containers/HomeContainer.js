@@ -7,6 +7,7 @@ import JobList from "../components/JobList";
 import {Link} from "react-router";
 
 @connect((store) => {
+  me: store.users.me
 })
 export default class Home extends React.Component {
   componentDidMount() {
