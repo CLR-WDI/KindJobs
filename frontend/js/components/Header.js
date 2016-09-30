@@ -17,7 +17,6 @@ class Header extends React.Component {
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
-    // document.cookie = 'connect.sid =;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     hashHistory.push({pathname: '/'});
   }
   componentWillMount() {
@@ -75,6 +74,7 @@ class Header extends React.Component {
         <Navbar.Collapse>
           <Nav pullRight>
             {navbarLinks}
+            <li><Link to='/about'>About</Link></li>
             <li><Link to='/'>Home</Link></li>
           </Nav>
         </Navbar.Collapse>

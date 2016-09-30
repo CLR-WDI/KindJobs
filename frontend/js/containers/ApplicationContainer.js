@@ -38,7 +38,6 @@ export default class ApplicationContainer extends React.Component {
   }
 
   render() {
-    if( !this.props.admin ){hashHistory.push({pathname: 'login'})}
     let applications = [ ...this.props.applications];
     let application = applications.filter( application => application._id === this.props.routeParams.id)[0];
     return(

@@ -88,14 +88,14 @@ export function destroyMe() {
 }
 
 export function fetchUsers() {
-  return function (dispatch) {
+  return function (dispatch, callback) {
     axios.get('./api/users')
         .then((response)=>{
           dispatch({type:"FETCH_USERS_FULFILLED", payload: response.data})
         })
         .catch((err)=>{
           dispatch({type:"FETCH_USERS_REJECTED", payload: err})
-    })
+        })
   }
 }
 

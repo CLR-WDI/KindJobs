@@ -6,7 +6,7 @@ import InputText from "../components/InputText"
 
 // actions
 import {getMe} from "../actions/userActions" //actions for Users
-import {fetchKindJob} from "../actions/kindjobActions"
+import {fetchKindJob, fetchKindJobs} from "../actions/kindjobActions"
 import {createApplication, uploadCV, clearCV} from "../actions/applicationActions"
 // for redirect to home
 import {hashHistory} from "react-router"
@@ -23,10 +23,13 @@ import Dropzone from 'react-dropzone'
 })
 export default class ApplyContainer extends React.Component {
   componentWillMount() {
-    this.props.dispatch( fetchKindJob() );
     if( typeof this.props.me.email === "undefined" || (typeof this.refs.email === "undefined") ){
       this.props.dispatch( getMe() );
     }
+    if (this.props.kindjobs.length === 0 ){
+      this.props.dispatch( fetchKindJobs() );
+    }
+    this.props.dispatch( fetchKindJob() );
   }
 
   componentWillUnmount() {
@@ -66,49 +69,53 @@ export default class ApplyContainer extends React.Component {
   }
 
   render() {
-    let jobs = [ ...this.props.kindjobs];
-    let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
+    if( (this.props.kindjobs.length === 0 ) ){
+      return( <div></div> )
+    }else{  
+      let jobs = [ ...this.props.kindjobs];
+      let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
 
-    if( (typeof this.refs.email !== "undefined") && (typeof this.props.me.email !== "undefined") ){
-      this.refs.name.refs.inp.defaultValue = this.props.me.name;
-      this.refs.email.refs.inp.defaultValue = this.props.me.email;
-    }
+      if( (typeof this.refs.email !== "undefined") && (typeof this.props.me.email !== "undefined") ){
+        this.refs.name.refs.inp.defaultValue = this.props.me.name;
+        this.refs.email.refs.inp.defaultValue = this.props.me.email;
+      }
 
-    return(
-      <div class="container-fluid">
-        <div class="col-md-8 col-md-offset-2">
-          <form onSubmit = {this._submitApplication}>
-            <h1>Application Form</h1>
-            <h4>{job.title} - {job.sector_id.name} sector, {job.location_id.name}</h4>
-            <div class="inner">
-              <InputText _label="Name*" _type="text" ref="name"  _default="" />
-              <InputText _label="Email*" _type="text" ref="email"  _default="" />
-              <InputText _label="Tel*" _type="number" ref="tel_no"  _default={0} />
-              <InputText _label="Expected Pay ($/mth)*" _type="number" ref="expected_salary"  _default={0} />
-              <InputText _label="Relevant Experience(Yrs)*" _type="number" ref="yrs_rel_exp"  _default={0} />
-              <InputText _label="Highest Relevant Qualification*" _type="text" ref="highest_qualification"  _default="" />
-              <div class="form-group">
-                <label>Message to recruiters:</label>
-                <textarea class="form-control" type="text" ref="message_to_recruiters" onChange={this._updateApplication} placeholder="optional"></textarea>
-              </div>
-              <p>
-                <label>Attach your CV*</label>
-              </p>
-              <Dropzone onDrop={ this._onDrop } size={ 150 }>
-                <div>
-                  Drop some files here!
+      return(
+        <div class="container-fluid">
+          <div class="col-md-8 col-md-offset-2">
+            <form onSubmit = {this._submitApplication}>
+              <h1>Application Form</h1>
+              <h4>{job.title} - {job.sector_id.name} sector, {job.location_id.name}</h4>
+              <div class="inner">
+                <InputText _label="Name*" _type="text" ref="name"  _default="" />
+                <InputText _label="Email*" _type="text" ref="email"  _default="" />
+                <InputText _label="Tel*" _type="number" ref="tel_no"  _default={0} />
+                <InputText _label="Expected Pay ($/mth)*" _type="number" ref="expected_salary"  _default={0} />
+                <InputText _label="Relevant Experience(Yrs)*" _type="number" ref="yrs_rel_exp"  _default={0} />
+                <InputText _label="Highest Relevant Qualification*" _type="text" ref="highest_qualification"  _default="" />
+                <div class="form-group">
+                  <label>Message to recruiters:</label>
+                  <textarea class="form-control" type="text" ref="message_to_recruiters" onChange={this._updateApplication} placeholder="optional"></textarea>
                 </div>
-              </Dropzone>
-              <div class="form-action-btn">
-                <p>* required</p>
-                <button class="btn btn-default" type="button" onClick={function(e){e.preventDefault; hashHistory.go( -1 ); }}>Back</button>
-                <button class="btn btn-primary" type="submit">Apply</button>
+                <p>
+                  <label>Attach your CV*</label>
+                </p>
+                <Dropzone onDrop={ this._onDrop } size={ 150 }>
+                  <div>
+                    Drop some files here!
+                  </div>
+                </Dropzone>
+                <div class="form-action-btn">
+                  <p>* required</p>
+                  <button class="btn btn-default" type="button" onClick={function(e){e.preventDefault; hashHistory.go( -1 ); }}>Back</button>
+                  <button class="btn btn-primary" type="submit">Apply</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
