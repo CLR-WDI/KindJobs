@@ -74,6 +74,7 @@ module.exports = {
 			if (err) return next(err);
       req.logout();
       req.session.destroy();
+      // req.session = null;
       res.redirect('/#');
 		})
   },
@@ -85,6 +86,7 @@ module.exports = {
   getLogout: function(req, res) {
     req.logout();
     req.session.destroy();
+    // req.session = null;
     res.redirect('/#');
   },
 
