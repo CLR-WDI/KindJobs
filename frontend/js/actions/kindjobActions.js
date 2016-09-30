@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function fetchKindJobs(query) {
   return function (dispatch) {
-    axios.get('./api/kindjobs?' + query)
+    return axios.get('./api/kindjobs?' + query)
         .then((response)=>{
           dispatch({type:"FETCH_KINDJOBS_FULFILLED", payload: response.data})
         })

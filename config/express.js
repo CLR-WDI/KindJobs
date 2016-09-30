@@ -41,7 +41,12 @@ module.exports = function() {
   // middleware for passport
   // be sure to use express.session() before passport.session() to ensure that the login session is restored in the correct order
   // express session is to stash a cookie in the client's session
-  app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
+  app.use(session({
+    secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS',
+    httpOnly: true,
+    secure: true,
+    // ephemeral: true 
+  }));
   app.use(passport.initialize());
   // the passport session is equivalent to app.use(passport.authenticate('session')); this in turn pulls the serializeUser and deserializeUser functions
   app.use(passport.session());

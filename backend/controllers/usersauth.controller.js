@@ -73,8 +73,10 @@ module.exports = {
 		}, function(err){
 			if (err) return next(err);
       req.logout();
-      req.session.destroy();
-      res.redirect('/#');
+      req.session.destroy( function(){
+          res.redirect('/#');
+        }
+      );
 		})
   },
 
@@ -84,8 +86,11 @@ module.exports = {
   // logout
   getLogout: function(req, res) {
     req.logout();
-    req.session.destroy();
-    res.redirect('/#');
+    // req.session.cookie.expires = new Date( Date.now() );
+    req.session.destroy( function(){
+        res.redirect('/#');
+      }
+    );
   },
 
   // LOCAL STRATEGIES

@@ -104,8 +104,6 @@ export default function reducer(state = {
         }
       }
 
-
-
       case "FETCH_USERS_FULFILLED":{
         return {
           ...state,

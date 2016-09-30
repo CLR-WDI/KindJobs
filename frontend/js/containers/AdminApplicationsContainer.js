@@ -61,7 +61,9 @@ export default class AdminApplicationsContainer extends React.Component {
       let individual_cv
       if(typeof application.link_to_cv === "string"){
         let filename = (application.kindjobs_id.title + "-" + application.name).replace(/\s+/g,'_')
-        individual_cv = <td><a href={application.link_to_cv} download={filename}>Download CV</a></td>
+        let cv = application.link_to_cv
+        let fileextension = cv.substr(cv.indexOf("."))
+        individual_cv = <td><a href={cv} download={filename+fileextension}>Download CV</a></td>
       }else{
         individual_cv = <td></td>
       }
