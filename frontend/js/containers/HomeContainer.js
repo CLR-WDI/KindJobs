@@ -8,13 +8,13 @@ import {Link} from "react-router";
 import {getMe} from "../actions/userActions" //actions for users
 
 @connect((store) => {
-  me: store.users.me
+  return{me: store.users.me}
 })
 export default class Home extends React.Component {
   componentDidMount() {
     // home page is landing page after log in, get profile of logged in user
     console.log("the props at homepage is ", this.props);
-    if( typeof this.props.users.me.email === "undefined" ){
+    if( typeof this.props.me.email === "undefined" ){
       this.props.dispatch( getMe() );
     }
   }
