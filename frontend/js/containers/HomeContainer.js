@@ -16,7 +16,7 @@ export default class Home extends React.Component {
     if( this.props.me === null || typeof this.props.me.email === "undefined" ){
       setTimeout(function() {
         this.props.dispatch( getMe() );
-      }, 500 )
+      }, 500 ).bind(this)
     }
   }
   render() {
