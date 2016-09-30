@@ -11,6 +11,7 @@ import {hashHistory} from "react-router"
 @connect((store) => {
   return {
     applications: store.applications.applications,
+    cv: store.applications.cv,
     // jwtToken: store.users.jwtToken,
     // admin: store.users.admin
   }
@@ -66,6 +67,7 @@ export default class AdminApplicationsContainer extends React.Component {
           <td>{application.expected_salary}</td>
           <td>{application.yrs_rel_exp}</td>
           <td><Link to={'admin/applications/'+application._id}>{application.name}</Link></td>
+          <td><a href={cv} download>Download CV</a></td>
           <td><button onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
         </tr>
       )
@@ -83,7 +85,8 @@ export default class AdminApplicationsContainer extends React.Component {
               <th className="col-md-1">Qualification</th>
               <th className="col-md-1">Salary</th>
               <th className="col-md-1">Yrs Exp</th>
-              <th className="col-md-3">Name</th>
+              <th className="col-md-2">Name</th>
+              <th className="col-md-1">CV</th>
               <th className="col-md-1">Delete</th>
             </tr>
           </thead>
