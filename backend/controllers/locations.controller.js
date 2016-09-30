@@ -11,7 +11,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var sector = new Locations(req.body);
-    console.log(req.body);
 
     sector.save(function(err) {
       if (err) return next(err);

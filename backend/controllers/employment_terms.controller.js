@@ -11,7 +11,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var employmentTerm = new EmploymentTerm(req.body);
-    console.log(req.body);
 
     employmentTerm.save(function(err) {
       if (err) return next(err);

@@ -1,6 +1,6 @@
 export default function reducer(state = {
     users: [],
-    userType: "none",
+    // userType: "none",
     fetching: false,
     fetched: false,
     error: null,
@@ -15,7 +15,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          userType: "Jobseeker",
+          // userType: "Jobseeker",
         };
       }
       case "LOGIN_USER_REJECTED":{
@@ -29,7 +29,7 @@ export default function reducer(state = {
         return{
           ...state,
           users: [],
-          userType: "none",
+          // userType: "none",
           me: null
         };
       }
@@ -46,7 +46,7 @@ export default function reducer(state = {
           ...state,
           fetching: false,
           fetched: true,
-          userType: action.payload.userType
+          // userType: action.payload.userType
         };
       }
       case "SIGNUP_USER_REJECTED":{
@@ -63,7 +63,7 @@ export default function reducer(state = {
           fetching: false,
           fetched: true,
           me: action.payload,
-          userType: action.payload.userType
+          // userType: action.payload.userType
         }
       }
       case "GET_ME_REJECTED":{
@@ -103,8 +103,6 @@ export default function reducer(state = {
           error: action.payload
         }
       }
-
-
 
       case "FETCH_USERS_FULFILLED":{
         return {
