@@ -22,6 +22,14 @@ module.exports = function(app) {
 	  res.redirect('/');
 	}
 
+	// authenticate by passport
+	function authenticatedUserNoRedirect(req, res, next) {
+	  // If the user is authenticated, then we continue the execution
+	  if (req.isAuthenticated()) return next();
+	  // Otherwise the request is always redirected to the home page
+	  res.status(401).json({message: 'You need to log in to view this information.'});
+	}
+
 	function unAuthenticatedUser(req, res, next) {
 	  if(!req.isAuthenticated()) return next();
 	  req.flash('errorMessage', 'You are already logged in!')
@@ -56,52 +64,13 @@ module.exports = function(app) {
 	app.get('/api/users/auth/linkedin', usersAuthController.getLinkedin);
   app.get('/api/users/auth/linkedin/callback', usersAuthController.getLinkedinCallback); // usersAuthController.getLinkedinCallbackSuccess
 
-	// // tokens for managing access
-	// var expressJWT = require('express-jwt');
-	// var jwt_secret = "1kindjobsarenotjustforkindpeople2takeakindjobandlearntobeakinderkindofhuman";
-
-	// JWT access control. Important to have these before our routes, so it can run first!
-	// ACCESS RESTRICTIONS FOR
-
-	// app.use( expressJWT({
-	// 	secret: jwt_secret,
-	// 	// isRevoked: blacklist.isRevoked  // install to revoke access of offending individuals
-	// })
- // 			.unless({
-	// 			path:	[
-	// 				'/images',
-	// 				'/api/users/signup', // route unblocked till we look for admin users
-	// 				'/api/users/login',
-	// 				{url: '/api/kindjobs',
-	// 				methods: ['GET']},
-	// 				{url: '/api/scopes',
-	// 				methods: ['GET']},
-	// 				{url: '/api/employment_terms',
-	// 				methods: ['GET']},
-	// 				{url: '/api/sectors',
-	// 				methods: ['GET']},
-	// 				{url: '/api/locations',
-	// 				methods: ['GET']},
-	// 				{url: '/api/sgos',
-	// 				methods: ['GET']},
-	// 				{url: '/api/applications',
-	// 				methods: ['POST']}, // note method will not block the GET method
-	// 			]
-	// 		})
-	// 	);
-
-	// app.use(function (error, request, response, next) {
-	//   if (error.name === 'UnauthorizedError') {
-	//     response.status(401).json({message: 'You need to log in to view this information.'});
-	//   }
-	// });
-
-
-	// app.post('/api/users/signup', usersController.signup)
-	// app.post('/api/users/login',	usersController.login)
-
 	// USER API ROUTES
-	app.get('/api/users', authenticatedUser, usersAuthController.index)
+	app.route('/api/users/me')
+			.get(authenticatedUserNoRedirect, usersAuthController.getMe)
+			.post(authenticatedUser, usersAuthController.editMe)
+			.delete(authenticatedUser, usersAuthController.destroyMe)
+
+	app.get('/api/users', authenticatedUser, checkIfAdmin, usersAuthController.index)
 
 	app.route('/api/users/:id')
 		.put(authenticatedUser, usersAuthController.update)

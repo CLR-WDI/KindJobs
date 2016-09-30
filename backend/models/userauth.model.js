@@ -21,6 +21,10 @@ var UserAuthSchema = new mongoose.Schema({
   },
   name            : String,
   defaultCV       : String,
+  sgo_id:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'SGO'
+  },
 });
 
 UserAuthSchema.set('timestamps',{});

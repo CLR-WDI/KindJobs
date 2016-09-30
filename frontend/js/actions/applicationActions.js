@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-export function fetchApplications(jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function fetchApplications() {
   return function (dispatch) {
-    axios.get('./api/applications',
-              { headers: {Authorization: key} })
+    axios.get('./api/applications')
         .then((response)=>{
           dispatch({type:"FETCH_APPLICATIONS_FULFILLED", payload: response.data})
         })
@@ -20,11 +18,9 @@ export function fetchApplication() {
   }
 }
 
-export function deleteApplication(id, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function deleteApplication(id) {
   return function (dispatch) {
-    axios.delete('./api/applications/' + id,
-              { headers: {Authorization: key} } )
+    axios.delete('./api/applications/' + id)
         .then((response)=>{
           dispatch({type:"DELETE_APPLICATION_FULFILLED", payload: response.data})
         })
@@ -35,11 +31,9 @@ export function deleteApplication(id, jwtToken) {
 }
 
 
-export function editApplication(id, application, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function editApplication(id, application) {
   return function (dispatch) {
-    axios.put('./api/applications/' + id, application,
-              { headers: {Authorization: key} } )
+    axios.put('./api/applications/' + id, application )
         .then((response)=>{
           dispatch({type:"EDIT_APPLICATION_FULFILLED", payload: response.data})
         })
@@ -62,14 +56,6 @@ export function createApplication(application) {
 }
 
 export function uploadCV(file) {
-  console.log("the file is ", file);
-  console.log("filename is ", file.name);
-  console.log("filetype is ", file.type);
-  // let fileData = {
-  //   filename: file.name,
-  //   filetype: file.type
-  // }
-
   return function (dispatch) {
     axios.get(`./api/applications/fileupload?filename=${file.name}&filetype=${file.type}`)
     .then((result) => {
@@ -80,9 +66,7 @@ export function uploadCV(file) {
           'Content-Type': file.type
         }
       };
-      console.log("the result is ", result);
-      console.log("the signed url is ", signedUrl);
-      console.log("the options are ", options);
+
       axios.put(signedUrl, file, options)
         .then((response) => {
           dispatch({type:"UPLOAD_CV_FULFILLED", payload: result.data.url})

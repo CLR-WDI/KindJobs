@@ -2,14 +2,17 @@ import React from "react";
 import {connect} from "react-redux"
 import {Link} from "react-router"
 import {formatDate} from "../helpers/helpers"
+// actions
 import {fetchApplication, deleteApplication} from "../actions/applicationActions"
+import {getMe, editMe, destroyMe} from "../actions/userActions" //actions for Users
+// for redirect
 import {hashHistory} from 'react-router';
 
 @connect((store) => {
   return {
     applications: store.applications.applications,
-    admin: store.users.admin,
-    jwtToken: store.users.jwtToken,
+    // admin: store.users.admin,
+    // jwtToken: store.users.jwtToken,
   }
 })
 export default class ApplicationContainer extends React.Component {
@@ -18,15 +21,14 @@ export default class ApplicationContainer extends React.Component {
     this._deleteApplication = this._deleteApplication.bind(this);
   }
   componentWillMount() {
-    this.props.dispatch( fetchApplication(this.props.jwtToken) );
+    this.props.dispatch( fetchApplication() );
   }
   _deleteApplication(e){
     e.preventDefault();
     var r = confirm("Delete this application?");
     if(r==true){
-      console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
-        this.props.dispatch( deleteApplication(this.props.routeParams.id, this.props.jwtToken) );
+        this.props.dispatch( deleteApplication(this.props.routeParams.id) );
         this.props.history.goBack();
       }
       else{

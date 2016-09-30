@@ -23,7 +23,6 @@ export default class JobList extends React.Component {
   render() {
     let filteredList = [...this.props.kindjobs];
     let criteria = this.props.filters.criteria;
-    console.log("criteria is ", criteria);
     if (this.props._jobListName !== "Recent Jobs"){
 
       if (Object.keys(criteria).length > 0) {
@@ -53,8 +52,6 @@ export default class JobList extends React.Component {
     if(!this.props.filters.employment_term.internship.state){
       filteredList = filteredList.filter( job => job.employment_term_id.name !== "Internship" )
     }
-
-    console.log("the post filter list is ", filteredList);
 
     let jobList = filteredList.map( (job) => {
       return <JobCard

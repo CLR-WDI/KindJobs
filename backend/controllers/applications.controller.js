@@ -28,7 +28,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var Application = new Applications(req.body);
-    console.log(req.body);
 
     Application.save(function(err) {
       if (err) {
@@ -62,9 +61,6 @@ module.exports = {
         var s3 = new AWS.S3();
         var filename = req.query.filename;
         var filetype = req.query.filetype;
-        console.log("query is ", req.query);
-        console.log("filename is ", filename);
-        console.log("filetype is ", filetype);
 
         var params = {
             Bucket: process.env.S3_BUCKET,

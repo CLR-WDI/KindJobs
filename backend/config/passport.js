@@ -54,10 +54,12 @@ module.exports  = function(passport){
       UserAuth.findOne({ email: email }, function(err, user) {
         if (err) return done(err);
         // If no user is found
-        if (!user) return done(null, false, req.flash('errorMessage', 'No user found.'));
+        if (!user)
+          return done(null, false, req.flash('errorMessage', 'No user found.'));
 
         // Check if the password is correct
-        if (!user.validPassword(password)) return done(null, false, req.flash('errorMessage', 'Oops wrong password!'));
+        if (!user.validPassword(password))
+          return done(null, false, req.flash('errorMessage', 'Oops wrong password!'));
 
         return done(null, user);
 
@@ -123,7 +125,7 @@ module.exports  = function(passport){
 
 
   passport.use('linkedin', new LinkedInStrategy({
-    clientID: process.env.KINDJOBS_LINKEDIN_clientID, 
+    clientID: process.env.KINDJOBS_LINKEDIN_clientID,
     clientSecret: process.env.KINDJOBS_LINKEDIN_clientSecret,
     callbackURL: '/api/users/auth/linkedin/callback',
     scope: ['r_basicprofile', 'r_emailaddress'],

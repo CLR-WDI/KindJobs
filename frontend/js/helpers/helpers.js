@@ -5,7 +5,6 @@ let formatDate = function(date){
 };
 
 let dateToYYYY_MM_YY = function(date){
-  console.log(date)
   if(typeof date === "string"){return date}
   let day = ("0" + date.getDate() ).slice(-2);
   let month = ("0" + (date.getMonth() + 1)).slice(-2);

@@ -3,7 +3,6 @@ import {Link} from "react-router";
 
 const JobCard = (props) => {
   let description = props.description.substr(0,90);
-  console.log(description);
   return(
     <div className = {'jobCard '+props.term+' col-md-4 col-sm-6'}>
       <div class="inner">

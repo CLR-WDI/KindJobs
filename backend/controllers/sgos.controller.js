@@ -11,7 +11,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var sgo = new SGOs(req.body);
-    console.log(req.body);
 
     sgo.save(function(err) {
       if (err) return next(err);

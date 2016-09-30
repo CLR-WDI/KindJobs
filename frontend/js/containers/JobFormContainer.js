@@ -26,8 +26,8 @@ import {fetchEmploymentTerms} from "../actions/employmentTermActions" //actions 
     sectors: store.sectors.sectors,
     sgos: store.sgos.sgos,
     kindjobs: store.kindjobs.kindjobs,
-    admin: store.users.admin,
-    jwtToken: store.users.jwtToken,
+    // admin: store.users.admin,
+    // jwtToken: store.users.jwtToken,
   }
 })
 export default class JobForm extends React.Component {
@@ -49,8 +49,6 @@ export default class JobForm extends React.Component {
     e.preventDefault();
     var r = confirm("Delete this job?");
     if(r==true){
-      // console.log(this.props);
-      // console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
         this.props.dispatch( deleteKindJob(this.props.routeParams.id, this.props.jwtToken) );
         this.props.history.goBack();
@@ -80,12 +78,10 @@ export default class JobForm extends React.Component {
     if(this.props.routeParams.id){
       let id = this.props.routeParams.id;
       this.props.dispatch( editKindJob(id, jobSave, this.props.jwtToken) );
-      // console.log(jobSave);
       hashHistory.go(-1);
     }
     else{
       this.props.dispatch( createKindJob(jobSave, this.props.jwtToken) );
-      // console.log(jobSave);
       hashHistory.go(-1);
     }
   }
@@ -95,7 +91,6 @@ export default class JobForm extends React.Component {
     if(this.props.routeParams.id){
       var jobs = [ ...this.props.kindjobs];
       var job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
-      // console.log(job)
       var type = "EDIT"
     }
     else {

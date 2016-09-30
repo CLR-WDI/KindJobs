@@ -12,11 +12,9 @@ export function fetchLocations() {
   }
 }
 
-export function deleteLocation(id, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function deleteLocation(id) {
   return function (dispatch) {
-    axios.delete('./api/locations/' + id,
-              { headers: {Authorization: key} } )
+    axios.delete('./api/locations/' + id )
         .then((response)=>{
           dispatch({type:"DELETE_LOCATION_FULFILLED", payload: response.data})
         })
@@ -26,11 +24,9 @@ export function deleteLocation(id, jwtToken) {
   }
 }
 
-export function editLocation(id, location, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function editLocation(id, location) {
   return function (dispatch) {
-    axios.put('./api/locations/' + id, location,
-              { headers: {Authorization: key} } )
+    axios.put('./api/locations/' + id, location)
         .then((response)=>{
           dispatch({type:"EDIT_LOCATION_FULFILLED", payload: response.data})
         })
@@ -40,11 +36,9 @@ export function editLocation(id, location, jwtToken) {
   }
 }
 
-export function createLocation(location, jwtToken) {
-  let key = 'Bearer ' + jwtToken;
+export function createLocation(location) {
   return function (dispatch) {
-    axios.post('./api/locations', location,
-              { headers: {Authorization: key} } )
+    axios.post('./api/locations', location )
         .then((response)=>{
           dispatch({type:"CREATE_LOCATION_FULFILLED", payload: response.data})
         })

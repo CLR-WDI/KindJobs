@@ -11,8 +11,8 @@ import {hashHistory} from "react-router"
 @connect((store) => {
   return {
     applications: store.applications.applications,
-    jwtToken: store.users.jwtToken,
-    admin: store.users.admin
+    // jwtToken: store.users.jwtToken,
+    // admin: store.users.admin
   }
 })
 export default class AdminApplicationsContainer extends React.Component {
@@ -25,12 +25,10 @@ export default class AdminApplicationsContainer extends React.Component {
     this.props.dispatch( fetchApplications(this.props.jwtToken) );
   }
   _deleteApplication( e, id ){
-    console.log(id);
     e.preventDefault();
     var r = confirm("Delete this application?");
     if(r==true){
       this.props.dispatch( deleteApplication(id, this.props.jwtToken) );
-      console.log("deleted app!")
     }
   }
 

@@ -11,7 +11,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var scope = new Scopes(req.body);
-    console.log(req.body);
 
     scope.save(function(err) {
       if (err) return next(err);

@@ -29,7 +29,6 @@ export default class EditOptions extends React.Component {
     if (this.props._optionEdit === "sector_name") {
         this.props._props.dispatch( editSector(targetId, form, this.props._token)  );
     } else if (this.props._optionEdit === "sector_link") {
-        console.log(image);
         this.props._props.dispatch( editSector(targetId, image, this.props._token)  )
     } else if (this.props._optionEdit === "scope") {
         this.props._props.dispatch( editScope(targetId, form, this.props._token)  );

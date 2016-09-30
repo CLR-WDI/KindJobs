@@ -29,8 +29,6 @@ module.exports = {
 
   create: function(req, res, next) {
     var kindJob = new KindJobs(req.body);
-    console.log(req.body);
-
     kindJob.save(function(err) {
       if (err) {
         return res.status(400).send(err);
