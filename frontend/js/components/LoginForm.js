@@ -23,7 +23,6 @@ export default class LoginForm extends React.Component {
       email: ReactDOM.findDOMNode(this.refs.email.refs.inp).value,
       password: ReactDOM.findDOMNode(this.refs.password.refs.inp).value,
     };
-    console.log(userLogin);
     this.props.dispatch( loginUser(userLogin) );
     hashHistory.push({pathname: '/'});
   }

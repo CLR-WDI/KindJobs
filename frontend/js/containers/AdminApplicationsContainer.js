@@ -25,12 +25,10 @@ export default class AdminApplicationsContainer extends React.Component {
     this.props.dispatch( fetchApplications(this.props.jwtToken) );
   }
   _deleteApplication( e, id ){
-    console.log(id);
     e.preventDefault();
     var r = confirm("Delete this application?");
     if(r==true){
       this.props.dispatch( deleteApplication(id, this.props.jwtToken) );
-      console.log("deleted app!")
     }
   }
 

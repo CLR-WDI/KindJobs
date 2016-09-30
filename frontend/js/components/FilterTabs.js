@@ -12,7 +12,6 @@ export default class FilterTabs extends React.Component{
 
   _toggleFilters(e){
     e.preventDefault;
-    console.log("hideFilters clicked");
     if (this.state.filterStyle === "hide-filters") {
       this.setState({filterStyle: "show-filters", chevronState: "fa-chevron-up"});
     }else{

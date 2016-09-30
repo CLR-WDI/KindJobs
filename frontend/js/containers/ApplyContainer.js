@@ -45,7 +45,6 @@ export default class ApplyContainer extends React.Component {
       return alert('No file selected.');
     }
     this.props.dispatch( uploadCV(file) );
-    // console.log(this.props.cv);
   }
 
   _submitApplication(e){

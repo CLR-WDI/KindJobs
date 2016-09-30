@@ -27,7 +27,6 @@ export default class ApplicationContainer extends React.Component {
     e.preventDefault();
     var r = confirm("Delete this application?");
     if(r==true){
-      console.log(this.props.routeParams.id);
       if(this.props.routeParams.id){
         this.props.dispatch( deleteApplication(this.props.routeParams.id) );
         this.props.history.goBack();

@@ -17,6 +17,7 @@ class Header extends React.Component {
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
+    // document.cookie = 'connect.sid =;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     hashHistory.push({pathname: '/'});
   }
   componentWillMount() {
@@ -27,37 +28,41 @@ class Header extends React.Component {
 
   render() {
     let navbarLinks
-    switch (this.props.me.userType) {
-      case "Jobseeker":
-        navbarLinks = (
-          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
-            <li><Link to='profile'>My profile</Link></li>
-            <li><a href="#" onClick={this._logout}>Logout</a></li>
-          </NavDropdown>
-        );
-        break;
-      case "Admin":
-        navbarLinks = (
-          <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
-            <li><Link to='admin/applications'>Applications</Link></li>
-            <li><Link to='admin/kindjobs'>Job Postings</Link></li>
-            <li><Link to='admin/options'>Options</Link></li>
-            <li><Link to='admin/users'>Users</Link></li>
-            <li><Link to='profile'>My profile</Link></li>
-            <li><a href="#" onClick={this._logout}>Logout</a></li>
-          </NavDropdown>
-        );
-        break;
-      case "SGO":
-        navbarLinks = (
-          <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
-            <li><Link to='profile'>My profile</Link></li>
-            <li><a href="#" onClick={this._logout}>Logout</a></li>
-          </NavDropdown>
-        );
-        break;
-      default:
-        navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
+    if(!this.props.me)
+    { navbarLinks = <li><Link to='/login'>Login/Signup</Link></li> }
+    else{
+      switch (this.props.me.userType) {
+        case "Jobseeker":
+          navbarLinks = (
+            <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+              <li><Link to='profile'>My profile</Link></li>
+              <li><a href="#" onClick={this._logout}>Logout</a></li>
+            </NavDropdown>
+          );
+          break;
+        case "Admin":
+          navbarLinks = (
+            <NavDropdown eventKey="4" title="Admin" id="nav-dropdown">
+              <li><Link to='admin/applications'>Applications</Link></li>
+              <li><Link to='admin/kindjobs'>Job Postings</Link></li>
+              <li><Link to='admin/options'>Options</Link></li>
+              <li><Link to='admin/users'>Users</Link></li>
+              <li><Link to='profile'>My profile</Link></li>
+              <li><a href="#" onClick={this._logout}>Logout</a></li>
+            </NavDropdown>
+          );
+          break;
+        case "SGO":
+          navbarLinks = (
+            <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
+              <li><Link to='profile'>My profile</Link></li>
+              <li><a href="#" onClick={this._logout}>Logout</a></li>
+            </NavDropdown>
+          );
+          break;
+        default:
+          navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
+      }
     }
     return(
       <Navbar staticTop fluid>

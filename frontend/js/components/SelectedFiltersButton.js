@@ -24,10 +24,8 @@ export default class SelectedFiltersButton extends React.Component {
     e.preventDefault();
     let deleteFilters = { ...this.props.filters }
     let criteriaType = this._getKeyByValue(deleteFilters.criteria, this.props._id);
-    console.log("the criteria type is ", criteriaType);
     delete deleteFilters.criteria[criteriaType];
     delete deleteFilters.criteriaName[this.props._id];
-    console.log(this.props.filters);
     this.props.dispatch( editFilters(deleteFilters) );
   }
 
