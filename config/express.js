@@ -43,9 +43,9 @@ module.exports = function() {
   // express session is to stash a cookie in the client's session
   app.use(session({
     secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS',
-    httpOnly: true,
-    secure: true,
-    // ephemeral: true 
+    // httpOnly: true,
+    // secure: true,
+    // ephemeral: true
   }));
   app.use(passport.initialize());
   // the passport session is equivalent to app.use(passport.authenticate('session')); this in turn pulls the serializeUser and deserializeUser functions
