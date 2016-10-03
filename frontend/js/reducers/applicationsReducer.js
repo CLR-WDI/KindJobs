@@ -104,24 +104,6 @@ export default function reducer(state = {
           error: action.payload
         };
       }
-      case "UPLOAD_CV_FULFILLED":{
-        return{
-          ...state,
-          cv: action.payload
-        }
-      }
-      case "UPLOAD_CV_REJECTED":{
-        return{
-          ...state,
-          error: action.payload
-        }
-      }
-      case "CLEAR_CV_FULFILLED":{
-        return{
-          ...state,
-          cv: ""
-        }
-      }
     }
   return state;
 }

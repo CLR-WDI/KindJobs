@@ -10,6 +10,7 @@ import terms from "./termsReducer"
 import sgos from "./sgosReducer"
 import filters from "./filtersReducer"
 import users from "./usersReducer"
+import uploader from "./uploaderReducer"
 
 export default combineReducers({
   employmentTerms,
@@ -22,4 +23,5 @@ export default combineReducers({
   filters,
   terms,
   users,
+  uploader,
 })

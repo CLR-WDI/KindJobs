@@ -3,21 +3,20 @@ import ReactDOM from 'react-dom';
 import {connect} from "react-redux"
 import {Link} from "react-router"
 import InputText from "../components/InputText"
+import FileUploader from "../components/FileUploader"
 
 // actions
 import {getMe} from "../actions/userActions" //actions for Users
 import {fetchKindJob, fetchKindJobs} from "../actions/kindjobActions"
-import {createApplication, uploadCV, clearCV} from "../actions/applicationActions"
+import {createApplication} from "../actions/applicationActions"
+import {uploadCV, clearCV} from "../actions/uploaderActions"
 // for redirect to home
 import {hashHistory} from "react-router"
-
-//Dropzone for file uploads
-import Dropzone from 'react-dropzone'
 
 @connect((store) => {
   return {
     kindjobs: store.kindjobs.kindjobs,
-    cv: store.applications.cv,
+    cv: store.uploader.cv,
     me: store.users.me
   }
 })
@@ -39,14 +38,10 @@ export default class ApplyContainer extends React.Component {
   constructor(){
     super();
     this._submitApplication = this._submitApplication.bind(this);
-    this._onDrop = this._onDrop.bind(this);
+    this._onUpload = this._onUpload.bind(this);
   }
 
-  _onDrop(files) {
-    let file = files[0];
-    if(file == null){
-      return alert('No file selected.');
-    }
+  _onUpload(file) {
     this.props.dispatch( uploadCV(file) );
   }
 
@@ -61,7 +56,7 @@ export default class ApplyContainer extends React.Component {
       yrs_rel_exp: ReactDOM.findDOMNode(this.refs.yrs_rel_exp.refs.inp).value,
       highest_qualification: ReactDOM.findDOMNode(this.refs.highest_qualification.refs.inp).value,
       message_to_recruiters: ReactDOM.findDOMNode(this.refs.message_to_recruiters).value,
-      link_to_cv: this.props.cv
+      link_to_cv: this.props.cv.url
     }
     this.props.dispatch( createApplication(form) );
     alert( "Application submitted" );
@@ -71,7 +66,7 @@ export default class ApplyContainer extends React.Component {
   render() {
     if( (this.props.kindjobs.length === 0 ) ){
       return( <div></div> )
-    }else{  
+    }else{
       let jobs = [ ...this.props.kindjobs];
       let job = jobs.filter( job => job._id === this.props.routeParams.id)[0];
 
@@ -100,11 +95,8 @@ export default class ApplyContainer extends React.Component {
                 <p>
                   <label>Attach your CV*</label>
                 </p>
-                <Dropzone onDrop={ this._onDrop } size={ 150 }>
-                  <div>
-                    Drop some files here!
-                  </div>
-                </Dropzone>
+                <FileUploader _onUpload={ this._onUpload } _uploadedURL={this.props.cv.url} _fileName={this.props.cv.name} _status={this.props.cv.status}/>
+
                 <div class="form-action-btn">
                   <p>* required</p>
                   <button class="btn btn-default" type="button" onClick={function(e){e.preventDefault; hashHistory.go( -1 ); }}>Back</button>
