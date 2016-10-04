@@ -153,9 +153,17 @@
 @media (max-width: $grid-float-breakpoint) {
   .navbar-header {
     position: relative;
-    z-index: $zindex-navbar-header;
 
     .navbar-toggle {
+      height: $navbar-height;
+      margin: 0;
+      position: relative;
+      z-index: $zindex-navbar-header;
+
+      &:hover, :focus {
+        background: none;
+      }
+
       .navbar-toggle-icon {
         position: relative;
         top: 5px;
@@ -186,11 +194,16 @@
         top: 0;
         left: 0;
         right: 0;
-        background-color: $jumbotron-bg;
         padding-top: $navbar-height;
         text-align: center;
         min-height: 100vh;
         z-index: $zindex-collapse;
+        transition: all 0.3s ease 0s;
+
+        &.in {
+          background-color: $jumbotron-bg;
+          transition: all 0.3s ease 0s;
+        }
 
         .nav {
           padding-left: $navbar-padding-horizontal;
@@ -237,83 +250,4 @@
       padding-right: 0;
     }
   }
-}
-
-.navbar-toggle * {
-	-ms-transition: all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
-}
-.navbar-toggle span.bar1 {
-	-ms-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-	-ms-transform-origin: 1px 3px;
-	-webkit-transform-origin: 1px 3px;
-  -moz-transform-origin: 1px 3px;
-  -o-transform-origin: 1px 3px;
-	transform-origin: 1px 3px;
-	width: 27px;
-}
-.navbar-toggle span.bar2 {
-	-ms-transform: rotate(-360deg) scale(0);
-	-webkit-transform: rotate(-360deg) scale(0);
-  -moz-transform: rotate(-360deg) scale(0);
-  -o-transform: rotate(-360deg) scale(0);
-	transform: rotate(-360deg) scale(0);
-}
-.navbar-toggle span.bar3 {
-	-ms-transform: rotate(360deg) scale(0);
-	-webkit-transform: rotate(360deg) scale(0);
-  -moz-transform: rotate(360deg) scale(0);
-  -o-transform: rotate(360deg) scale(0);
-	transform: rotate(360deg) scale(0);
-}
-.navbar-toggle span.bar4 {
-	-ms-transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
-	transform: rotate(-45deg);
-	-ms-transform-origin: 2px 0px;
-	-webkit-transform-origin: 2px 0px;
-	transform-origin: 2px 0px;
-	width: 27px;
-	display:block;
-}
-.navbar-toggle.collapsed span.bar1,
-.navbar-toggle.collapsed span.bar2,
-.navbar-toggle.collapsed span.bar3,
-.navbar-toggle.collapsed span.bar4 {
-	-ms-transform: none;
-	-webkit-transform: none;
-	transform: none;
-	width: 20px;
-}
-
-.navbar-toggle.collapsed span.bar4 {
-	display: none;
-}
-
-// collapse appear animation
-
-.navbar-show-enter {
-   opacity: 0.01;
-   overflow-y: auto;
-}
-
-.navbar-show-enter.navbar-show-enter-active {
-   opacity: 1;
-   transition: opacity 500ms ease-in;
-}
-
-.navbar-show-leave {
-   opacity: 1;
-}
-
-.navbar-show-leave.navbar-show-leave-active {
-   opacity: 0.01;
-   transition: opacity 500ms ease-in;
 }
