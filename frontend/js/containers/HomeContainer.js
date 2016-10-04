@@ -23,7 +23,8 @@ export default class Home extends React.Component {
     let heroStyle = {
       backgroundImage: 'url(./images/kindjobs-bg-main.jpg)',
       backgroundSize: 'cover',
-      backgroundPosition: 'center'
+      background-attachment: fixed;
+      background-position: center;
     };
     return(
       <div>
