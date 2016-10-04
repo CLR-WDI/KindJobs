@@ -19,10 +19,10 @@
 
     .searchbar {
       .search-icon {
-        line-height: $font-size-h2;
+        line-height: $font-size-h3;
       }
       .form-control {
-        font-size: $font-size-h2;
+        font-size: $font-size-h3;
         color: darken($brand-primary, 50%);
         border-bottom: 1px solid darken($brand-primary, 50%);
         &::-webkit-input-placeholder { /* Chrome */
@@ -41,7 +41,7 @@
         }
       }
       .search-sizer {
-        font-size: $font-size-h2;
+        font-size: $font-size-h3;
       }
     }
   }
