@@ -60,22 +60,30 @@ class Header extends React.Component {
           );
           break;
         default:
-          navbarLinks = <li><Link to='/login'>Login/Signup</Link></li>;
+          navbarLinks = <li><p class="navbar-btn"><Link class="btn btn-signin" to='/login'><i class="icon-ios-contact-outline"></i> Sign in</Link></p></li>;
       }
     }
+    let logoLink = "./images/kindjobs-logo.png"
+    let navbarStyle = {}
+    if (this.props._location.pathname == '/') {
+      logoLink = "./images/kindjobs-logo-dark.png"
+      navbarStyle = {
+        background: none;
+      }
+    }
+    console.log("props is ", this.props);
     return(
-      <Navbar staticTop fluid>
+      <Navbar staticTop fluid style={navbarStyle}>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to='/'><div class="logo"><img class="img-responsive" src="./images/kindjobs-logo.png" /></div></Link>
+            <Link to='/'><div class="logo"><img class="img-responsive" src={logoLink} /></div></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {navbarLinks}
             <li><Link to='/about'>About</Link></li>
-            <li><Link to='/'>Home</Link></li>
+            {navbarLinks}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

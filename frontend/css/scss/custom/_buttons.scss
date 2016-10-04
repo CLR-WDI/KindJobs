@@ -5,9 +5,14 @@ $bs-height-xs:   (floor($font-size-small * 1.2) + $padding-small-vertical + 1) !
 
 .btn {
   margin: 5px 10px 5px 0;
+  transition: all 0.3s ease 0s;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  &.active:focus, :focus {
+    outline: none;
   }
 }
 
@@ -15,6 +20,90 @@ $bs-height-xs:   (floor($font-size-small * 1.2) + $padding-small-vertical + 1) !
   .btn {
     margin: 0;
   }
+}
+
+.btn-signin {
+  background: none;
+  border: 1px solid;
+  border-color: darken($brand-primary, 50%);
+  color: darken($brand-primary, 50%);
+  border-radius: $border-radius-base;
+  padding: $padding-base-vertical $padding-base-horizontal !important;
+  margin: 0;
+  &:focus {
+    border-color: darken($brand-primary, 30%);
+    color: darken($brand-primary, 30%);
+  }
+  &.active, &:active, &:hover {
+    background-color: darken($brand-primary, 50%);
+    color: white;
+  }
+
+  i {
+    font-size: 1.2em;
+    position: relative;
+    margin-top: 3px;
+    &:before {
+      margin-top: 3px;
+    }
+  }
+}
+
+.btn-default-ghost {
+  background: none;
+  border: 1px solid;
+  border-color: $navbar-default-link-color;
+  color: $navbar-default-link-color;
+  margin: 0;
+  &:focus {
+    border-color: darken($navbar-default-link-color, 20%);
+    color: darken($navbar-default-link-color, 20%);
+  }
+  &.active, &:active, &:hover {
+    background-color: $navbar-default-link-color;
+    color: lighten($navbar-default-link-color, 50%);
+  }
+}
+
+.btn-light-ghost {
+  background: none;
+  border: 1px solid;
+  border-color: white;
+  color: white;
+  margin: 0;
+  &:focus {
+    border-color: darken(white, 20%);
+    color: darken(white, 20%);
+  }
+  &.active, &:active, &:hover {
+    background-color: white;
+    color: darken(white, 75%);
+  }
+}
+
+.btn-primary-dark-ghost {
+  background: none;
+  border: 1px solid;
+  border-color: darken($brand-primary, 50%);
+  color: darken($brand-primary, 50%);
+  margin: 0;
+  &:focus {
+    border-color: darken($brand-primary, 30%);
+    color: darken($brand-primary, 30%);
+  }
+  &.active, &:active, &:hover {
+    background-color: darken($brand-primary, 50%);
+    color: white;
+  }
+}
+
+.btn-adv-search {
+  margin-top: $padding-large-vertical;
+}
+
+.navbar-btn {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .form-action-btn {

@@ -20,17 +20,17 @@ export default class Home extends React.Component {
     }
   }
   render() {
-    let divStyle = {
-      backgroundImage: 'url(./images/kindjobs-bg.jpg)',
+    let heroStyle = {
+      backgroundImage: 'url(./images/kindjobs-bg-main.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     };
     return(
       <div>
-        <div class="jumbotron home text-center" style={divStyle}>
-          <h2>Come find your kind of job!</h2>
+        <div class="jumbotron home text-center" style={ heroStyle }>
+          <h1>Come find your kind of job!</h1>
           <SearchBar />
-          <h3><Link to={'/advsearch'}>Advanced Search</Link></h3>
+          <Link class="btn btn-primary-dark-ghost btn-adv-search" to={'/advsearch'}>Advanced Search</Link>
         </div>
         <div class="container-fluid">
           <JobList _jobListName="Recent Jobs" />

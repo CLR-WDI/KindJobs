@@ -5,7 +5,7 @@ export default class FilterTabs extends React.Component{
   constructor() {
     super();
     this.state={filterStyle: "hide-filters",
-                chevronState: "fa-chevron-down" };
+                chevronState: "icon-ios-arrow-down" };
     this._toggleFilters = this._toggleFilters.bind(this);
 
   }
@@ -13,9 +13,9 @@ export default class FilterTabs extends React.Component{
   _toggleFilters(e){
     e.preventDefault;
     if (this.state.filterStyle === "hide-filters") {
-      this.setState({filterStyle: "show-filters", chevronState: "fa-chevron-up"});
+      this.setState({filterStyle: "show-filters", chevronState: "icon-ios-arrow-up"});
     }else{
-      this.setState({filterStyle: "hide-filters", chevronState: "fa-chevron-down"});
+      this.setState({filterStyle: "hide-filters", chevronState: "icon-ios-arrow-down"});
     }
   }
 
@@ -26,7 +26,7 @@ export default class FilterTabs extends React.Component{
     })
     return (
       <div>
-        <h4 style={{cursor: 'pointer'}} onClick={this._toggleFilters} >{this.props._title}<i style={{cursor: 'pointer'}} onClick={this._toggleFilters} class={"fa " + this.state.chevronState}></i></h4>
+        <h4 style={{cursor: 'pointer'}} onClick={this._toggleFilters} >{this.props._title}<i style={{cursor: 'pointer'}} onClick={this._toggleFilters} class={"pull-right toggle-chevron " + this.state.chevronState}></i></h4>
 
         <div class={this.state.filterStyle}>
           {filtersList}

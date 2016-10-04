@@ -13,6 +13,9 @@
   &.Full-time {
     .inner {
       border-color: $color-fulltime;
+      &:hover {
+        box-shadow: 0 0 6px $color-fulltime;
+      }
       h1,h2,h3,.jobicon {
         color: $color-fulltime;
       }
@@ -26,6 +29,9 @@
   &.Part-time {
     .inner {
       border-color: $color-parttime;
+      &:hover {
+        box-shadow: 0 0 6px $color-parttime;
+      }
       h1,h2,h3,.jobicon {
         color: $color-parttime;
       }
@@ -39,6 +45,9 @@
   &.Contract {
     .inner {
       border-color: $color-contract;
+      &:hover {
+        box-shadow: 0 0 6px $color-contract;
+      }
       h1,h2,h3,.jobicon {
         color: $color-contract;
       }
@@ -52,6 +61,9 @@
   &.Project {
     .inner {
       border-color: $color-project;
+      &:hover {
+        box-shadow: 0 0 6px $color-project;
+      }
       h1,h2,h3,.jobicon {
         color: $color-project;
       }
@@ -65,6 +77,9 @@
   &.Internship {
     .inner {
       border-color: $color-internship;
+      &:hover {
+        box-shadow: 0 0 6px $color-internship;
+      }
       h1,h2,h3,.jobicon {
         color: $color-internship;
       }
@@ -76,11 +91,14 @@
   }
 
   .inner {
-    border-radius: $border-radius-base;
-    border: 2px solid $card-border-color;
+    border-radius: $border-radius-small;
+    border: 1px solid $card-border-color;
+    box-shadow: 0 0 1px $card-border-color;
     text-align: center;
     padding: $card-margin-base ($card-margin-base * 2);
     height: 100%;
+    min-height: 200px;
+    transition: all 0.3s ease 0s;
 
     img {
       max-width: 100px;
@@ -100,7 +118,9 @@
     }
 
     .jobicon {
+      position: realtive;
       font-size: 8rem;
+      margin-bottom: -20px;
     }
   }
 }

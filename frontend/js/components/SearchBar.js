@@ -1,4 +1,5 @@
 import React from "react";
+var AutosizeInput = require('react-input-autosize');
 
 // for redirect
 import * as ReactRouter from 'react-router';
@@ -18,6 +19,30 @@ export default class SearchBar extends React.Component {
   constructor(){
     super();
     this._sendSearch = this._sendSearch.bind(this);
+    this._resizeInput = this._resizeInput.bind(this);
+
+    this.state = {
+      minWidth: 96,
+      inputWidth: 1,
+      inputValue: ""
+    }
+  }
+  componentWillMount() {
+    this.setState({inputWidth: this.state.minWidth});
+  }
+
+  _resizeInput() {
+    let newInputValue = {};
+    let newWidth;
+    newInputValue = ReactDOM.findDOMNode(this.refs.search).value;
+    this.setState({inputValue: newInputValue})
+    console.log("the input val length is ", newInputValue.length);
+    console.log("the sizer width is ", ReactDOM.findDOMNode(this.refs.sizer).scrollWidth);
+    newWidth = ReactDOM.findDOMNode(this.refs.sizer).scrollWidth + 42;
+    this.setState({inputWidth: this.state.minWidth});
+    if(newWidth > this.state.minWidth) {
+      this.setState({inputWidth: newWidth})
+    }
   }
 
   _sendSearch(e) {
@@ -32,18 +57,24 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
+    let sizerValue = this.state.inputValue;
+    let inputStyle = {
+      width: this.state.inputWidth + 'px'
+    }
+    let sizerStyle = { position: 'absolute', top: 0, left: 0, visibility: 'hidden', height: 0, overflow: 'scroll', whiteSpace: 'pre' };
     return (
       <form onSubmit = {this._sendSearch}>
-        <div className="col-md-8 col-md-offset-2 input-group boxShadow">
+        <div className="searchbar" style={inputStyle}>
+
+          <i class="search-icon fa fa-search"></i>
           <input
           type="text"
           ref="search"
           className="form-control"
           placeholder="Search"
+          onChange={this._resizeInput}
           />
-          <span className="input-group-btn">
-            <button className="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-          </span>
+        <div class="search-sizer" ref="sizer" style={sizerStyle}>{sizerValue}</div>
         </div>
       </form>
     );

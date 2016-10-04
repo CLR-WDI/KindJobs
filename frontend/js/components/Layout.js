@@ -18,9 +18,10 @@ class Layout extends React.Component {
     };
   }
   render() {
+    console.log("props at layout is ", this.props);
     return (
       <div>
-        <Header />
+        <Header _location={this.props.location}/>
         <div class="pushDaFoota">
           {this.props.children}
         </div>
