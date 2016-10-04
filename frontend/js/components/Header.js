@@ -68,7 +68,7 @@ class Header extends React.Component {
     if (this.props._location.pathname == '/') {
       logoLink = "./images/kindjobs-logo-dark.png"
       navbarStyle = {
-        background: none;
+        background: 'none',
       }
     }
     console.log("props is ", this.props);
