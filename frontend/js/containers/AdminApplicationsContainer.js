@@ -77,33 +77,37 @@ export default class AdminApplicationsContainer extends React.Component {
           <td>{application.yrs_rel_exp}</td>
           <td><Link to={'admin/applications/'+application._id}>{application.name}</Link></td>
           {individual_cv}
-          <td><button onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
+          <td><button class="btn btn-sm btn-danger" onClick={ function(e){this._deleteApplication( e, application._id )}.bind(this) }>Delete</button></td>
         </tr>
       )
     })
 
     return(
-      <div>
-        <h1>Admin Applications View</h1>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th className="col-md-2">SGO name</th>
-              <th className="col-md-2">Job title</th>
-              <th className="col-md-1">Date Posted</th>
-              <th className="col-md-1">Qualification</th>
-              <th className="col-md-1">Salary</th>
-              <th className="col-md-1">Yrs Exp</th>
-              <th className="col-md-2">Name</th>
-              <th className="col-md-1">CV</th>
-              <th className="col-md-1">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applicationList}
-          </tbody>
-        </table>
-        <button onClick={ function(e){this._exportCSV( e)}.bind(this)}>Export to CSV</button>
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          <h1>Admin Applications View</h1>
+          <div class="table-responsive">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th className="col-md-2">SGO name</th>
+                  <th className="col-md-2">Job title</th>
+                  <th className="col-md-1">Date Posted</th>
+                  <th className="col-md-1">Qualification</th>
+                  <th className="col-md-1">Salary</th>
+                  <th className="col-md-1">Yrs Exp</th>
+                  <th className="col-md-2">Name</th>
+                  <th className="col-md-1">CV</th>
+                  <th className="col-md-1">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {applicationList}
+              </tbody>
+            </table>
+          </div>
+          <button class="btn btn-primary" onClick={ function(e){this._exportCSV( e)}.bind(this)}>Export to CSV</button>
+        </div>
       </div>
     )
   }

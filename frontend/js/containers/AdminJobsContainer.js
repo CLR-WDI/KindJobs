@@ -40,7 +40,7 @@ export default class AdminJobsContainer extends React.Component {
           <td>{job.sgo_id.name}</td>
           <td><Link to={'kindjobs/'+job._id}><div>{job.title}</div></Link></td>
           <td><Link to={'admin/jobform/'+job._id}><div>Edit</div></Link></td>
-          <td><button onClick={function(e){this._deleteJob( e, job._id )}.bind(this)}>Delete</button></td>
+          <td><button class="btn btn-sm btn-danger" onClick={function(e){this._deleteJob( e, job._id )}.bind(this)}>Delete</button></td>
         </tr>
       )
     })

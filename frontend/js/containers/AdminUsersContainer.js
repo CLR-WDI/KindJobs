@@ -50,13 +50,13 @@ export default class AdminUsersContainer extends React.Component {
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>
-            <select ref={"userType"+user._id}  defaultValue={user.userType} onChange={ function(e){ this._editUserType(e, user._id )}.bind(this) } >
+            <select class="form-control" ref={"userType"+user._id}  defaultValue={user.userType} onChange={ function(e){ this._editUserType(e, user._id )}.bind(this) } >
               <option value="Admin" >Admin</option>
               <option value="Jobseeker" >Jobseeker</option>
               <option value="SGO" >SGO</option>
             </select>
           </td>
-          <td><button onClick={function(e){this._deleteUser( e, user._id)}.bind(this)}>Delete</button></td>
+          <td><button class="btn btn-sm btn-danger" onClick={function(e){this._deleteUser( e, user._id)}.bind(this)}>Delete</button></td>
         </tr>
       )
     })

@@ -84,35 +84,38 @@ export default class ProfileContainer extends React.Component {
     var linkedInButton
 
     if((typeof this.props.me === "undefined") || (typeof this.props.me.facebookId === "undefined") || this.props.me.facebookId === null  ){
-      facebookButton = <a href= '/api/users/auth/facebook' class="btn btn-primary inactive">Link Facebook</a>
+      facebookButton = <a href= '/api/users/auth/facebook' class="btn btn-block btn-social btn-facebook inactive"><span class="fa fa-facebook"></span> Link Facebook</a>
     }else{
-      facebookButton = <button type="button" class="btn btn-primary active" onClick={this._removeFacebook}>Unlink Facebook</button>
+      facebookButton = <button type="button" class="btn btn-block btn-social btn-facebook active" onClick={this._removeFacebook}><span class="fa fa-facebook"></span> Unlink Facebook</button>
     }
 
     if( (typeof this.props.me === "undefined") || (typeof this.props.me.linkedinId === "undefined") ||  this.props.me.linkedinId === null ){
-      linkedInButton = <a href= '/api/users/auth/linkedin' class="btn btn-primary inactive">Link LinkedIn</a>
+      linkedInButton = <a href= '/api/users/auth/linkedin' class="btn btn-block btn-social btn-linkedin inactive"><span class="fa fa-linkedin"></span> Link LinkedIn</a>
     }else{
-      linkedInButton = <button type="button" class="btn btn-primary active" onClick={this._removeLinkedIn}>Unlink LinkedIn</button>
+      linkedInButton = <button type="button" class="btn btn-block btn-social btn-linkedin active" onClick={this._removeLinkedIn}><span class="fa fa-linkedin"></span> Unlink LinkedIn</button>
     }
 
 
 
     return(
       <div class="container-fluid">
-        <div class="col-md-4 col-md-offset-1">
-          <form onSubmit = {this._submitUpdate}>
-            <InputText ref="name" _label="Name" _type="text" />
-            <InputText ref="email" _label="Email" _type="text" />
-            <InputText ref="password" _label="Password" _type="password"/>
-            <InputText ref="confirmPassword" _label="Confirm Password" _type="password"/>
-            <br/>
-            <button class="btn btn-primary" type="submit">Update profile</button>
-            <button class="btn btn-primary" type="button" onClick={this._submitDelete} >Delete my profile</button>
-          </form>
-        </div>
-        <div class="col-md-4 col-md-offset-1">
-          {facebookButton}
-          {linkedInButton}
+        <div class="col-md-6 col-md-offset-3">
+          <div class="content-panel">
+            <h1>Welcome, {this.props.me.name}</h1>
+            <h3>Update your details here or link to your social network accounts.</h3>
+            <form onSubmit = {this._submitUpdate}>
+              <InputText ref="name" _label="Name" _type="text" />
+              <InputText ref="email" _label="Email" _type="text" />
+              <InputText ref="password" _label="Password" _type="password"/>
+              <InputText ref="confirmPassword" _label="Confirm Password" _type="password"/>
+              <br/>
+              <button class="btn btn-primary" type="submit">Update profile</button>
+              <button class="btn btn-primary" type="button" onClick={this._submitDelete} >Delete my profile</button>
+            </form>
+            <div class="divider-horizontal"></div>
+            {facebookButton}
+            {linkedInButton}
+          </div>
         </div>
       </div>
     )
