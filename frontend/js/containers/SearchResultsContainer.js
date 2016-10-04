@@ -12,14 +12,9 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    let divStyle = {
-      backgroundImage: 'url(./images/kindjobs-bg.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    };
     return(
       <div>
-        <div class="jumbotron text-center" style={divStyle}>
+        <div class="searchbar-container">
           <SearchBar _jobListName="Results"/>
         </div>
         <div class="container-fluid">

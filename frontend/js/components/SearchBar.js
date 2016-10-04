@@ -22,7 +22,7 @@ export default class SearchBar extends React.Component {
     this._resizeInput = this._resizeInput.bind(this);
 
     this.state = {
-      minWidth: 96,
+      minWidth: 104,
       inputWidth: 1,
       inputValue: ""
     }
