@@ -88,3 +88,10 @@ form {
     }
   }
 }
+
+.content-panel {
+
+  @media (min-width: $grid-float-breakpoint) {
+    padding: ($padding-base-horizontal * 1.5);
+  }
+}

@@ -11,7 +11,7 @@ export default class LoginContainer extends React.Component {
     return(
       <div class="container-fluid">
         <div class="col-md-6 col-md-offset-3">
-          <Tabs bsStyle="pills" defaultActiveKey={1} id="loginTabs">
+          <Tabs bsStyle="pills" defaultActiveKey={1} id="loginTabs" className="content-panel">
             <Tab eventKey={1} title="Login">
               <LoginForm />
             </Tab>
