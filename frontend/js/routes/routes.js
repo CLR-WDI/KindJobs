@@ -3,8 +3,10 @@ import React from 'react'
 import * as ReactRouter from 'react-router';
 let Router = ReactRouter.Router;
 let Route = ReactRouter.Route;
+let applyRouterMiddleware = ReactRouter.applyRouterMiddleware;
 let IndexRoute = ReactRouter.IndexRoute;
 let HashHistory = ReactRouter.hashHistory;
+import { useScroll } from 'react-router-scroll';
 
 import Layout from "../components/Layout";
 import Home from "../containers/HomeContainer";
@@ -24,7 +26,7 @@ import AboutContainer from '../containers/AboutContainer'
 
 
 let routes = (
-  <Router history={HashHistory}>
+  <Router history={HashHistory} render={applyRouterMiddleware(useScroll())}>
     <Route path="/" component={Layout}>
       <IndexRoute name="home" component={Home} />
       <Route path='login' component={LoginContainer} />

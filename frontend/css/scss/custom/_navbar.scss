@@ -148,3 +148,172 @@
   width: 105px;
   background-size: 100% auto;
 }
+
+// header overrides
+@media (max-width: $grid-float-breakpoint) {
+  .navbar-header {
+    position: relative;
+    z-index: $zindex-navbar-header;
+
+    .navbar-toggle {
+      .navbar-toggle-icon {
+        position: relative;
+        top: 5px;
+        font-size: $font-size-h3;
+      }
+    }
+  }
+}
+
+//collapse overrides
+
+.navbar-collapse {
+  overflow-x: visible;
+  padding-right: $navbar-padding-horizontal;
+  padding-left:  $navbar-padding-horizontal;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+  @include clearfix;
+  -webkit-overflow-scrolling: touch;
+
+  &.in {
+    overflow-y: auto;
+  }
+
+  @media (max-width: $grid-float-breakpoint) {
+    &.collapse {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: $jumbotron-bg;
+        padding-top: $navbar-height;
+        text-align: center;
+        min-height: 100vh;
+        z-index: $zindex-collapse;
+
+        .nav {
+          padding-left: $navbar-padding-horizontal;
+          padding-right: $navbar-padding-horizontal;
+          font-size: $font-size-h4;
+          font-family: $headings-font-family;
+          font-weight: $headings-font-weight;
+          li {
+            a {
+              padding: ($padding-large-vertical * 2) ($padding-large-horizontal * 2);
+            }
+          }
+
+          .dropdown-menu {
+            text-align: center;
+            font-size: $font-size-h4;
+          }
+        }
+    }
+  }
+
+  @media (min-width: $grid-float-breakpoint) {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+
+    &.collapse {
+      display: block !important;
+      height: auto !important;
+      padding-bottom: 0; // Override default setting
+      overflow: visible !important;
+    }
+
+    &.in {
+      overflow-y: visible;
+    }
+
+    // Undo the collapse side padding for navbars with containers to ensure
+    // alignment of right-aligned contents.
+    .navbar-fixed-top &,
+    .navbar-static-top &,
+    .navbar-fixed-bottom & {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.navbar-toggle * {
+	-ms-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.navbar-toggle span.bar1 {
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+	-ms-transform-origin: 1px 3px;
+	-webkit-transform-origin: 1px 3px;
+  -moz-transform-origin: 1px 3px;
+  -o-transform-origin: 1px 3px;
+	transform-origin: 1px 3px;
+	width: 27px;
+}
+.navbar-toggle span.bar2 {
+	-ms-transform: rotate(-360deg) scale(0);
+	-webkit-transform: rotate(-360deg) scale(0);
+  -moz-transform: rotate(-360deg) scale(0);
+  -o-transform: rotate(-360deg) scale(0);
+	transform: rotate(-360deg) scale(0);
+}
+.navbar-toggle span.bar3 {
+	-ms-transform: rotate(360deg) scale(0);
+	-webkit-transform: rotate(360deg) scale(0);
+  -moz-transform: rotate(360deg) scale(0);
+  -o-transform: rotate(360deg) scale(0);
+	transform: rotate(360deg) scale(0);
+}
+.navbar-toggle span.bar4 {
+	-ms-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	-ms-transform-origin: 2px 0px;
+	-webkit-transform-origin: 2px 0px;
+	transform-origin: 2px 0px;
+	width: 27px;
+	display:block;
+}
+.navbar-toggle.collapsed span.bar1,
+.navbar-toggle.collapsed span.bar2,
+.navbar-toggle.collapsed span.bar3,
+.navbar-toggle.collapsed span.bar4 {
+	-ms-transform: none;
+	-webkit-transform: none;
+	transform: none;
+	width: 20px;
+}
+
+.navbar-toggle.collapsed span.bar4 {
+	display: none;
+}
+
+// collapse appear animation
+
+.navbar-show-enter {
+   opacity: 0.01;
+   overflow-y: auto;
+}
+
+.navbar-show-enter.navbar-show-enter-active {
+   opacity: 1;
+   transition: opacity 500ms ease-in;
+}
+
+.navbar-show-leave {
+   opacity: 1;
+}
+
+.navbar-show-leave.navbar-show-leave-active {
+   opacity: 0.01;
+   transition: opacity 500ms ease-in;
+}

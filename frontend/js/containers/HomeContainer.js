@@ -21,10 +21,11 @@ export default class Home extends React.Component {
   }
   render() {
     let heroStyle = {
+      position: 'relative',
+      width: '100%',
       backgroundImage: 'url(./images/kindjobs-bg-main.jpg)',
       backgroundSize: 'cover',
-      background-attachment: fixed,
-      background-position: center,
+      backgroundPosition: 'center center',
     };
     return(
       <div>

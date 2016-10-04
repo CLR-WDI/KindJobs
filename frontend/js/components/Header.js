@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {Link, hashHistory} from "react-router";
 import {Navbar, Nav, NavDropdown, MenuItem} from "react-bootstrap";
 import {logoutUser, getMe} from "../actions/userActions";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 @connect((store) => {
   return {
@@ -13,12 +14,18 @@ class Header extends React.Component {
   constructor() {
     super();
     this._logout = this._logout.bind(this);
+    this._toggleCollapse = this._toggleCollapse.bind(this);
   }
   _logout(e){
     e.preventDefault();
     this.props.dispatch( logoutUser() );
     hashHistory.push({pathname: '/'});
   }
+
+  _toggleCollapse() {
+
+  }
+
   componentWillMount() {
     if( typeof this.props.me.email === "undefined" ){
       this.props.dispatch( getMe() );
@@ -78,14 +85,22 @@ class Header extends React.Component {
           <Navbar.Brand>
             <Link to='/'><div class="logo"><img class="img-responsive" src={logoLink} /></div></Link>
           </Navbar.Brand>
-          <Navbar.Toggle />
+          <button type="button" class="navbar-toggle collapsed" onClick={this._toggleCollapse}>
+            <span class="sr-only">Toggle navigation</span>
+            <i class="navbar-toggle-icon icon-ios-more"></i>
+          </button>
         </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <li><Link to='/about'>About</Link></li>
-            {navbarLinks}
-          </Nav>
-        </Navbar.Collapse>
+        <ReactCSSTransitionGroup
+          transitionName="navbar-show"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+          <div key='collapse' class="navbar-collapse collapse">
+            <Nav pullRight>
+              <li><Link to='/about'>About</Link></li>
+              {navbarLinks}
+            </Nav>
+          </div>
+        </ReactCSSTransitionGroup>
       </Navbar>
     )
   }

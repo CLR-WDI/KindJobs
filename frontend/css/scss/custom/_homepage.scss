@@ -6,6 +6,13 @@
   &.home {
     height: 60vh;
     color: darken($brand-primary, 50%);
+
+    .hero-image {
+      margin: $padding-base-vertical auto;
+      width: 80%;
+      max-width: 100px;
+    }
+
     h1 {
       font-size: 36px;
     }
