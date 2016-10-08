@@ -135,18 +135,19 @@ export default class JobForm extends React.Component {
             _default={job.min_yrs_exp}/>
             <InputText ref="salary" _label="salary" _type="number"
             _default={job.salary}/>
-
-            <label> Description:
-              <textarea class="form-control" ref="description"
+            <div class="form-group">
+              <label> Description:</label>
+              <textarea class="form-control" rows="12" ref="description"
               defaultValue={job.description}></textarea>
-            </label>
+            </div>
             <br/>
-            <label> Deadline:
+            <div class="form-group">
+              <label> Deadline:</label>
               <input type="Date" ref="deadline" class="form-control" onChange={this._updateInput}
               defaultValue={job.deadline}></input>
-            </label>
+            </div>
             <br/>
-            <button class="btn btn-warning" onClick={this._deleteJob}>Delete</button>
+            <button class="btn btn-danger" onClick={this._deleteJob}>Delete</button>
             <button class="btn btn-primary" type="submit">Post</button>
           </form>
         </div>

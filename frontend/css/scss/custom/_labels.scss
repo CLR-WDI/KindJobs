@@ -1,0 +1,30 @@
+.label {
+  font-weight: inherit;
+}
+
+@mixin label-outline-variant($color) {
+  background: none;
+  color: $color;
+  border: 1px solid $color;
+
+  &[href] {
+    &:hover,
+    &:focus {
+      color: darken($color, 10%);
+      border-color: darken($color, 10%);
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+.label-default-outline {
+  @include label-outline-variant($label-default-bg);
+}
+
+.label-primary-outline {
+  @include label-outline-variant($label-primary-bg);
+}
+
+.label-info-outline {
+  @include label-outline-variant($label-info-bg);
+}
