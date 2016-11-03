@@ -5,14 +5,21 @@ import {connect} from "react-redux"
 import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
 import {Link} from "react-router";
+import {getMe} from "../actions/userActions" //actions for Users
 
 @connect((store) => {
+  return{
+    me: store.users.me
+  }
 })
 export default class Home extends React.Component {
   componentDidMount() {
+    console.log(this.props.me);
     // home page is landing page after log in, get profile of logged in user
-    if( typeof this.props.me.email === "undefined" ){
-      this.props.dispatch( getMe() );
+    if( this.props.me === null || typeof this.props.me.email === "undefined" ){
+      setTimeout(function(){
+        this.props.dispatch( getMe() );
+      }, 500).bind(this)
     }
   }
   render() {

@@ -5,13 +5,6 @@ export function loginUser(user) {
     axios.post('./api/users/loginAuth', user)
         .then((response)=>{
           dispatch({type:"LOGIN_USER_FULFILLED", payload: response.data})
-          axios.get('./api/users/me')
-            .then((res)=>{
-              dispatch({type:"GET_ME_FULFILLED", payload: res.data})
-            })
-            .catch((err)=>{
-              dispatch({type:"GET_ME_REJECTED", payload: err})
-            })
         })
         .catch((err)=>{
           dispatch({type:"LOGIN_USER_REJECTED", payload: err})
@@ -37,13 +30,6 @@ export function signupUser(user) {
     axios.post('./api/users/signupAuth', user)
         .then((response)=>{
           dispatch({type:"SIGNUP_USER_FULFILLED", payload: response.data})
-          axios.get('./api/users/me')
-            .then((res)=>{
-              dispatch({type:"GET_ME_FULFILLED", payload: res.data})
-            })
-            .catch((err)=>{
-              dispatch({type:"GET_ME_REJECTED", payload: err})
-            })
         })
         .catch((err)=>{
           dispatch({type:"SIGNUP_USER_REJECTED", payload: err})
