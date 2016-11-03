@@ -16,7 +16,7 @@ export default class Home extends React.Component {
       <div>
         <div class="jumbotron text-center" style={divStyle}>
           <h2>Advanced Search</h2>
-          <SearchBar />
+          <SearchBar _placeholderValue="Search"/>
         </div>
         <div class="container-fluid">
           <div class="row">

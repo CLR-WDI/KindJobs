@@ -31,7 +31,7 @@ export default class Home extends React.Component {
       <div>
         <div class="jumbotron home text-center" style={ heroStyle }>
           <h1>Come find your kind of job!</h1>
-          <SearchBar />
+          <SearchBar _placeholderValue="Search"/>
           <Link class="btn btn-primary-dark-ghost btn-adv-search" to={'/advsearch'}>Advanced Search</Link>
         </div>
         <div class="container-fluid">
