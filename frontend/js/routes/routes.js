@@ -8,6 +8,7 @@ let IndexRoute = ReactRouter.IndexRoute;
 let HashHistory = ReactRouter.hashHistory;
 import { useScroll } from 'react-router-scroll';
 
+// importing the files required to render the views for the different routes
 import Layout from "../components/Layout";
 import Home from "../containers/HomeContainer";
 import AdminCreateOptionsContainer from '../containers/AdminCreateOptionsContainer';
@@ -24,7 +25,10 @@ import AdminUsersContainer from '../containers/AdminUsersContainer';
 import ProfileContainer from '../containers/ProfileContainer'
 import AboutContainer from '../containers/AboutContainer'
 
-
+// defining which container file gets rendered for each route
+// define history as hash history for routes
+// include a page template called layout for the whole site
+// define the index route as home 
 let routes = (
   <Router history={HashHistory} render={applyRouterMiddleware(useScroll())}>
     <Route path="/" component={Layout}>

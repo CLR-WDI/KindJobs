@@ -1,11 +1,19 @@
+// bring in react module
 import React from "react";
-// create store
+
+// allow to move between different routes
+import {Link} from "react-router";
+
+// allows connection to store
 import {connect} from "react-redux"
 
+//actions for users
+import {getMe} from "../actions/userActions"
+
+// import components
 import SearchBar from "../components/SearchBar";
 import JobList from "../components/JobList";
-import {Link} from "react-router";
-import {getMe} from "../actions/userActions" //actions for users
+
 
 @connect((store) => {
   return{me: store.users.me}
@@ -13,6 +21,7 @@ import {getMe} from "../actions/userActions" //actions for users
 export default class Home extends React.Component {
   componentDidMount() {
     // home page is landing page after log in, get profile of logged in user
+    // the set time out was to work around a bug found when running on the heroku server the race conditions resulted in the page loading before the backend server came back with the details of the user logged in
     if( this.props.me === null || typeof this.props.me.email === "undefined" ){
       setTimeout(function() {
         this.props.dispatch( getMe() );
