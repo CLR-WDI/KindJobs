@@ -1,126 +1,131 @@
-.row.is-flex {
-  display: flex;
-  flex-wrap: wrap;
+@media only screen and (min-width : 481px) {
+   .flex-row.row {
+	 display: flex;
+	 flex-wrap: wrap;
+   }
+   .flex-row.row > [class*='col-'] {
+	 display: flex;
+	 flex-direction: column;
+   }
+  .flex-row.row:after,
+  .flex-row.row:before {
+	 display: flex;
+  }
 }
-.row.is-flex > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
+
+.flex-row .jobCard,
+.flex-row .inner {
+  flex:1 0 auto;
+  flex-direction:column;
+}
+.flex-text {
+  flex-grow:1
+}
+.flex-row img {
+  height:auto;
+  width:100%
 }
 
 .jobCard {
-  padding: $card-margin-base;
 
   &.Full-time {
-    .inner {
+    border-color: $color-fulltime;
+    &:hover {
+      box-shadow: 0 0 6px $color-fulltime;
+    }
+    h1,h2,h3,.jobicon {
+      color: $color-fulltime;
+    }
+    .label {
       border-color: $color-fulltime;
-      &:hover {
-        box-shadow: 0 0 6px $color-fulltime;
-      }
-      h1,h2,h3,.jobicon {
-        color: $color-fulltime;
-      }
-      .label {
-        border-color: $color-fulltime;
-        color: $color-fulltime;
-      }
+      color: $color-fulltime;
     }
   }
 
   &.Part-time {
-    .inner {
+    border-color: $color-parttime;
+    &:hover {
+      box-shadow: 0 0 6px $color-parttime;
+    }
+    h1,h2,h3,.jobicon {
+      color: $color-parttime;
+    }
+    .label {
       border-color: $color-parttime;
-      &:hover {
-        box-shadow: 0 0 6px $color-parttime;
-      }
-      h1,h2,h3,.jobicon {
-        color: $color-parttime;
-      }
-      .label {
-        border-color: $color-parttime;
-        color: $color-parttime;
-      }
+      color: $color-parttime;
     }
   }
 
   &.Contract {
-    .inner {
+    border-color: $color-contract;
+    &:hover {
+      box-shadow: 0 0 6px $color-contract;
+    }
+    h1,h2,h3,.jobicon {
+      color: $color-contract;
+    }
+    .label {
       border-color: $color-contract;
-      &:hover {
-        box-shadow: 0 0 6px $color-contract;
-      }
-      h1,h2,h3,.jobicon {
-        color: $color-contract;
-      }
-      .label {
-        border-color: $color-contract;
-        color: $color-contract;
-      }
+      color: $color-contract;
     }
   }
 
   &.Project {
-    .inner {
+    border-color: $color-project;
+    &:hover {
+      box-shadow: 0 0 6px $color-project;
+    }
+    h1,h2,h3,.jobicon {
+      color: $color-project;
+    }
+    .label {
       border-color: $color-project;
-      &:hover {
-        box-shadow: 0 0 6px $color-project;
-      }
-      h1,h2,h3,.jobicon {
-        color: $color-project;
-      }
-      .label {
-        border-color: $color-project;
-        color: $color-project;
-      }
+      color: $color-project;
     }
   }
 
   &.Internship {
-    .inner {
+    border-color: $color-internship;
+    &:hover {
+      box-shadow: 0 0 6px $color-internship;
+    }
+    h1,h2,h3,.jobicon {
+      color: $color-internship;
+    }
+    .label {
       border-color: $color-internship;
-      &:hover {
-        box-shadow: 0 0 6px $color-internship;
-      }
-      h1,h2,h3,.jobicon {
-        color: $color-internship;
-      }
-      .label {
-        border-color: $color-internship;
-        color: $color-internship;
-      }
+      color: $color-internship;
     }
   }
 
-  .inner {
-    border-radius: $border-radius-small;
-    border: 1px solid $card-border-color;
-    box-shadow: 0 0 1px $card-border-color;
-    text-align: center;
-    padding: $card-margin-base ($card-margin-base * 2);
-    height: 100%;
-    min-height: 200px;
-    transition: all 0.3s ease 0s;
+  border-radius: $border-radius-small;
+  border: 1px solid $card-border-color;
+  box-shadow: 0 0 1px $card-border-color;
+  text-align: center;
+  padding: $card-margin-base ($card-margin-base * 2);
+  transition: all 0.3s ease 0s;
+  margin-bottom: $grid-gutter-width;
 
-    img {
-      max-width: 100px;
-      width: 100%;
+  img {
+    max-width: 100px;
+    width: 100%;
+  }
+
+  .content {
+
+    h3 {
+      margin-top: 0;
     }
 
-    .content {
-
-      h3 {
-        margin-top: 0;
-      }
-
-      .label {
-        border: 1px solid;
-        padding: .2rem .6rem .3rem;
-      }
+    .label {
+      border: 1px solid;
+      padding: .2rem .6rem .3rem;
     }
+  }
 
-    .jobicon {
-      position: realtive;
-      font-size: 8rem;
-      margin-bottom: -20px;
-    }
+  .jobicon {
+    position: realtive;
+    font-size: 8rem;
+    margin-bottom: -20px;
   }
 }
