@@ -43,7 +43,8 @@ To change the ownership of the Heroku account, follow these steps:
 
   As the new owner, you will have the option to accept or decline all transfer requests. If the app has an ongoing cost, such as paid add-ons or dynos, then you will be asked to enter in a credit card before accepting, if you haven’t done so already.
 
-* The owner can cancel the transfer request at any time before the new owner accepts or declines the request.
+* Cancel transfer
+  The owner can cancel the transfer request at any time before the new owner accepts or declines the request.
 
 ## Deployment considerations
 
