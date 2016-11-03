@@ -23,16 +23,12 @@ export default class SearchBar extends React.Component {
 
     this.state = {
       minWidth: 104,
-      placeholderWidth: 1,
       inputWidth: 1,
       inputValue: ""
     }
   }
   componentWillMount() {
-    this.setState({
-      placeholderWidth: (this.props._placeholderValue).length,
-      inputWidth: this.state.minWidth
-    });
+    this.setState({inputWidth: this.state.minWidth});
   }
 
   _resizeInput() {
@@ -43,8 +39,8 @@ export default class SearchBar extends React.Component {
     console.log("the input val length is ", newInputValue.length);
     console.log("the sizer width is ", ReactDOM.findDOMNode(this.refs.sizer).scrollWidth);
     newWidth = ReactDOM.findDOMNode(this.refs.sizer).scrollWidth + 42;
-    this.setState({inputWidth: this.state.placeholderWidth});
-    if(newWidth > this.state.placeholderWidth) {
+    this.setState({inputWidth: this.state.minWidth});
+    if(newWidth > this.state.minWidth) {
       this.setState({inputWidth: newWidth})
     }
   }
@@ -75,11 +71,10 @@ export default class SearchBar extends React.Component {
           type="text"
           ref="search"
           className="form-control"
-          placeholder={this.props._placeholderValue}
+          placeholder="Search"
           onChange={this._resizeInput}
           />
         <div class="search-sizer" ref="sizer" style={sizerStyle}>{sizerValue}</div>
-        <div class="placeholder-sizer" ref="placeholderSizer" style={sizerStyle}>{this.props._placeholderValue}</div>
         </div>
       </form>
     );

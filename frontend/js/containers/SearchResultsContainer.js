@@ -15,7 +15,7 @@ export default class SearchResults extends React.Component {
     return(
       <div>
         <div class="searchbar-container">
-          <SearchBar _jobListName="Results" _placeholderValue="Search"/>
+          <SearchBar _jobListName="Results"/>
         </div>
         <div class="container-fluid">
           <div class="row">
