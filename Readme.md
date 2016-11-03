@@ -24,8 +24,23 @@ Front-end
 ## Installation
 
 STEP BY STEP instructions for getting it up and running.
-creating it on local
+
+### Cloning on git to local
+
+### Linking local to Heroku
+
+In the command line in the application root folder that you are linking to Heroku, type in this command:
+
+```
+git remote add heroku git@heroku.com:kindjobs.git
+
+```
+
+Once that is done, you can deploy any changes to Heroku by pushing to Heroku. 
+
 getting it up on heroku
+
+
 
 ### Transferring ownership of Heroku
 
@@ -45,6 +60,8 @@ To change the ownership of the Heroku account, follow these steps:
 
 * Cancel transfer
   The owner can cancel the transfer request at any time before the new owner accepts or declines the request.
+
+
 
 ## Deployment considerations
 
