@@ -200,9 +200,7 @@ export default class AdminCreateOptionsContainer extends React.Component {
       })
 
       // show list of locations and allow to edit
-      console.log("before sorting ", this.props.locations);
       var sortedLocations =this.props.locations.sort((a, b) => { return a.name > b.name})
-      console.log("after sorting ", sortedLocations);
       let locationsList = sortedLocations.map( (location) => {
         return (
             <tr key={location._id}>

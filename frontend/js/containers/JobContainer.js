@@ -32,7 +32,6 @@ export default class JobContainer extends React.Component {
                 </p>
               )
             })
-      console.log("the formattedDescription is ", formattedDescription);
       return(
         <div>
           <div class="searchbar-container">

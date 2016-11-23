@@ -36,8 +36,6 @@ export default class SearchBar extends React.Component {
     let newWidth;
     newInputValue = ReactDOM.findDOMNode(this.refs.search).value;
     this.setState({inputValue: newInputValue})
-    console.log("the input val length is ", newInputValue.length);
-    console.log("the sizer width is ", ReactDOM.findDOMNode(this.refs.sizer).scrollWidth);
     newWidth = ReactDOM.findDOMNode(this.refs.sizer).scrollWidth + 42;
     this.setState({inputWidth: this.state.minWidth});
     if(newWidth > this.state.minWidth) {
